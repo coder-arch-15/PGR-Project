@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PGR Admin Login</title>
+</head>
+<body>
+<center><font size="36" color="blue"><b>Welcome to Praedico Global Research</b></font></center><br>
+<center><font size="18" color="green">Admin Login</font></center><br><br><br><br>
+{% block content %}
+  <h2>Login</h2>
+  <form action = "../admloginsubmit" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+{% endblock %}
+</body>
+</html>

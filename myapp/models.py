@@ -12,6 +12,8 @@ class user(models.Model):
    password = models.CharField(max_length = 15, default = "1234test")
    pending = models.IntegerField(default = 1)
    approved = models.IntegerField(default = 0)
+   last_login = models.DateTimeField(blank=True,    null=True)
+   
 
    class meta(object):
    	db_table = "user"

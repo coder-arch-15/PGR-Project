@@ -40,22 +40,22 @@ def user_login_submit(request):
 		username = request.POST['username']
 		password = request.POST['password']
 		users = user.objects.filter(mail = username).filter(password = password).first()
-
+		login(request,user)
 		if users is not None:
 		    request.session['username'] = username
-		    return render(request, "user_dashboard.html")
+		    return redirect("/userdashboard")
 		else:
 			context ={}
 			context['form']= loginForm()
-			return redirect("/userlogin")
+			return redirect("/login")
 	
 	return redirect("/")
 
 
-@login_required
+@login_required(login_url = "/adminlogin")
 def user_dashboard(request):
-	
-	return render(request, "user_dashboard.html")
+	print("hello")
+	return render(request, "userdashboard.html")
 
 @login_required
 def user_logout(request):
