@@ -1,82 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>PGR User Login</title>
-	<script>
+<!doctype html>
+<html lang="en-US">
+<head>{% include 'layouts/home_head.html' %}</head>
 
-function yourFunction(){
-    // do whatever you like here
-    var f = document.getElementById('iframe1');
-	f.src = f.src;
-    setTimeout(yourFunction, 1000);
-}
+<body class="pmpro-login page-template-default page page-id-31 wp-custom-logo um-page-login um-page-loggedout theme-hamroclass pmpro-body-has-access woocommerce-no-js hmc_fullwidth_layout no-sidebar wpb-js-composer js-comp-ver-6.4.2 vc_responsive elementor-default elementor-kit-7653"><a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+		<div id="page" class="site">
 
-</script>
-<script>
-window.onload = function () {
 
-var dps = []; // dataPoints
-var chart = new CanvasJS.Chart("chartContainer", {
-	title :{
-		text: "Dynamic Data"
-	},
-	data: [{
-		type: "line",
-		dataPoints: dps
-	}]
-});
+				{% include 'layouts/home_header.html' %}
 
-var xVal = 0;
-var yVal = 100; 
-var updateInterval = 1000;
-var dataLength = 20; // number of dataPoints visible at any point
 
-var updateChart = function (count) {
+	{% include 'layouts/login_body.html' %}
 
-	count = count || 1;
 
-	for (var j = 0; j < count; j++) {
-		yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-		dps.push({
-			x: xVal,
-			y: yVal
-		});
-		xVal++;
-	}
+{% include 'layouts/home_footer.html' %}
 
-	if (dps.length > dataLength) {
-		dps.shift();
-	}
 
-	chart.render();
-};
-
-updateChart(dataLength);
-setInterval(function(){updateChart()}, updateInterval);
-
-}
-</script>
-</head>
-<body>
-
-<center><font size="36" color="blue"><b>Welcome to Praedico Global Research</b></font></center><br>
-<center><font size="18" color="green">User Login</font></center><br><br><br><br>
-{% block content %}
-  <h2>Login</h2>
-  <form action = "../usrloginsubmit" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-{% endblock %}
-<br><br><br>
-<iframe src="https://www.quickanddirtytips.com/sites/default/files/images/5360/line_graph.png" id="iframe1"></iframe>
-
-	<script type="text/javascript">
-    yourFunction();
-</script>
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>r
-
-</body>
 </html>

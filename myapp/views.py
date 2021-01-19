@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from django.conf import settings 
 
 def home(request):
-   return render(request, "home2.html")
+   return render(request, "home.html")
 
 def register(request):
 	context ={}

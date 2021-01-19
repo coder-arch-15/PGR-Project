@@ -9,7 +9,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("register", register, name = 'register' ),
     path("reg_submit", register_check, name = 'register_check' ),
-    path('userlogin', user_login, name = 'user_login' ),
+    path('login', user_login, name = 'user_login' ),
     path("adminlogin", admin_login, name = 'admin_login' ),
     path("userlogout", user_logout, name = 'user_logout' ),
     path("usrloginsubmit", user_login_submit, name = 'user_login_submit' ),
