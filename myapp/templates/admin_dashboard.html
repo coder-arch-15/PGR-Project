@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PGR Admin</title>
+<style type="text/css">
+	table,th {
+  border: 1px solid black;
+  padding: 15px;
+  border-collapse:collapse;
+}
+table{
+	width: 100%;
+}
+	tr.pending{
+		background-color: #FEB041;
+	}
+	tr.accepted{
+		
+			background-color: #9DFE41;
+	}
+	tr.rejected{
+			background-color: #FE4141;
+		
+	}
+</style>
+
+</head>
+<body>
+<center><font size="36" color="blue"><b>Welcome to Praedico Global Research</b></font></center><br><br>
+<center><font size="18" color="green">Admin Dashboard</font></center><br><br>
+<center><font size="18" color="green">User List</font></center><br><br><br><br>
+<table>
+<tr>
+	<th>Name</th>
+	<th>Email</th>
+	<th>Mobile Number</th>
+	<th>Gender</th>
+	<th>Address</th>
+	<th>DOB</th>
+	<th>APPROVE</th>
+	<th>REJECT</th>
+</tr>
+
+{% for user in table %} 
+		{% if user.pending %} 
+		    <tr class="pending">
+		    	<th>{{user.name}}</th>
+				<th>{{user.mail}}</th>
+				<th>{{user.phone}}</th>
+				<th>{{user.gender}}</th>
+				<th>{{user.addr}}</th>
+				<th>{{user.dob}}</th>
+				<th><a href="../adminaccept/{{user.id}}"> <button type="submit">ACCEPT</button></a></th>
+				<th><a href="../adminreject/{{user.id}}"> <button type="submit">REJECT</button></a></th>
+		    </tr>
+		{% elif user.approved %} 
+		    <tr class="accepted">
+		    	<th>{{user.name}}</th>
+				<th>{{user.mail}}</th>
+				<th>{{user.phone}}</th>
+				<th>{{user.gender}}</th>
+				<th>{{user.addr}}</th>
+				<th>{{user.dob}}</th>
+				<th colspan="2">Approved</td>
+						
+		    </tr>
+		{% else %} 
+		    <tr class="rejected">
+		    	<th>{{user.name}}</th>
+				<th>{{user.mail}}</th>
+				<th>{{user.phone}}</th>
+				<th>{{user.gender}}</th>
+				<th>{{user.addr}}</th>
+				<th>{{user.dob}}</th>
+				<th colspan="2">Rejected</td>
+				
+		    </tr>
+		{% endif %} 
+{% endfor %} 
+</table>
+<br><br>
+<a href="../">Go to homepage</a>
+</body>
+</html>

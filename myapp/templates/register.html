@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PGR Register</title>
+	<style type="text/css">
+		.form{
+			margin-left: 40px;
+		}
+	</style>
+</head>
+<body>
+<center><font size="36" color="blue"><b>Welcome to Praedico Global Research</b></font></center><br><br>
+<center><font size="18" color="green">User Registration</font></center><br><br><br><br><br><br>
+
+<form action = "../reg_submit" method = "post"> 
+    {% csrf_token %} 
+    <div class="form">
+    <table>
+
+    <font size="18" color="green">{{form }}</font>
+
+    </table> 
+    <input type="submit" value=Submit> 
+</div>
+    <br><br>
+
+</form> 
+
+</body>
+</html>
