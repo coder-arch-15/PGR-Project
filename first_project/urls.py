@@ -19,3 +19,5 @@ urlpatterns = [
     url(r'^adminreject/(\d+)/', reject, name = 'reject'),
     url(r'^adminaccept/(\d+)/', accept, name = 'accept'),
 ]
+
+#test
