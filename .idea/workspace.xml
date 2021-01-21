@@ -19,7 +19,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dummy" />
   </component>
   <component name="RunManager">
     <configuration name="PGR-Project" type="Python.DjangoServer" factoryName="Django server">
@@ -68,11 +68,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1611140031966</updated>
-      <workItem from="1611140034554" duration="554000" />
+      <workItem from="1611140034554" duration="778000" />
+      <workItem from="1611162086218" duration="574000" />
+      <workItem from="1611249000702" duration="1665000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1611249176056">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611249176056" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1611249000710">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1611249000710" />
   </component>
 </project>

@@ -1,0 +1,88 @@
+<style type="text/css">
+    .root{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        }
+    .subroot{
+        width:600px;
+        height:auto;
+        background-color:#b2bec3;
+        border: 1px solid black;
+        padding: 4px;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+    .heading{
+       width:auto;
+        height:auto;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding:4px;
+        background-color: #365b94;
+    }
+     .title{
+        color:#ffffff;
+    }
+
+</style>
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<html lang="en">
+<head>
+    <title>Title</title>
+</head>
+<body>
+ <form action="/usereditdeletesubmitlogin" method="POST" enctype="multipart/form-data">{% csrf_token %}
+<div class="root">
+
+    <div class="subroot">
+        <div class="heading">
+            <h3 class="title">User Register</h3>
+        </div>
+        <div class="form-group">
+         <label>Id:</label>
+         <input type="text" name="ccid" readonly="true" value="{{ row.0 }}" class="form-control" placeholder="Enter User Id">
+       </div>
+
+    <div class="form-group">
+       <label>User Name:</label>
+       <input type="text" name="cname" value="{{ row.1 }}" class="form-control" placeholder="Enter User Name">
+   </div>
+   <div class="form-group">
+      <label>Contact:</label>
+      <input type="text" name="contact" value="{{ row.2 }}" class="form-control" placeholder="Enter Contact Details">
+   </div>
+    <div class="form-group">
+      <label>Gender:</label>
+      <input type="text" name="gender" value="{{ row.3 }}" class="form-control" placeholder="Enter User Gender">
+   </div>
+     <div class="form-group">
+      <label>User Id:</label>
+      <input type="text" name="userid" value="{{ row.5 }}" class="form-control" placeholder="Enter User Id">
+   </div>
+     <div class="form-group">
+      <label>Password:</label>
+      <input type="text" name="password" value="{{ row.6 }}" class="form-control" placeholder="Enter Password">
+   </div>
+
+     <center><div class="form-group">
+      <input type="submit" name="btn" class="btn btn-primary" value="Edit">
+         <input type="submit" name="btn" class="btn btn-primary" value="Delete">
+     </div></center>
+    <label>{{msg}}</label>
+  </div>
+
+</div>
+ </form>
+
+</body>
+</html>

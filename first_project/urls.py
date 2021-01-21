@@ -2,6 +2,9 @@ from django.conf.urls import *
 from myapp.views import *
 from django.contrib import admin
 from django.urls import path
+from . import User
+from . import UserLogin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
 
 urlpatterns = [
@@ -18,6 +21,17 @@ urlpatterns = [
     path("userdashboard", user_dashboard, name = 'user_dashboard' ),
     url(r'^adminreject/(\d+)/', reject, name = 'reject'),
     url(r'^adminaccept/(\d+)/', accept, name = 'accept'),
+    path('user/', User.ActionUserInterface),
+    path('usersubmit', User.ActionUserSubmit),
+    path('displayalluser/', User.ActionDisplayAllUser),
+    path('userdisplaybyid/', User.ActionDisplayById),
+    path('usereditdeletesubmit', User.ActionUserEditDeleteSubmit),
+    path('userlogin/', UserLogin.ActionUserLogin),
+    path('checkuser', UserLogin.ActionCheckUserLogin),
+    path('logout/', UserLogin.ActionLogout),
+    path('displayalluserlogin/', User.ActionDisplayAllUserLogin),
+    path('userdisplaybyidlogin/', User.ActionDisplayByIdLogin),
+    path('usereditdeletesubmitlogin', User.ActionUserEditDeleteSubmitLogin),
 ]
-
-#test
+urlpatterns+=staticfiles_urlpatterns()
+#test2
