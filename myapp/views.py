@@ -13,7 +13,7 @@ def home(request):
 def register(request):
 	context ={}
 	context['form']= Register()
-	return render(request, "register.html", context)
+	return render(request, "userregister.html", context)
 
 
 def register_check(request): 
