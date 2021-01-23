@@ -5,65 +5,79 @@ from .models import user
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings 
+import sqlite3
 
 def home(request):
    return render(request, "home.html")
 
 def register(request):
-	context ={}
-	context['form']= Register()
-	return render(request, "userregister.html", context)
+	return render(request, "userregister.html")
 
-
-def register_check(request): 
-    context ={} 
-  
-    # create object of form 
-    form = Register(request.POST or None, request.FILES or None) 
-      
-
-    if form.is_valid():
-            # process form data
-            form.save() 
-            return HttpResponseRedirect('/')
     
 def user_login(request):
-	context ={}
-	context['form']= loginForm()
-	return render(request, "userlogin.html", context)
+	return render(request, "userlogin.html")
 
 def user_login_submit(request):
-	# if request.user.is_authenticated:
-	# 	return redirect("/userdashboard/")
-	if request.method == 'POST':
-		username = request.POST['username']
-		password = request.POST['password']
-		users = user.objects.filter(mail = username).filter(password = password).first()
-		login(request,user)
-		if users is not None:
-		    request.session['username'] = username
-		    return redirect("/userdashboard")
-		else:
-			context ={}
-			context['form']= loginForm()
-			return redirect("/login")
+	if(request.session.has_key("username")):
+		return redirect("/userdashboard")
+	else:
+		if (request.method == 'POST'):
+			username = str(request.POST['username'])
+			password = request.POST['password']
+			conn = sqlite3.connect('pgr-database.db')
+			cur = conn.cursor()
+			cur.execute("SELECT pasw FROM users WHERE username=?", (username,))
+			user = cur.fetchone()
+			
+			if user is not None:
+				request.session['username'] = username
+				return redirect("/userdashboard")
+			else:
+				return render(request, "userlogin.html", {"error": "Invalid username or password!"} )
 	
-	return redirect("/")
+		return redirect("/login")
 
 
-@login_required(login_url = "/adminlogin")
+
 def user_dashboard(request):
-	print("hello")
-	return render(request, "userdashboard.html")
+	if(request.session.has_key("username")):
+		print("hello")
+		return render(request, "userdashboard.html")
+	else:
+		return redirect("/login")
 
-@login_required
+
 def user_logout(request):
 	try:
 		del request.session['username']
 	except:
 		pass
 	return redirect('/')
+
+
+def check_username_exist(request):
+	username=request.POST.get("user_login-25")
+	name=request.POST.get("nickname-25")
+	email=request.POST.get("user_email-25")
+	mob=request.POST.get("mobile_number-25")
+	pasw=request.POST.get("user_password-25")
+	conn = sqlite3.connect('pgr-database.db')
+	cur = conn.cursor()
+	cur.execute("SELECT * FROM users WHERE username=?", (username,))
+	user_obj = cur.fetchall()
+	free = "free"
+	if user_obj:
+		conn.close()
+		return render(request, "userregister.html", {"error" : "Username - '"+username+"' is not available!" , "name":name, "email": email, "mob":mob})
+	else:
+		cur.execute("insert into users (username,pasw,name,email, mob,plan) values(?,?,?,?,?,?)",(username, pasw, name,email,mob,free))
+		conn.commit()
+		cur.execute("insert into user_cash (username,cash) values (?,?)", (username, 1000000))
+		conn.commit()
+		conn.close()
+		return redirect("/")
 
 
 def admin_dashboard(request):

@@ -12,7 +12,6 @@ urlpatterns = [
 	path("", home, name = 'home'),
     path("admin/", admin.site.urls),
     path("register", register, name = 'register' ),
-    path("reg_submit", register_check, name = 'register_check' ),
     path('login', user_login, name = 'user_login' ),
     path("adminlogin", admin_login, name = 'admin_login' ),
     path("userlogout", user_logout, name = 'user_logout' ),
@@ -22,6 +21,8 @@ urlpatterns = [
     path("userdashboard", user_dashboard, name = 'user_dashboard' ),
     url(r'^adminreject/(\d+)/', reject, name = 'reject'),
     url(r'^adminaccept/(\d+)/', accept, name = 'accept'),
+    path('check_username_exist', check_username_exist, name = 'check_username_exist'),
+    
     path('user/', User.ActionUserInterface),
     path('usersubmit', User.ActionUserSubmit),
 

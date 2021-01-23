@@ -20,19 +20,22 @@
 
 	<div class="um-form" data-mode="register">
 
-		<form method="post" action="">
 
-			<div class="um-row _um_row_1 " style="margin: 0 0 30px 0;"><div class="um-col-1"><div  id="um_field_25_nickname" class="um-field um-field-text  um-field-nickname um-field-text um-field-type_text" data-key="nickname"><div class="um-field-label"><label for="nickname-25">Full Name<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><input  autocomplete="off" class="um-form-field valid " type="text" name="nickname-25" id="nickname-25" value="" placeholder="" data-validate="" data-key="nickname" />
 
-						</div></div><div  id="um_field_25_user_login" class="um-field um-field-text  um-field-user_login um-field-text um-field-type_text" data-key="user_login"><div class="um-field-label"><label for="user_login-25">Username (Login ID)<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><input  autocomplete="off" class="um-form-field valid " type="text" name="user_login-25" id="user_login-25" value="" placeholder="" data-validate="unique_username" data-key="user_login" />
+<form method="post" action="../check_username_exist" id="myForm">
 
-						</div></div><div  id="um_field_25_mobile_number" class="um-field um-field-text  um-field-mobile_number um-field-text um-field-type_text" data-key="mobile_number"><div class="um-field-label"><label for="mobile_number-25">Mobile Number<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><div class="um-field-icon"><i class="um-faicon-mobile"></i></div><input  autocomplete="off" class="um-form-field valid um-iconed " type="text" name="mobile_number-25" id="mobile_number-25" value="" placeholder="" data-validate="phone_number" data-key="mobile_number" />
+			<div class="um-row _um_row_1 " style="margin: 0 0 30px 0;"><div class="um-col-1"><div  id="um_field_25_nickname" class="um-field um-field-text  um-field-nickname um-field-text um-field-type_text" data-key="nickname"><div class="um-field-label"><label for="nickname-25">Full Name<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><input  autocomplete="off" class="um-form-field valid " type="text" name="nickname-25" id="name" value="{{name}} " placeholder="" data-validate="" data-key="nickname" required />
 
-						</div></div><div  id="um_field_25_user_email" class="um-field um-field-text  um-field-user_email um-field-text um-field-type_text" data-key="user_email"><div class="um-field-label"><label for="user_email-25">E-mail Address<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><input  autocomplete="off" class="um-form-field valid " type="text" name="user_email-25" id="user_email-25" value="" placeholder="" data-validate="unique_email" data-key="user_email" />
 
-						</div></div><div  id="um_field_25_user_password" class="um-field um-field-password  um-field-user_password um-field-password um-field-type_password" data-key="user_password"><div class="um-field-label"><label for="user_password-25">Password<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><input class="um-form-field valid " type="password" name="user_password-25" id="user_password-25" value="" placeholder="" data-validate="" data-key="user_password" />
+						</div></div><div  id="um_field_25_user_login" class="um-field um-field-text  um-field-user_login um-field-text um-field-type_text" data-key="user_login"><div class="um-field-label"><label for="user_login-25">Username (Login ID)<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><input  autocomplete="off" class="um-form-field valid " type="text" name="user_login-25" id="username" value="" placeholder=""  data-key="user_login" required />{{error}}
 
-						</div></div><div  id="um_field_25_confirm_user_password" class="um-field um-field-password  um-field-user_password um-field-password um-field-type_password" data-key="confirm_user_password"><div class="um-field-label"><label for="confirm_user_password-25">Confirm Password<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><input class="um-form-field valid " type="password" name="confirm_user_password-25" id="confirm_user_password-25" value="" placeholder="Confirm Password" data-validate="" data-key="confirm_user_password" />
+						</div></div><div  id="um_field_25_mobile_number" class="um-field um-field-text  um-field-mobile_number um-field-text um-field-type_text" data-key="mobile_number"><div class="um-field-label"><label for="mobile_number-25">Mobile Number<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><div class="um-field-icon"><i class="um-faicon-mobile"></i></div><input  autocomplete="off" class="um-form-field valid um-iconed " type="text" name="mobile_number-25" id="mob" value="{{mob}}" placeholder="" data-validate="phone_number" data-key="mobile_number" required />
+
+						</div></div><div  id="um_field_25_user_email" class="um-field um-field-text  um-field-user_email um-field-text um-field-type_text" data-key="user_email"><div class="um-field-label"><label for="user_email-25">E-mail Address<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><input  autocomplete="off" class="um-form-field valid " type="text" name="user_email-25" id="email" value="{{email}}" placeholder="" data-validate="unique_email" data-key="user_email" required />
+
+						</div></div><div  id="um_field_25_user_password" class="um-field um-field-password  um-field-user_password um-field-password um-field-type_password" data-key="user_password"><div class="um-field-label"><label for="user_password-25">Password<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><input class="um-form-field valid " type="password" name="user_password-25" id="password" value="" placeholder="" data-validate="" data-key="user_password" required />
+
+						</div></div><div  id="um_field_25_confirm_user_password" class="um-field um-field-password  um-field-user_password um-field-password um-field-type_password" data-key="confirm_user_password"><div class="um-field-label"><label for="confirm_user_password-25">Confirm Password<span class="um-req" title="Required">*</span></label><div class="um-clear"></div></div><div class="um-field-area"><input class="um-form-field valid " type="password" name="confirm_user_password-25" id="passwordConfirm" value="" placeholder="" data-validate="" data-key="confirm_user_password" required />
 
 								</div></div></div></div>
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
@@ -60,7 +63,7 @@
 
 		
 		<label class="um-field-checkbox">
-			<input type="checkbox" name="use_gdpr_agreement" value="1">
+			<input type="checkbox" name="use_gdpr_agreement" value="1" required>
 			<span class="um-field-checkbox-state"><i class="um-icon-android-checkbox-outline-blank"></i></span>
 			<span class="um-field-checkbox-option">Please confirm that you agree to our Terms and Conditions</span>
 		</label>
@@ -71,53 +74,42 @@
 	</div>
 </div>		<input type="hidden" name="form_id" id="form_id_25" value="25" />
 	
-	<p class="um_request_name">
-		<label for="um_request_25">Only fill in if you are not human</label>
-		<input type="hidden" name="um_request" id="um_request_25" class="input" value="" size="25" autocomplete="off" />
-	</p>
-
-	<input type="hidden" id="_wpnonce" name="_wpnonce" value="1d185c90c2" /><input type="hidden" name="_wp_http_referer" value="/register/" />
-<div class="um-field">
-	<div class="g-recaptcha" id="um-25"  data-type="image"  data-size="normal"  data-theme="light"  data-sitekey="6Lc0qQ8UAAAAANG07Nb3Dd40LpiAeEEjkpfmTp52" ></div>
-</div>
+	
 
 
 <script type="text/javascript">
 	
-		var onloadCallback = function () {
-			jQuery('.g-recaptcha').each( function (i) {
-				grecaptcha.render( jQuery(this).attr('id'), {
-					'sitekey': jQuery(this).attr('data-sitekey'),
-					'theme': jQuery(this).attr('data-theme')
-				});
-			});
-		};
-
-		function um_recaptcha_refresh() {
-			jQuery('.g-recaptcha').html('');
-			grecaptcha.reset();
-			onloadCallback();
-		}
+		function checkform(){
+    var form1 = document.getElementById('myForm')
+    if(form1.password.value != form1.passwordConfirm.value)
+    {
+        alert("Passwords must be the same");
+        form1.password.focus();
+        
+    }
+    else
+    {form1.submit();}
+}
 
 	</script>
 	<div class="um-col-alt">
 
 		
-			<div class="um-left um-half">
-				<input type="submit" value="Register" class="um-button" id="um-submit-btn" />
-			</div>
+			
+				<button type="button" onclick="checkform();">Register</button>
+			
 			<div class="um-right um-half">
-				<a href="https://priyankgupta.co.in/login/" class="um-button um-alt">
+				<a href="../login" class="um-button um-alt">
 					Login				</a>
 			</div>
 
 		
 		<div class="um-clear"></div>
-
+</form>
 	</div>
 
 			
-		</form>
+		
 
 	</div>
 
