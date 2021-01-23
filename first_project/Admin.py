@@ -1,85 +1,90 @@
 from django.shortcuts import render
-from django.views.decorators.clickjacking import xframe_options_exempt
 import pymysql as mysql
+from django.contrib import auth
+from django.views.decorators.clickjacking import xframe_options_exempt
 
+def ActionAdminLogin(request):
+    return render(request,"AdminLogin.html",{"msg":''})
+def ActionCheckAdminLogin(request):
+    try:
+      adminid=request.POST['adminId']
+      password=request.POST['password']
+      dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
+      cmd = dbe.cursor()
+      q="select * from admin where adminid='{0}' and password='{1}'".format(adminid,password)
+      cmd.execute(q)
+      rec=cmd.fetchone()
+      if(rec):
+        return render(request,"AdminDashboard.html",{'admin':rec})
+      else:
+        return render(request, "AdminLogin.html",{'msg':'Invalid UserId/Password or Your registration is not approved from admin'})
+    except Exception as e:
+        print(e)
+        return render(request, "AdminLogin.html",{'msg':'Server Error'})
 
-
+@xframe_options_exempt
 def ActionDisplayAllUser(request):
     try:
+
      dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
      cmd = dbe.cursor()
-     q = "select D.* from dummy D where D.action=''"
+     q = "select U.* from user U"
      cmd.execute(q)
      rows=cmd.fetchall()
      dbe.close()
-     return render(request,"UserDisplayAll.html",{"rows":rows})
+     return render(request,"AdminDisplayAll.html",{"rows":rows})
     except Exception as e:
         print(e)
-        return render(request, "UserDisplayAll.html", {"rows":[]})
+        return render(request, "AdminDisplayAll.html", {"rows":[]})
 
 @xframe_options_exempt
 def ActionDisplayById(request):
-  try:
-    rec = request.session['ADMIN_SES']
     try:
      ccid=request.GET['ccid']
-     dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='minor')
+     dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
      cmd = dbe.cursor()
-     q = "select * from coordinator where coordinatorid={0}".format(ccid)
+     q = "select * from user where id={0}".format(ccid)
      cmd.execute(q)
      row=cmd.fetchone()
      dbe.close()
-     return render(request,"CoordinatorDisplayById.html",{"row":row,"rec":rec})
+     return render(request,"AdminDisplayById.html",{"row":row})
     except Exception as e:
         print(e)
-        return render(request, "CoordinatorDisplayById.html", {"row":[]})
-  except:
-      return render(request, "NewAdminLogin.html", {"msg": ''})
+        return render(request, "AdminDisplayById.html", {"row":[]})
+
 @xframe_options_exempt
-def ActionCoordinatorEditDeleteSubmit(request):
+def ActionAdminEditDeleteSubmit(request):
         ccid=request.POST['ccid']
-        name=request.POST['ename']
-        cname = request.POST['cname']
-        contact=request.POST['contact']
         btn=request.POST['btn']
         try:
-         if(btn=='Edit'):
-          dbe=mysql.connect(host='localhost',port=3306,password='123',user='root',db='minor')
+         if(btn=='Pending'):
+          dbe=mysql.connect(host='localhost',port=3306,password='123',user='root',db='dummy')
           cmd=dbe.cursor()
-          q="update coordinator set clubname='{0}',coordinatorname='{1}',contact='{2}' where coordinatorid={3}".format(name,cname,contact,ccid)
+          q="update user set adminact='{0}' where id={1}".format(btn,ccid)
           cmd.execute(q)
           dbe.commit()
           dbe.close()
-          return ActionDisplayAllCoordinator(request)
-         elif(btn=='Delete'):
-            dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='minor')
-            cmd = dbe.cursor()
-            q = "delete from coordinator where coordinatorid={0}".format(ccid)
-            cmd.execute(q)
-            dbe.commit()
-            dbe.close()
-            return ActionDisplayAllCoordinator(request)
+          return ActionDisplayAllUser(request)
+         elif(btn=='Approved'):
+             dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
+             cmd = dbe.cursor()
+             q = "update user set adminact='{0}' where id={1}".format(btn, ccid)
+             cmd.execute(q)
+             dbe.commit()
+             dbe.close()
+             return ActionDisplayAllUser(request)
+         elif (btn == 'DisApproved'):
+             dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
+             cmd = dbe.cursor()
+             q = "update user set adminact='{0}' where id={1}".format(btn, ccid)
+             cmd.execute(q)
+             dbe.commit()
+             dbe.close()
+             return ActionDisplayAllUser(request)
         except Exception as e:
             print(e)
-            return ActionDisplayAllCoordinator(request)
+            return ActionDisplayAllUser(request)
 
-@xframe_options_exempt
-def ActionEditCoordinatorPicture(request):
-
-    try:
-        ccid = request.POST['ccid']
-        file=request.FILES['eicon']
-        dbe=mysql.connect(host='localhost',port=3306,password='123',user='root',db='minor')
-        cmd=dbe.cursor()
-        q="update coordinator set coordinatorpic='{0}' where ccid={1}".format(file.name,ccid)
-        cmd.execute(q)
-        dbe.commit()
-        dbe.close()
-        f=open("E:/minor/asset/"+file.name,"wb")
-        for chunk in file.chunks():
-            f.write(chunk)
-        f.close()
-        return ActionDisplayAllCoordinator(request)
-    except Exception as e:
-        print(e)
-        return ActionDisplayAllCoordinator(request)
+def ActionLogout(request):
+    auth.logout(request)
+    return render(request,"AdminLogin.html",{'msg':[]})

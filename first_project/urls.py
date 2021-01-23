@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import path
 from . import User
 from . import UserLogin
+from . import Admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
 
@@ -23,15 +24,20 @@ urlpatterns = [
     url(r'^adminaccept/(\d+)/', accept, name = 'accept'),
     path('user/', User.ActionUserInterface),
     path('usersubmit', User.ActionUserSubmit),
-    path('displayalluser/', User.ActionDisplayAllUser),
-    path('userdisplaybyid/', User.ActionDisplayById),
-    path('usereditdeletesubmit', User.ActionUserEditDeleteSubmit),
+
+
     path('userlogin/', UserLogin.ActionUserLogin),
     path('checkuser', UserLogin.ActionCheckUserLogin),
     path('logout/', UserLogin.ActionLogout),
     path('displayalluserlogin/', User.ActionDisplayAllUserLogin),
     path('userdisplaybyidlogin/', User.ActionDisplayByIdLogin),
     path('usereditdeletesubmitlogin', User.ActionUserEditDeleteSubmitLogin),
+    path('adminlogin/',Admin.ActionAdminLogin),
+    path('checkadmin', Admin.ActionCheckAdminLogin),
+    path('displayalluser/', Admin.ActionDisplayAllUser),
+    path('userdisplaybyid/', Admin.ActionDisplayById),
+    path('admineditdeletesubmit', Admin.ActionAdminEditDeleteSubmit),
+
 ]
 urlpatterns+=staticfiles_urlpatterns()
 #test2

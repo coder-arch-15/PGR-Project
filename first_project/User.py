@@ -25,68 +25,6 @@ def ActionUserSubmit(request):
         return render(request, "UserInterface.html", {"msg": "record not submitted"})
 
 
-def ActionDisplayAllUser(request):
-    try:
-
-     dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
-     cmd = dbe.cursor()
-     q = "select U.* from user U"
-     cmd.execute(q)
-     rows=cmd.fetchall()
-     dbe.close()
-     return render(request,"UserDisplayAll.html",{"rows":rows})
-    except Exception as e:
-        print(e)
-        return render(request, "UserDisplayAll.html", {"rows":[]})
-
-
-def ActionDisplayById(request):
-    try:
-     ccid=request.GET['ccid']
-     dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
-     cmd = dbe.cursor()
-     q = "select * from user where id={0}".format(ccid)
-     cmd.execute(q)
-     row=cmd.fetchone()
-     dbe.close()
-     return render(request,"UserDisplayById.html",{"row":row})
-    except Exception as e:
-        print(e)
-        return render(request, "UserDisplayById.html", {"row":[]})
-
-
-def ActionUserEditDeleteSubmit(request):
-        ccid=request.POST['ccid']
-        btn=request.POST['btn']
-        try:
-         if(btn=='Pending'):
-          dbe=mysql.connect(host='localhost',port=3306,password='123',user='root',db='dummy')
-          cmd=dbe.cursor()
-          q="update user set adminact='{0}' where id={1}".format(btn,ccid)
-          cmd.execute(q)
-          dbe.commit()
-          dbe.close()
-          return ActionDisplayAllUser(request)
-         elif(btn=='Approved'):
-             dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
-             cmd = dbe.cursor()
-             q = "update user set adminact='{0}' where id={1}".format(btn, ccid)
-             cmd.execute(q)
-             dbe.commit()
-             dbe.close()
-             return ActionDisplayAllUser(request)
-         elif (btn == 'DisApproved'):
-             dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
-             cmd = dbe.cursor()
-             q = "update user set adminact='{0}' where id={1}".format(btn, ccid)
-             cmd.execute(q)
-             dbe.commit()
-             dbe.close()
-             return ActionDisplayAllUser(request)
-        except Exception as e:
-            print(e)
-            return ActionDisplayAllUser(request)
-
 @xframe_options_exempt
 def ActionDisplayAllUserLogin(request):
     try:
