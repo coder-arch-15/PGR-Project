@@ -19,6 +19,8 @@ def register(request):
 
     
 def user_login(request):
+	if(request.session.has_key("username")):
+		return redirect("/userdashboard")
 	return render(request, "userlogin.html")
 
 def user_login_submit(request):
@@ -30,33 +32,17 @@ def user_login_submit(request):
 			password = request.POST['password']
 			conn = sqlite3.connect('pgr-database.db')
 			cur = conn.cursor()
-			cur.execute("SELECT pasw FROM users WHERE username=?", (username,))
-			user = cur.fetchone()
-			
+			cur.execute("SELECT pasw,plan FROM users WHERE username=?", (username,))
+			user,plan = cur.fetchone()
+			conn.close()
 			if user is not None:
 				request.session['username'] = username
+				request.session['plan'] = plan
 				return redirect("/userdashboard")
 			else:
 				return render(request, "userlogin.html", {"error": "Invalid username or password!"} )
 	
 		return redirect("/login")
-
-
-
-def user_dashboard(request):
-	if(request.session.has_key("username")):
-		print("hello")
-		return render(request, "userdashboard.html")
-	else:
-		return redirect("/login")
-
-
-def user_logout(request):
-	try:
-		del request.session['username']
-	except:
-		pass
-	return redirect('/')
 
 
 def check_username_exist(request):

@@ -1,5 +1,6 @@
 from django.conf.urls import *
 from myapp.views import *
+from myapp.user_dashboard import *
 from django.contrib import admin
 from django.urls import path
 from . import User
@@ -38,6 +39,16 @@ urlpatterns = [
     path('displayalluser/', Admin.ActionDisplayAllUser),
     path('userdisplaybyid/', Admin.ActionDisplayById),
     path('admineditdeletesubmit', Admin.ActionAdminEditDeleteSubmit),
+
+
+    path("usershowstocks", user_show_stocks, name = 'user_show_stocks' ),
+    path("useradvstocks", user_adv_stocks, name = 'user_adv_stocks' ),
+    path("userwatchlist", user_watchlist, name = 'user_watchlist' ),
+    path("usertransaction", user_transaction, name = 'user_transaction' ),
+    path("useranalysis", user_analysis, name = 'user_analysis' ),
+    path("userwallet", user_wallet, name = 'user_wallet' ),
+    path("userleaderboard", user_leaderboard, name = 'user_leaderboard' ),
+    path("usermembershipaccount", user_membership_account, name = 'user_membership_account' ),
 
 ]
 urlpatterns+=staticfiles_urlpatterns()
