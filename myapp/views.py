@@ -10,7 +10,9 @@ from django.conf import settings
 import sqlite3
 
 def home(request):
-   return render(request, "home.html")
+	if(request.session.has_key("username")):
+		return redirect("/userdashboard")
+	return render(request, "home.html")
 
 def register(request):
 	return render(request, "userregister.html")
@@ -72,7 +74,7 @@ def check_username_exist(request):
 		conn.close()
 		return render(request, "userregister.html", {"error" : "Username - '"+username+"' is not available!" , "name":name, "email": email, "mob":mob})
 	else:
-		cur.execute("insert into users (username,pasw,name,email, mob,plan) values(?,?,?,?,?,?)",(username, pasw, name,email,mob,free))
+		cur.execute("insert into users (username,pasw,name,email, mob,plan,pending,approved) values(?,?,?,?,?,?,?,?)",(username, pasw, name,email,mob,free,1,0))
 		conn.commit()
 		cur.execute("insert into user_cash (username,cash) values (?,?)", (username, 1000000))
 		conn.commit()
