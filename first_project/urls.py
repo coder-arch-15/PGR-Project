@@ -49,7 +49,7 @@ urlpatterns = [
     path("userwallet", user_wallet, name = 'user_wallet' ),
     path("userleaderboard", user_leaderboard, name = 'user_leaderboard' ),
     path("usermembershipaccount", user_membership_account, name = 'user_membership_account' ),
-
+    url(r'^buyplan/(\d+)/(\d+)/', user_buyplan, name = 'user_buyplan'),
 ]
 urlpatterns+=staticfiles_urlpatterns()
 #test2

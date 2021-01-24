@@ -34,6 +34,7 @@ def user_login_submit(request):
 			cur = conn.cursor()
 			cur.execute("SELECT pasw,plan FROM users WHERE username=?", (username,))
 			user,plan = cur.fetchone()
+			conn.commit()
 			conn.close()
 			if user is not None:
 				request.session['username'] = username

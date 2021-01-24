@@ -90,6 +90,7 @@ def user_membership_account(request):
 		return redirect("/login")
 
 
+
 def user_leaderboard(request):
 	if(request.session.has_key("username")):
 		if( request.session['plan'] == "silver"):
@@ -99,6 +100,42 @@ def user_leaderboard(request):
 			return render(request, "buymembershipp.html", {"error": "To access LEADERBOARD section please activate SILVER or any premium plan!"})
 	else:
 		return redirect("/login")
+
+
+def user_buyplan(request,planid,expiry):
+	if(request.session.has_key("username")):
+		from datetime import datetime, timedelta
+		if(planid=="1"):
+			plan = "silver"
+		elif(planid=="2"):
+			plan = "gold"
+		elif(planid=="3"):
+			plan = "gold"
+		elif(planid=="4"):
+			plan = "platinum"
+		else:
+			plan = "free"
+
+		if(expiry=="1"):
+			expirydate = datetime.now() + timedelta(days=30) 
+		elif(expiry=="2"):
+			expirydate = datetime.now() + timedelta(days=90) 
+		elif(expiry=="3"):
+			expirydate = datetime.now() + timedelta(days=182) 
+		elif(expiry=="4"):
+			expirydate = datetime.now() + timedelta(days=365) 
+		else:
+			expirydate = ""
+		conn = sqlite3.connect('pgr-database.db')
+		cur = conn.cursor()
+		cur.execute("UPDATE USERS SET plan = ?, pending = ?, approved = ?, expiry = ? WHERE username=?", (plan,1,0,expirydate,request.session['username']))
+		conn.commit()
+		conn.close()
+		print("hello")
+		request.session['plan'] = plan
+		return redirect("/userdashboard")
+	else:
+		return redirect("/userlogout")
 
 
 def user_logout(request):
