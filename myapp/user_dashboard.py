@@ -7,7 +7,7 @@ import sqlite3
 
 def user_dashboard(request):
 	if(request.session.has_key("username")):
-		if( request.session['plan'] != "free"):
+		if( int(request.session['plan']) != 0):
 			print("hello")
 			return render(request, "userdashboard.html")
 		else:
@@ -18,7 +18,7 @@ def user_dashboard(request):
 
 def user_show_stocks(request):
 	if(request.session.has_key("username")):
-		if( request.session['plan'] >= 1):
+		if( int(request.session['plan']) >= 1):
 			print("hello_show_stocks")
 			return render(request, "usershowstocks.html")
 		else:
@@ -29,7 +29,7 @@ def user_show_stocks(request):
 
 def user_adv_stocks(request):
 	if(request.session.has_key("username")):
-		if( request.session['plan'] >= 2):
+		if( int(request.session['plan']) >= 2):
 			print("hello_adv_stocks")
 			return render(request, "useradvstocks.html")
 		else:
@@ -40,7 +40,7 @@ def user_adv_stocks(request):
 
 def user_analysis(request):
 	if(request.session.has_key("username")):
-		if( request.session['plan'] >= 3):
+		if( int(request.session['plan']) >= 3):
 			print("hello_analysis")
 			return render(request, "useranalysis.html")
 		else:
@@ -51,7 +51,7 @@ def user_analysis(request):
 
 def user_watchlist(request):
 	if(request.session.has_key("username")):
-		if( request.session['plan'] >= 1):
+		if( int(request.session['plan']) >= 1):
 			print("hello_watchlist")
 			return render(request, "userwatchlist.html")
 		else:
@@ -62,7 +62,7 @@ def user_watchlist(request):
 
 def user_wallet(request):
 	if(request.session.has_key("username")):
-		if( request.session['plan'] >= 1):
+		if( int(request.session['plan']) >= 1):
 			print("hello_wallet")
 			return render(request, "userwallet.html")
 		else:
@@ -73,7 +73,7 @@ def user_wallet(request):
 
 def user_transaction(request):
 	if(request.session.has_key("username")):
-		if( request.session['plan'] >= 1):
+		if( int(request.session['plan']) >= 1):
 			print("hello_transaction")
 			return render(request, "usertransaction.html")
 		else:
@@ -93,7 +93,7 @@ def user_membership_account(request):
 
 def user_leaderboard(request):
 	if(request.session.has_key("username")):
-		if( request.session['plan'] >= 1):
+		if( int(request.session['plan']) >= 1):
 			print("hello_leaderboard")
 			return render(request, "userleaderboard.html")
 		else:

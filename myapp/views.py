@@ -56,11 +56,14 @@ def check_username_exist(request):
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM users WHERE username=?", (username,))
 	user_obj = cur.fetchall()
-	free = "free"
+	conn.commit()
+	conn.close()
+	free = 0
 	if user_obj:
-		conn.close()
 		return render(request, "userregister.html", {"error" : "Username - '"+username+"' is not available!" , "name":name, "email": email, "mob":mob})
 	else:
+		conn = sqlite3.connect('pgr-database.db')
+		cur = conn.cursor()
 		cur.execute("insert into users (username,pasw,name,email, mob,plan,pending,approved) values(?,?,?,?,?,?,?,?)",(username, pasw, name,email,mob,free,1,0))
 		conn.commit()
 		cur.execute("insert into user_cash (username,cash) values (?,?)", (username, 1000000))
