@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 LOGIN_REDIRECT_URL = '/'
 # Application definition
 
+SESSION_COOKIE_AGE = 60*60
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

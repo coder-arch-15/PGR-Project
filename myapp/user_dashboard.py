@@ -64,7 +64,21 @@ def user_wallet(request):
 	if(request.session.has_key("username")):
 		if( int(request.session['plan']) >= 1):
 			print("hello_wallet")
-			return render(request, "userwallet.html")
+			conn = sqlite3.connect('pgr-database.db')
+			cur = conn.cursor()
+			cur.execute("SELECT * FROM STOCKS")
+			stocks = cur.fetchall()
+			cur.execute("SELECT * FROM HOLDINGS WHERE username = ?", (request.session['username'],))
+			table = cur.fetchall()
+			conn.commit()
+			conn.close()
+			print("###############################")
+			print(stocks)
+			stocks[1][0]
+			for user in table:
+				stocks[int(user[3])][1]
+			
+			return render(request, "userwallet.html", {"table": table , "stocks": stocks})
 		else:
 			return render(request, "buymembershipp.html", {"error": "To access WALLET section please activate SILVER or any premium plan!"})
 	else:
