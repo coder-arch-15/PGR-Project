@@ -1,0 +1,345 @@
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<title>Praedico Stock Trading Simulator &#8211; India&#039;s First Neural Network based Stock Trading Simulator</title>
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Praedico Stock Trading Simulator &raquo; Feed" href="https://priyankgupta.co.in/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Praedico Stock Trading Simulator &raquo; Comments Feed" href="https://priyankgupta.co.in/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/priyankgupta.co.in\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.6"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://priyankgupta.co.in/wp-includes/css/dist/block-library/style.min.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-block-vendors-style-css'  href='https://priyankgupta.co.in/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/vendors-style.css?ver=4.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-block-style-css'  href='https://priyankgupta.co.in/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/style.css?ver=4.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='ap-fileuploader-animation-css'  href='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/css/loading-animation.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='ap-fileuploader-css'  href='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/css/fileuploader.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='ap-jquery-ui-style-css'  href='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='ap-tagit-styles-css'  href='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/css/jquery.tagit.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='ap-tagit-ui-styles-css'  href='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/css/tagit.ui-zendesk.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='ap-front-styles-css'  href='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/css/frontend-style.css?ver=3.1.7' type='text/css' media='all' />
+<link rel='stylesheet' id='ap-lightbox-css-css'  href='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/lightbox/css/lightbox.css?ver=3.1.7' type='text/css' media='all' />
+<link rel='stylesheet' id='select2-css-css'  href='https://priyankgupta.co.in/wp-content/plugins/affs/assets/css/select2/select2.min.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='fs_affiliates-font-awesome-css'  href='https://priyankgupta.co.in/wp-content/plugins/affs/assets/css/font-awesome.min.css?ver=6.3' type='text/css' media='all' />
+<link rel='stylesheet' id='fs_affiliates-status-css'  href='https://priyankgupta.co.in/wp-content/plugins/affs/assets/css/frontend/frontend-status-button-design.css?ver=6.3' type='text/css' media='all' />
+<link rel='stylesheet' id='fs_affiliates-dashboard-css'  href='https://priyankgupta.co.in/wp-content/plugins/affs/assets/css/frontend/dashboard.css?ver=6.3' type='text/css' media='all' />
+<link rel='stylesheet' id='fs_affiliates-mobile-responsive-css'  href='https://priyankgupta.co.in/wp-content/plugins/affs/assets/css/frontend/table-mobile-responsive.css?ver=6.3' type='text/css' media='all' />
+<link rel='stylesheet' id='pmpro_frontend-css'  href='https://priyankgupta.co.in/wp-content/plugins/paid-memberships-pro/css/frontend.css?ver=2.5.2' type='text/css' media='screen' />
+<link rel='stylesheet' id='pmpro_print-css'  href='https://priyankgupta.co.in/wp-content/plugins/paid-memberships-pro/css/print.css?ver=2.5.2' type='text/css' media='print' />
+<link rel='stylesheet' id='wprls-style-css'  href='https://priyankgupta.co.in/wp-content/plugins/slider-slideshow/admin/includes/../css/public/slider-pro.min.css?ver=5.6' type='text/css' media='all' />
+<link rel='stylesheet' id='tutor-icon-css'  href='https://priyankgupta.co.in/wp-content/plugins/tutor/assets/icons/css/tutor-icon.css?ver=1.7.8' type='text/css' media='all' />
+<link rel='stylesheet' id='tutor-plyr-css'  href='https://priyankgupta.co.in/wp-content/plugins/tutor/assets/packages/plyr/plyr.css?ver=1.7.8' type='text/css' media='all' />
+<link rel='stylesheet' id='tutor-frontend-css'  href='https://priyankgupta.co.in/wp-content/plugins/tutor/assets/css/tutor-front.min.css?ver=1.7.8' type='text/css' media='all' />
+<style id='tutor-frontend-inline-css' type='text/css'>
+:root{}
+</style>
+<link rel='stylesheet' id='woocommerce-layout-css'  href='https://priyankgupta.co.in/wp-content/plugins/woocommerce/assets/css/woocommerce-layout.css?ver=4.9.0' type='text/css' media='all' />
+<link rel='stylesheet' id='woocommerce-smallscreen-css'  href='https://priyankgupta.co.in/wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreen.css?ver=4.9.0' type='text/css' media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='woocommerce-general-css'  href='https://priyankgupta.co.in/wp-content/plugins/woocommerce/assets/css/woocommerce.css?ver=4.9.0' type='text/css' media='all' />
+<style id='woocommerce-inline-inline-css' type='text/css'>
+.woocommerce form .form-row .required { visibility: visible; }
+</style>
+<link rel='stylesheet' id='font-awesome-css'  href='https://priyankgupta.co.in/wp-content/plugins/elementor/assets/lib/font-awesome/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='tcy-front-style-css'  href='https://priyankgupta.co.in/wp-content/themes/hamroclass/inc/centurylib/assets/css/tcy-front-style.min.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='js_composer_front-css'  href='https://priyankgupta.co.in/wp-content/plugins/js_composer/assets/css/js_composer.min.css?ver=6.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='popup-maker-site-css'  href='https://priyankgupta.co.in/wp-content/plugins/popup-maker/assets/css/pum-site.min.css?ver=1.15.0' type='text/css' media='all' />
+<style id='popup-maker-site-inline-css' type='text/css'>
+/* Popup Theme 7581: Content Only - For use with page builders or block editor */
+.pum-theme-7581, .pum-theme-content-only { background-color: rgba( 0, 0, 0, 0.70 ) } 
+.pum-theme-7581 .pum-container, .pum-theme-content-only .pum-container { padding: 0px; border-radius: 0px; border: 1px none #000000; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.00 ) } 
+.pum-theme-7581 .pum-title, .pum-theme-content-only .pum-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 400; font-size: 32px; line-height: 36px } 
+.pum-theme-7581 .pum-content, .pum-theme-content-only .pum-content { color: #8c8c8c; font-family: inherit; font-weight: 400 } 
+.pum-theme-7581 .pum-content + .pum-close, .pum-theme-content-only .pum-content + .pum-close { position: absolute; height: 18px; width: 18px; left: auto; right: 7px; bottom: auto; top: 7px; padding: 0px; color: #000000; font-family: inherit; font-weight: 700; font-size: 20px; line-height: 20px; border: 1px none #ffffff; border-radius: 15px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.00 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.00 ); background-color: rgba( 255, 255, 255, 0.00 ) } 
+
+/* Popup Theme 7182: Floating Bar - Soft Blue */
+.pum-theme-7182, .pum-theme-floating-bar { background-color: rgba( 255, 255, 255, 0.00 ) } 
+.pum-theme-7182 .pum-container, .pum-theme-floating-bar .pum-container { padding: 8px; border-radius: 0px; border: 1px none #000000; box-shadow: 1px 1px 3px 0px rgba( 2, 2, 2, 0.23 ); background-color: rgba( 238, 246, 252, 1.00 ) } 
+.pum-theme-7182 .pum-title, .pum-theme-floating-bar .pum-title { color: #505050; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 400; font-size: 32px; line-height: 36px } 
+.pum-theme-7182 .pum-content, .pum-theme-floating-bar .pum-content { color: #505050; font-family: inherit; font-weight: 400 } 
+.pum-theme-7182 .pum-content + .pum-close, .pum-theme-floating-bar .pum-content + .pum-close { position: absolute; height: 18px; width: 18px; left: auto; right: 5px; bottom: auto; top: 50%; padding: 0px; color: #505050; font-family: Sans-Serif; font-weight: 700; font-size: 15px; line-height: 18px; border: 1px solid #505050; border-radius: 15px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.00 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.00 ); background-color: rgba( 255, 255, 255, 0.00 ); transform: translate(0, -50%) } 
+
+/* Popup Theme 6285: Default Theme */
+.pum-theme-6285, .pum-theme-default-theme { background-color: rgba( 255, 255, 255, 1.00 ) } 
+.pum-theme-6285 .pum-container, .pum-theme-default-theme .pum-container { padding: 18px; border-radius: 0px; border: 1px none #000000; box-shadow: 1px 1px 3px 0px rgba( 2, 2, 2, 0.23 ); background-color: rgba( 249, 249, 249, 1.00 ) } 
+.pum-theme-6285 .pum-title, .pum-theme-default-theme .pum-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 400; font-size: 32px; font-style: normal; line-height: 36px } 
+.pum-theme-6285 .pum-content, .pum-theme-default-theme .pum-content { color: #8c8c8c; font-family: inherit; font-weight: 400; font-style: inherit } 
+.pum-theme-6285 .pum-content + .pum-close, .pum-theme-default-theme .pum-content + .pum-close { position: absolute; height: auto; width: auto; left: auto; right: 0px; bottom: auto; top: 0px; padding: 8px; color: #ffffff; font-family: inherit; font-weight: 400; font-size: 12px; font-style: inherit; line-height: 36px; border: 1px none #ffffff; border-radius: 0px; box-shadow: 1px 1px 3px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 0, 183, 205, 1.00 ) } 
+
+/* Popup Theme 6286: Light Box */
+.pum-theme-6286, .pum-theme-lightbox { background-color: rgba( 0, 0, 0, 0.60 ) } 
+.pum-theme-6286 .pum-container, .pum-theme-lightbox .pum-container { padding: 18px; border-radius: 3px; border: 8px solid #000000; box-shadow: 0px 0px 30px 0px rgba( 2, 2, 2, 1.00 ); background-color: rgba( 255, 255, 255, 1.00 ) } 
+.pum-theme-6286 .pum-title, .pum-theme-lightbox .pum-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 100; font-size: 32px; line-height: 36px } 
+.pum-theme-6286 .pum-content, .pum-theme-lightbox .pum-content { color: #000000; font-family: inherit; font-weight: 100 } 
+.pum-theme-6286 .pum-content + .pum-close, .pum-theme-lightbox .pum-content + .pum-close { position: absolute; height: 26px; width: 26px; left: auto; right: -13px; bottom: auto; top: -13px; padding: 0px; color: #ffffff; font-family: Arial; font-weight: 100; font-size: 24px; line-height: 24px; border: 2px solid #ffffff; border-radius: 26px; box-shadow: 0px 0px 15px 1px rgba( 2, 2, 2, 0.75 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 0, 0, 0, 1.00 ) } 
+
+/* Popup Theme 6287: Enterprise Blue */
+.pum-theme-6287, .pum-theme-enterprise-blue { background-color: rgba( 0, 0, 0, 0.70 ) } 
+.pum-theme-6287 .pum-container, .pum-theme-enterprise-blue .pum-container { padding: 28px; border-radius: 5px; border: 1px none #000000; box-shadow: 0px 10px 25px 4px rgba( 2, 2, 2, 0.50 ); background-color: rgba( 255, 255, 255, 1.00 ) } 
+.pum-theme-6287 .pum-title, .pum-theme-enterprise-blue .pum-title { color: #315b7c; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 100; font-size: 34px; line-height: 36px } 
+.pum-theme-6287 .pum-content, .pum-theme-enterprise-blue .pum-content { color: #2d2d2d; font-family: inherit; font-weight: 100 } 
+.pum-theme-6287 .pum-content + .pum-close, .pum-theme-enterprise-blue .pum-content + .pum-close { position: absolute; height: 28px; width: 28px; left: auto; right: 8px; bottom: auto; top: 8px; padding: 4px; color: #ffffff; font-family: Times New Roman; font-weight: 100; font-size: 20px; line-height: 20px; border: 1px none #ffffff; border-radius: 42px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 49, 91, 124, 1.00 ) } 
+
+/* Popup Theme 6288: Hello Box */
+.pum-theme-6288, .pum-theme-hello-box { background-color: rgba( 0, 0, 0, 0.75 ) } 
+.pum-theme-6288 .pum-container, .pum-theme-hello-box .pum-container { padding: 30px; border-radius: 80px; border: 14px solid #81d742; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.00 ); background-color: rgba( 255, 255, 255, 1.00 ) } 
+.pum-theme-6288 .pum-title, .pum-theme-hello-box .pum-title { color: #2d2d2d; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: Montserrat; font-weight: 100; font-size: 32px; line-height: 36px } 
+.pum-theme-6288 .pum-content, .pum-theme-hello-box .pum-content { color: #2d2d2d; font-family: inherit; font-weight: 100 } 
+.pum-theme-6288 .pum-content + .pum-close, .pum-theme-hello-box .pum-content + .pum-close { position: absolute; height: auto; width: auto; left: auto; right: -30px; bottom: auto; top: -30px; padding: 0px; color: #2d2d2d; font-family: Times New Roman; font-weight: 100; font-size: 32px; line-height: 28px; border: 1px none #ffffff; border-radius: 28px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 255, 255, 255, 1.00 ) } 
+
+/* Popup Theme 6289: Cutting Edge */
+.pum-theme-6289, .pum-theme-cutting-edge { background-color: rgba( 0, 0, 0, 0.50 ) } 
+.pum-theme-6289 .pum-container, .pum-theme-cutting-edge .pum-container { padding: 18px; border-radius: 0px; border: 1px none #000000; box-shadow: 0px 10px 25px 0px rgba( 2, 2, 2, 0.50 ); background-color: rgba( 30, 115, 190, 1.00 ) } 
+.pum-theme-6289 .pum-title, .pum-theme-cutting-edge .pum-title { color: #ffffff; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: Sans-Serif; font-weight: 100; font-size: 26px; line-height: 28px } 
+.pum-theme-6289 .pum-content, .pum-theme-cutting-edge .pum-content { color: #ffffff; font-family: inherit; font-weight: 100 } 
+.pum-theme-6289 .pum-content + .pum-close, .pum-theme-cutting-edge .pum-content + .pum-close { position: absolute; height: 24px; width: 24px; left: auto; right: 0px; bottom: auto; top: 0px; padding: 0px; color: #1e73be; font-family: Times New Roman; font-weight: 100; font-size: 32px; line-height: 24px; border: 1px none #ffffff; border-radius: 0px; box-shadow: -1px 1px 1px 0px rgba( 2, 2, 2, 0.10 ); text-shadow: -1px 1px 1px rgba( 0, 0, 0, 0.10 ); background-color: rgba( 238, 238, 34, 1.00 ) } 
+
+/* Popup Theme 6290: Framed Border */
+.pum-theme-6290, .pum-theme-framed-border { background-color: rgba( 255, 255, 255, 0.50 ) } 
+.pum-theme-6290 .pum-container, .pum-theme-framed-border .pum-container { padding: 18px; border-radius: 0px; border: 20px outset #dd3333; box-shadow: 1px 1px 3px 0px rgba( 2, 2, 2, 0.97 ) inset; background-color: rgba( 255, 251, 239, 1.00 ) } 
+.pum-theme-6290 .pum-title, .pum-theme-framed-border .pum-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 100; font-size: 32px; line-height: 36px } 
+.pum-theme-6290 .pum-content, .pum-theme-framed-border .pum-content { color: #2d2d2d; font-family: inherit; font-weight: 100 } 
+.pum-theme-6290 .pum-content + .pum-close, .pum-theme-framed-border .pum-content + .pum-close { position: absolute; height: 20px; width: 20px; left: auto; right: -20px; bottom: auto; top: -20px; padding: 0px; color: #ffffff; font-family: Tahoma; font-weight: 700; font-size: 16px; line-height: 18px; border: 1px none #ffffff; border-radius: 0px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 0, 0, 0, 0.55 ) } 
+
+#pum-7671 {z-index: 1999999999}
+#pum-7497 {z-index: 1999999999}
+#pum-7450 {z-index: 1999999999}
+#pum-7311 {z-index: 1999999999}
+#pum-6305 {z-index: 1999999999}
+#pum-6671 {z-index: 1999999999}
+#pum-6295 {z-index: 1999999999}
+#pum-6293 {z-index: 1999999999}
+
+</style>
+<link rel='stylesheet' id='hamroclass-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A400italic%2C700italic%2C300%2C400%2C500%2C600%2C700' type='text/css' media='all' />
+<link rel='stylesheet' id='lightslider-style-css'  href='https://priyankgupta.co.in/wp-content/themes/hamroclass/assets/vendor/lightslider/css/lightslider.min.css?ver=1.1.6' type='text/css' media='all' />
+<link rel='stylesheet' id='magnific-popup-style-css'  href='https://priyankgupta.co.in/wp-content/themes/hamroclass/assets/vendor/magnific-popup/css/magnific-popup.min.css?ver=1.1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='hamroclass-main-css'  href='https://priyankgupta.co.in/wp-content/themes/hamroclass/assets/css/hamroclass.min.css?ver=1.0.7' type='text/css' media='all' />
+<style id='hamroclass-main-inline-css' type='text/css'>
+.hmc-notice-wrapper{background:}
+.site-title,.site-description{position:absolute;clip:rect(1px,1px,1px,1px)}
+.post-cats-list .category-button.hmc-cat-uncategorized{color:#fff;background:#0f233a}
+.post-cats-list .category-button.hmc-cat-uncategorized:after{border-left-color:#0f233a;border-bottom-color:#0f233a}
+</style>
+<link rel='stylesheet' id='hamroclass-style-css'  href='https://priyankgupta.co.in/wp-content/themes/hamroclass/style.css?ver=1.0.7' type='text/css' media='all' />
+<link rel='stylesheet' id='hamroclass-theeventcalendar-css'  href='https://priyankgupta.co.in/wp-content/themes/hamroclass/assets/css/theeventcalendar.min.css?ver=1.0.7' type='text/css' media='all' />
+<link rel='stylesheet' id='um_fonticons_ii-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-fonticons-ii.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_fonticons_fa-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-fonticons-fa.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='select2-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/select2/select2.min.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_crop-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-crop.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_modal-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-modal.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_styles-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-styles.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_profile-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-profile.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_account-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-account.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_misc-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-misc.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_fileupload-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-fileupload.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_datetime-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/pickadate/default.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_datetime_date-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/pickadate/default.date.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_datetime_time-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/pickadate/default.time.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_raty-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-raty.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_scrollbar-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/simplebar.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_tipsy-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-tipsy.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_responsive-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-responsive.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='um_default_css-css'  href='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/css/um-old-default.css?ver=2.1.15' type='text/css' media='all' />
+<link rel='stylesheet' id='hamroclass-learnpress-css'  href='https://priyankgupta.co.in/wp-content/themes/hamroclass/assets/css/learnpress.min.css?ver=1.0.7' type='text/css' media='all' />
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/jquery/jquery.min.js?ver=3.5.1' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js?ver=5.6' id='ap-jquery-ui-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/js/tag-it.js?ver=3.1.7' id='ap-tagit-js-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/js/tag-it-custom.js?ver=3.1.7' id='ap-tagit-custom-js-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/js/fileuploader.js?ver=5.6' id='ap-fileuploader-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/lightbox/js/lightbox.js?ver=3.1.7' id='ap-lightbox-js-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/jquery/ui/datepicker.min.js?ver=1.12.1' id='jquery-ui-datepicker-js'></script>
+<script type='text/javascript' id='jquery-ui-datepicker-js-after'>
+jQuery(document).ready(function(jQuery){jQuery.datepicker.setDefaults({"closeText":"Close","currentText":"Today","monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Previous","dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"dateFormat":"MM d, yy","firstDay":1,"isRTL":false});});
+</script>
+<script type='text/javascript' id='ap-frontend-js-js-extra'>
+/* <![CDATA[ */
+var ap_fileuploader = {"upload_url":"https:\/\/priyankgupta.co.in\/wp-admin\/admin-ajax.php","nonce":"19079108b6"};
+var ap_form_required_message = "This field is required";
+var ap_captcha_error_message = "Sum is not correct.";
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/accesspress-anonymous-post-pro/js/frontend.js?ver=3.1.7' id='ap-frontend-js-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/js/select2/select2.full.min.js?ver=2.1.15' id='select2-js'></script>
+<script type='text/javascript' id='fs-enhanced-select2-js-extra'>
+/* <![CDATA[ */
+var fs_enhanced_select_params = {"ajax_url":"https:\/\/priyankgupta.co.in\/wp-admin\/admin-ajax.php","search_nonce":"d4260ed1d6"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/affs/assets/js/fs-enhanced-select.js?ver=6.3' id='fs-enhanced-select2-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/affs/assets/js/blockUI/jquery.blockUI.js?ver=2.70.0' id='fs_blockUI-js'></script>
+<script type='text/javascript' id='fs-affiliates-form-js-extra'>
+/* <![CDATA[ */
+var fs_affiliates_form_params = {"ajax_url":"https:\/\/priyankgupta.co.in\/wp-admin\/admin-ajax.php","username_validation_msg":"Username should not be empty","useremail_validation_msg":"Email should not be empty","username_nonce":"fe3f841b77","useremail_nonce":"38858cca60","url_nonce":"9cbd4a2d8c","fbshare":"no","tweet":"no","gplusshare":"no","vkshare":"no","fbappid":"","redirecturl":"https:\/\/priyankgupta.co.in\/"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/affs/assets/js/frontend/form.js?ver=6.3' id='fs-affiliates-form-js'></script>
+<script type='text/javascript' id='fs_social_actions-js-extra'>
+/* <![CDATA[ */
+var fs_social_action_params = {"fbappid":"","fbshare":"no","tweet":"no","gplusshare":"no","vkshare":"no","redirecturl":"https:\/\/priyankgupta.co.in\/","success_msg":"Sucessfully Posted","cancel_msg":"Cancel"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/affs/assets/js/frontend/fpsocialactions.js?ver=6.3' id='fs_social_actions-js'></script>
+<script type='text/javascript' id='fs-affiliates-dashboard-js-extra'>
+/* <![CDATA[ */
+var fs_affiliates_dashboard_params = {"ajax_url":"https:\/\/priyankgupta.co.in\/wp-admin\/admin-ajax.php","pay_save_nonce":"d2e570a6e4","unpaid_commission":"a9ef64dd49","request_submit_confirm":"Are you sure, you want to submit the request?"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/affs/assets/js/frontend/dashboard.js?ver=6.3' id='fs-affiliates-dashboard-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/affs/assets/js/jquery.fileupload.js?ver=6.3' id='fs_affiliates_file_upload-js'></script>
+<script type='text/javascript' id='srpscripts-js-extra'>
+/* <![CDATA[ */
+var srpscripts_params = {"ajaxurl":"https:\/\/priyankgupta.co.in\/wp-admin\/admin-ajax.php","enable_option_nonce":"0f382c293d","checked_alert_msg":"Are you sure you want to be part of the Reward Points Program?","unchecked_alert_msg":"Are you sure you want to exit the Reward Points Program?"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/rewardsystem/assets/js/srpscripts.js?ver=24.5' id='srpscripts-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/slider-slideshow/admin/includes/../js/public/rsslider.js?ver=5.6' id='wprls-script-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70' id='jquery-blockui-js'></script>
+<script type='text/javascript' id='wc-add-to-cart-js-extra'>
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"https:\/\/priyankgupta.co.in\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=4.9.0' id='wc-add-to-cart-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/js_composer/assets/js/vendors/woocommerce-add-to-cart.js?ver=6.4.2' id='vc_woocommerce-add-to-cart-js-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/rewardsystem/assets/js/footable.js?ver=24.5' id='wp_reward_footable-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/rewardsystem/assets/js/footable.sort.js?ver=24.5' id='wp_reward_footable_sort-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/rewardsystem/assets/js/footable.paginate.js?ver=24.5' id='wp_reward_footable_paging-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/rewardsystem/assets/js/footable.filter.js?ver=24.5' id='wp_reward_footable_filter-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/rewardsystem/assets/js/jscolor/jscolor.js?ver=24.5' id='wp_jscolor_rewards-js'></script>
+<script type='text/javascript' id='frontendscripts-js-extra'>
+/* <![CDATA[ */
+var frontendscripts_params = {"ajaxurl":"https:\/\/priyankgupta.co.in\/wp-admin\/admin-ajax.php","generate_referral":"c0bfa50da5","unset_referral":"fdbcf7606a","unset_product":"4b79bc2ecb","booking_msg":"f913317927","variation_msg":"f41454e288","enable_option_nonce":"0f382c293d","loggedinuser":"no","buttonlanguage":"1","wplanguage":"","fbappid":"","url":"https:\/\/priyankgupta.co.in\/","showreferralmsg":"1","showearnmsg":"1","showearnmsg_guest":"1","showpurchasemsg":"1","showbuyingmsg":"1","productpurchasecheckbox":"","buyingpointscheckbox":"","buyingmsg":"1","variable_product_earnmessage":"no","enqueue_footable":"1","check_purchase_notice_for_variation":"no","check_referral_notice_for_variation":"no","check_buying_notice_for_variation":"no","is_product_page":"","is_date_filter_enabled":"2","custom_date_error_message":"From Date and To Date is mandatory","default_selection_error_message":"Please select any option"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/rewardsystem/includes/frontend/js/frontendscripts.js?ver=24.5' id='frontendscripts-js'></script>
+<script type='text/javascript' id='wc-enhanced-select-js-extra'>
+/* <![CDATA[ */
+var wc_enhanced_select_params = {"ajax_url":"https:\/\/priyankgupta.co.in\/wp-admin\/admin-ajax.php","search_customers_nonce":"759599fada"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/woocommerce/assets/js/admin/wc-enhanced-select.min.js?ver=4.9.0' id='wc-enhanced-select-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/underscore.min.js?ver=1.8.3' id='underscore-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=7.4.4' id='wp-polyfill-js'></script>
+<script type='text/javascript' id='wp-polyfill-js-after'>
+( 'fetch' in window ) || document.write( '<script src="https://priyankgupta.co.in/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://priyankgupta.co.in/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?ver=3.42.0"></scr' + 'ipt>' );( window.DOMRect ) || document.write( '<script src="https://priyankgupta.co.in/wp-includes/js/dist/vendor/wp-polyfill-dom-rect.min.js?ver=3.42.0"></scr' + 'ipt>' );( window.URL && window.URL.prototype && window.URLSearchParams ) || document.write( '<script src="https://priyankgupta.co.in/wp-includes/js/dist/vendor/wp-polyfill-url.min.js?ver=3.6.4"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://priyankgupta.co.in/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://priyankgupta.co.in/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?ver=2.0.2"></scr' + 'ipt>' );
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/i18n.min.js?ver=326fe7fbfdb407b6edbcfba7e17f3909' id='wp-i18n-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/ultimate-member/assets/js/um-gdpr.min.js?ver=2.1.15' id='um-gdpr-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/hooks.min.js?ver=54e7683a4c0aafac0448bb95dc8d53ba' id='wp-hooks-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/stockdio-historical-chart/assets/stockdio_chart_historical-wp.js?ver=2.8.1' id='customChartHistoricalStockdioJs-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/stockdio-historical-chart/assets/Sortable.min.js?ver=2.8.1' id='StockdioSortableJS-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/backbone.min.js?ver=1.4.0' id='backbone-js'></script>
+<script type='text/javascript' id='wp-api-request-js-extra'>
+/* <![CDATA[ */
+var wpApiSettings = {"root":"https:\/\/priyankgupta.co.in\/wp-json\/","nonce":"160c87ac16","versionString":"wp\/v2\/"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/api-request.min.js?ver=5.6' id='wp-api-request-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/wp-api.min.js?ver=5.6' id='wp-api-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/vendor/lodash.min.js?ver=4.17.19' id='lodash-js'></script>
+<script type='text/javascript' id='lodash-js-after'>
+window.lodash = _.noConflict();
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/vendor/moment.min.js?ver=2.26.0' id='moment-js'></script>
+<script type='text/javascript' id='moment-js-after'>
+moment.updateLocale( 'en_US', {"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthsShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"week":{"dow":1},"longDateFormat":{"LT":"g:i a","LTS":null,"L":null,"LL":"F j, Y","LLL":"F j, Y g:i a","LLLL":null}} );
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/vendor/react.min.js?ver=16.13.1' id='react-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/dom-ready.min.js?ver=5316a69cb8a665ca6252926589751f9a' id='wp-dom-ready-js'></script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/a11y.min.js?ver=693bc76804871970d5d4bf16475f9010' id='wp-a11y-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/vendor/react-dom.min.js?ver=16.13.1' id='react-dom-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/escape-html.min.js?ver=5241b8bf5a5db2d44897e649c1e253ef' id='wp-escape-html-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/element.min.js?ver=79c184d653b205e146d35d83429a25c6' id='wp-element-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/is-shallow-equal.min.js?ver=4cb27f4ffc609cc60a3f5d108fc14e67' id='wp-is-shallow-equal-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/priority-queue.min.js?ver=1ec20c9550edd665031b2872eeb15f6a' id='wp-priority-queue-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/compose.min.js?ver=f0c73fe1bb32f10ff822ceff1c83d80c' id='wp-compose-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/date.min.js?ver=3bcd711eb6f1f4a012bf025c0d4ee014' id='wp-date-js'></script>
+<script type='text/javascript' id='wp-date-js-after'>
+wp.date.setSettings( {"l10n":{"locale":"en_US","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthsShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"meridiem":{"am":"am","pm":"pm","AM":"AM","PM":"PM"},"relative":{"future":"%s from now","past":"%s ago"}},"formats":{"time":"g:i a","date":"F j, Y","datetime":"F j, Y g:i a","datetimeAbbreviated":"M j, Y g:i a"},"timezone":{"offset":"5.5","string":"","abbr":""}} );
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/deprecated.min.js?ver=7eeae75ecca445767bf663bbc025ee2e' id='wp-deprecated-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/dom.min.js?ver=37fc0d15d159b14d0a9c0883214ab108' id='wp-dom-js'></script>
+<script type='text/javascript' id='wp-keycodes-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/keycodes.min.js?ver=82e457c50e5f5a6c4da4c9e380f03441' id='wp-keycodes-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/primitives.min.js?ver=3ec9526df929c5f4e9100eec771bf4aa' id='wp-primitives-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/redux-routine.min.js?ver=8ec41c688c5daad1d264d85374a1c8b0' id='wp-redux-routine-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/data.min.js?ver=777f925bfe1a2aea2a86b7b9ae6aed25' id='wp-data-js'></script>
+<script type='text/javascript' id='wp-data-js-after'>
+( function() {
+	var userId = 0;
+	var storageKey = "WP_DATA_USER_" + userId;
+	wp.data
+		.use( wp.data.plugins.persistence, { storageKey: storageKey } );
+	wp.data.plugins.persistence.__unstableMigrate( { storageKey: storageKey } );
+} )();
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/rich-text.min.js?ver=76d3f16d07ab8284bd57ef3bc1ac3898' id='wp-rich-text-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/warning.min.js?ver=10a247cfe08865dfbda5c0d037134e27' id='wp-warning-js'></script>
+<script type='text/javascript' id='wp-components-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-includes/js/dist/components.min.js?ver=df4b16e21104c0e1043e9c0a0eeedd94' id='wp-components-js'></script>
+<script type='text/javascript' src='https://priyankgupta.co.in/wp-content/plugins/stockdio-historical-chart/assets/stockdio_search.js?ver=2.8.1' id='customStockdioSearchJS-js'></script>
+<link rel="https://api.w.org/" href="https://priyankgupta.co.in/wp-json/" /><link rel="alternate" type="application/json" href="https://priyankgupta.co.in/wp-json/wp/v2/pages/5539" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://priyankgupta.co.in/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://priyankgupta.co.in/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.6" />
+<meta name="generator" content="TutorLMS 1.7.8" />
+<meta name="generator" content="WooCommerce 4.9.0" />
+<link rel="canonical" href="https://priyankgupta.co.in/" />
+<link rel='shortlink' href='https://priyankgupta.co.in/' />
+<link rel="alternate" type="application/json+oembed" href="https://priyankgupta.co.in/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpriyankgupta.co.in%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://priyankgupta.co.in/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpriyankgupta.co.in%2F&#038;format=xml" />
+        <script>
+            var tutor_url_base="https://priyankgupta.co.in/wp-content/plugins/tutor/";
+        </script>
+    		<style type="text/css">
+			.um_request_name {
+				display: none !important;
+			}
+		</style>
+	            <style type="text/css">
+             
+            </style>
+            	<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress."/>
+<link rel="icon" href="https://priyankgupta.co.in/wp-content/uploads/2020/05/cropped-logo-32x32.jpeg" sizes="32x32" />
+<link rel="icon" href="https://priyankgupta.co.in/wp-content/uploads/2020/05/cropped-logo-192x192.jpeg" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://priyankgupta.co.in/wp-content/uploads/2020/05/cropped-logo-180x180.jpeg" />
+<meta name="msapplication-TileImage" content="https://priyankgupta.co.in/wp-content/uploads/2020/05/cropped-logo-270x270.jpeg" />
+<noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript></head>

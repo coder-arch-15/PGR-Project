@@ -57,7 +57,7 @@ ROOT_URLCONF = 'first_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['jyoti_templates'],
+        'DIRS': ['jyoti_templates', 'jyoti_templates/layouts'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -27,7 +27,12 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../minor" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\PGR-Project\jyoti_templates\layout" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="PGR-Project" type="Python.DjangoServer" factoryName="Django server">
@@ -83,6 +88,13 @@
       <workItem from="1611254089525" duration="594000" />
       <workItem from="1611383498929" duration="1329000" />
       <workItem from="1611384872555" duration="1996000" />
+      <workItem from="1611386932920" duration="828000" />
+      <workItem from="1611675473125" duration="384000" />
+      <workItem from="1611682460166" duration="1072000" />
+      <workItem from="1611684164803" duration="1647000" />
+      <workItem from="1611685982071" duration="1771000" />
+      <workItem from="1611687896943" duration="1765000" />
+      <workItem from="1611689715664" duration="1268000" />
     </task>
     <servers />
   </component>
@@ -90,13 +102,13 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1611249176056">
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1611690684256">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611249176056" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1611384873390">
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611690684256" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1611689727750">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1611384873390" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1611689727750" />
   </component>
 </project>

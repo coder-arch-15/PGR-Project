@@ -39,7 +39,8 @@ urlpatterns = [
     path('displayalluser/', Admin.ActionDisplayAllUser),
     path('userdisplaybyid/', Admin.ActionDisplayById),
     path('admineditdeletesubmit', Admin.ActionAdminEditDeleteSubmit),
-
+    path('userregister/',User.ActionUserInterface),
+    path('usersubmit', User.ActionUserSubmit),
 
     path("usershowstocks", user_show_stocks, name = 'user_show_stocks' ),
     path("useradvstocks", user_adv_stocks, name = 'user_adv_stocks' ),

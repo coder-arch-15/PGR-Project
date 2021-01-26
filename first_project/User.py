@@ -3,26 +3,26 @@ import pymysql as mysql
 from django.views.decorators.clickjacking import xframe_options_exempt
 
 def ActionUserInterface(request):
-        return render(request,"UserInterface.html",{"msg":''})
+        return render(request,"userregister.html",{"msg":''})
 
 def ActionUserSubmit(request):
       try:
-        cname = request.POST['cname']
-        contact=request.POST['contact']
-        gender=request.POST['gender']
-        userid = request.POST['userid']
-        password = request.POST['password']
+        name = request.POST["nickname-25"]
+        username=request.POST["user_login-25"]
+        email = request.POST["user_email-25"]
+        mob = request.POST["mobile_number-25"]
+        password = request.POST["user_password-25"]
         dbe=mysql.connect(host='localhost',port=3306,password='123',user='root',db='dummy')
         cmd=dbe.cursor()
-        q="insert into user(username,contact,gender,userid,password) values('{0}','{1}','{2}','{3}','{4}')".format(cname,contact,gender,userid,password)
+        q="insert into user(cname,username,email,mob,pasw) values('{0}','{1}','{2}','{3}','{4}')".format(name,username,email,mob,password)
         cmd.execute(q)
         dbe.commit()
         dbe.close()
-        return render(request,"UserInterface.html",{"msg":"record submitted"})
+        return render(request,"userregister.html",{"msg":"record submitted"})
 
       except Exception as e:
         print(e)
-        return render(request, "UserInterface.html", {"msg": "record not submitted"})
+        return render(request, "userregister.html", {"msg": "record not submitted"})
 
 
 @xframe_options_exempt
