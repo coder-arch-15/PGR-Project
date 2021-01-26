@@ -149,17 +149,17 @@ th {
 	
 
   <tr style="color:black;">
+    {% with company=user.3 %}
+    <td class="center"><a href="priyankgupta.co.in/portfolio/?id=ADANIPORTS"><button style="width:100%;" class="button button1">{{stocks.company.0}}</button></a></td>
+    <td>{{user.1}}</td>
+    <td>{{user.2}}</td>
+    <td>{{user.4}}</td>
+    <td>{{stocks.company.1}}</td>
+    <td>{{stocks.company.1}}</td>    
+    <!--  -->  </tr>
+	 {% endwith %}
 
-    <td class="center"><a href="priyankgupta.co.in/portfolio/?id=ADANIPORTS"><button style="width:100%;" class="button button1">{{stocks[user[3]][0]}}</button></a></td>
-    <td>{{user[1]}}</td>
-    <td>{{user[2]}}</td>
-    <td>{{user[4]}}</td>
-    <td>{{stocks[user[3]][1]}}</td>
-    <td>{{stocks[user[3]][1]* user[1]}}</td>    
-    <td style='background-color: green; color:black;'>{{user[4] - (stocks[user[3]][1]* user[1])}}</td>  </tr>
-	
-
-  	
+  {% endfor %}	
 	
 	</tbody>
 </table>

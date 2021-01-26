@@ -70,13 +70,14 @@ def user_wallet(request):
 			stocks = cur.fetchall()
 			cur.execute("SELECT * FROM HOLDINGS WHERE username = ?", (request.session['username'],))
 			table = cur.fetchall()
+			cur.close()
 			conn.commit()
 			conn.close()
 			print("###############################")
 			print(stocks)
-			stocks[1][0]
+			print(stocks[1][0])
 			for user in table:
-				stocks[int(user[3])][1]
+				print(stocks[user[3]][1])
 			
 			return render(request, "userwallet.html", {"table": table , "stocks": stocks})
 		else:
@@ -134,6 +135,7 @@ def user_buyplan(request,planid,expiry):
 		conn = sqlite3.connect('pgr-database.db')
 		cur = conn.cursor()
 		cur.execute("UPDATE USERS SET plan = ?, pending = ?, approved = ?, expiry = ? WHERE username=?", (planid,1,0,expirydate,request.session['username']))
+		cur.close()
 		conn.commit()
 		conn.close()
 		print("hello")

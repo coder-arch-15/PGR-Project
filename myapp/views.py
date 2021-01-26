@@ -35,6 +35,7 @@ def user_login_submit(request):
 			cur.execute("SELECT pasw,plan FROM users WHERE username=?", (username,))
 			pasw,plan = cur.fetchone()
 			print(user)
+			cur.close()
 			conn.commit()
 			conn.close()
 			if user is not None:
@@ -60,6 +61,7 @@ def check_username_exist(request):
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM users WHERE username=?", (username,))
 	user_obj = cur.fetchall()
+	cur.close()
 	conn.commit()
 	conn.close()
 	free = 0
