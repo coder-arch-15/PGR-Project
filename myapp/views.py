@@ -38,7 +38,7 @@ def user_login_submit(request):
 			        db='pgrdb', 
 			        ) 
 			cur = conn.cursor()
-			cur.execute("SELECT pasw,plan FROM users WHERE username=%s", (username))
+			cur.execute("SELECT pasw,plan FROM users WHERE username='{0}'".format(username))
 			pasw,plan = cur.fetchone()
 			print(user)
 			conn.commit()
@@ -69,25 +69,18 @@ def check_username_exist(request):
 			        password = "1234", 
 			        db='pgrdb', 
 			        ) 
-	cur = conn.cusor()
-	cur.execute("SELECT * FROM users WHERE username=(%s)", (username))
-	user_obj = cur.fetchall()
-	conn.commit()
-	conn.close()
+	cur = conn.cursor()
+	cur.execute("SELECT * FROM users WHERE username='{0}'".format(username))
 	free = 0
-	if user_obj:
+	if cur.rowcount!=0:
+		conn.commit()
+		conn.close()
 		return render(request, "userregister.html", {"error" : "Username - '"+username+"' is not available!" , "name":name, "email": email, "mob":mob})
 	else:
-		conn = pymysql.connect( 
-			        host='localhost',
-					port =3306 ,
-			        user='root',  
-			        password = "1234", 
-			        db='pgrdb', 
-			        ) 
-		cur = conn.cursor()
-		cur.execute("insert into users (username,pasw,name,email, mob,plan,pending,approved) values(%s,%s,%s,%s,%s,%s,%s,%s)",(username, pasw, name,email,mob,free,1,0))
-		cur.execute("insert into user_cash (username,cash) values (%s,%s)", (username, 1000000))
+		q="insert into users(username,pasw,name,email, mob,plan,pending,approved) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')".format(username, pasw, name,email,mob,free,1,0)
+		cur.execute(q)
+		q="insert into user_cash (username,cash) values ('{0}','{1}')".format(username, 1000000)
+		cur.execute(q)
 		conn.commit()
 		conn.close()
 		return redirect("/")

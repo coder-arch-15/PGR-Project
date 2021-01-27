@@ -74,7 +74,7 @@ def user_wallet(request):
 			cur = conn.cursor()
 			cur.execute("SELECT * FROM STOCKS")
 			stocks = cur.fetchall()
-			cur.execute("SELECT * FROM HOLDINGS WHERE username = ?", (request.session['username'],))
+			cur.execute("SELECT * FROM HOLDINGS WHERE username = '{0}' ".format(request.session['username'],))
 			table = cur.fetchall()
 			conn.commit()
 			conn.close()
@@ -145,14 +145,17 @@ def user_buyplan(request,planid,expiry):
 			        db='pgrdb', 
 			        ) 
 		cur = conn.cursor()
-		cur.execute("UPDATE USERS SET plan = ?, pending = ?, approved = ?, expiry = ? WHERE username=?", (planid,1,0,expirydate,request.session['username']))
+		print("befor execute statement")
+		q="UPDATE USERS SET plan = '{0}', pending = '{1}', approved = '{2}', expiry = '{3}' WHERE username='{3}'".format(planid,1,0,expirydate,request.session['username'])
+		cur.execute(q)
+		print("after")
 		conn.commit()
 		conn.close()
 		print("hello")
 		request.session['plan'] = planid
 		return redirect("/userdashboard")
 	else:
-		return redirect("/userlogout")
+		return redirect("/login")
 
 
 def user_logout(request):
