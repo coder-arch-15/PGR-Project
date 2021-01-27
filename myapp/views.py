@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings 
-import sqlite3
+import pymysql
 
 def home(request):
 	if(request.session.has_key("username")):
@@ -30,12 +30,17 @@ def user_login_submit(request):
 		if (request.method == 'POST'):
 			username = str(request.POST['username'])
 			password = request.POST['password']
-			conn = sqlite3.connect('pgr-database.db')
+			conn = pymysql.connect( 
+			        host='localhost',
+					port =3306 ,
+			        user='root',  
+			        password = "1234", 
+			        db='pgrdb', 
+			        ) 
 			cur = conn.cursor()
-			cur.execute("SELECT pasw,plan FROM users WHERE username=?", (username,))
+			cur.execute("SELECT pasw,plan FROM users WHERE username=%s", (username))
 			pasw,plan = cur.fetchone()
 			print(user)
-			cur.close()
 			conn.commit()
 			conn.close()
 			if user is not None:
@@ -57,22 +62,32 @@ def check_username_exist(request):
 	email=request.POST.get("user_email-25")
 	mob=request.POST.get("mobile_number-25")
 	pasw=request.POST.get("user_password-25")
-	conn = sqlite3.connect('pgr-database.db')
-	cur = conn.cursor()
-	cur.execute("SELECT * FROM users WHERE username=?", (username,))
+	conn = pymysql.connect( 
+			        host='localhost',
+					port =3306 ,
+			        user='root',  
+			        password = "1234", 
+			        db='pgrdb', 
+			        ) 
+	cur = conn.cusor()
+	cur.execute("SELECT * FROM users WHERE username=(%s)", (username))
 	user_obj = cur.fetchall()
-	cur.close()
 	conn.commit()
 	conn.close()
 	free = 0
 	if user_obj:
 		return render(request, "userregister.html", {"error" : "Username - '"+username+"' is not available!" , "name":name, "email": email, "mob":mob})
 	else:
-		conn = sqlite3.connect('pgr-database.db')
+		conn = pymysql.connect( 
+			        host='localhost',
+					port =3306 ,
+			        user='root',  
+			        password = "1234", 
+			        db='pgrdb', 
+			        ) 
 		cur = conn.cursor()
-		cur.execute("insert into users (username,pasw,name,email, mob,plan,pending,approved) values(?,?,?,?,?,?,?,?)",(username, pasw, name,email,mob,free,1,0))
-		conn.commit()
-		cur.execute("insert into user_cash (username,cash) values (?,?)", (username, 1000000))
+		cur.execute("insert into users (username,pasw,name,email, mob,plan,pending,approved) values(%s,%s,%s,%s,%s,%s,%s,%s)",(username, pasw, name,email,mob,free,1,0))
+		cur.execute("insert into user_cash (username,cash) values (%s,%s)", (username, 1000000))
 		conn.commit()
 		conn.close()
 		return redirect("/")

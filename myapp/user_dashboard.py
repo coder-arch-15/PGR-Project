@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.conf import settings 
-import sqlite3
+import pymysql
 
 
 def user_dashboard(request):
@@ -64,13 +64,18 @@ def user_wallet(request):
 	if(request.session.has_key("username")):
 		if( int(request.session['plan']) >= 1):
 			print("hello_wallet")
-			conn = sqlite3.connect('pgr-database.db')
+			conn = pymysql.connect( 
+			        host='localhost',
+					port =3306 ,
+			        user='root',  
+			        password = "1234", 
+			        db='pgrdb', 
+			        ) 
 			cur = conn.cursor()
 			cur.execute("SELECT * FROM STOCKS")
 			stocks = cur.fetchall()
 			cur.execute("SELECT * FROM HOLDINGS WHERE username = ?", (request.session['username'],))
 			table = cur.fetchall()
-			cur.close()
 			conn.commit()
 			conn.close()
 			print("###############################")
@@ -132,10 +137,15 @@ def user_buyplan(request,planid,expiry):
 			expirydate = datetime.now() + timedelta(days=365) 
 		else:
 			expirydate = ""
-		conn = sqlite3.connect('pgr-database.db')
+		conn = pymysql.connect( 
+			        host='localhost',
+					port =3306 ,
+			        user='root',  
+			        password = "1234", 
+			        db='pgrdb', 
+			        ) 
 		cur = conn.cursor()
 		cur.execute("UPDATE USERS SET plan = ?, pending = ?, approved = ?, expiry = ? WHERE username=?", (planid,1,0,expirydate,request.session['username']))
-		cur.close()
 		conn.commit()
 		conn.close()
 		print("hello")
