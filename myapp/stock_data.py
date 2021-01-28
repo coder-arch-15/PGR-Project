@@ -7,28 +7,12 @@ import bs4
 import requests
 from bs4 import BeautifulSoup 
 
-def get_cmp(request, ticker):
-	# url = requests.get('https://finance.yahoo.com/quote/RELIANCE.NS?p=RELIANCE.NS')
-	# soup = bs4.BeautifulSoup(url.text, features="html.parser")
-	# price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
-	conn = pymysql.connect( 
-			        host='localhost',
-					port =3306 ,
-			        user='root',  
-			        password = "1234", 
-			        db='pgrdb', 
-			        ) 
-	cur = conn.cursor()
-	cur.execute("SELECT company from STOCKS")
-	conn.commit()
-	companies = cur.fetchall()
-	for company in companies:
-		url = requests.get('https://finance.yahoo.com/quote/{0}?p={0}'.format(company))
-		soup = bs4.BeautifulSoup(url.text, features="html.parser")
-		price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
-		q="UPDATE STOCKS SET CMP={0} WHERE COMPANY={1}".format(price,company)
-		conn.commit()
-	conn.close
+def getcmp(request,ticker):
+	#ticker = request.GET.get("ticker")
+	url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker))
+	soup = bs4.BeautifulSoup(url.text, features="html.parser")
+	price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
+	return HttpResponse(price)
 
 
 def updatecmp(request):

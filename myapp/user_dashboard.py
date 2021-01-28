@@ -76,15 +76,18 @@ def user_wallet(request):
 			stocks = cur.fetchall()
 			cur.execute("SELECT * FROM HOLDINGS WHERE username = '{0}'".format(request.session['username']))
 			table = cur.fetchall()
+			cur.execute("SELECT company FROM HOLDINGS WHERE username = '{0}'".format(request.session['username']))
+			stocklist = cur.fetchall()
 			conn.commit()
 			conn.close()
 			print("###############################")
 			print(stocks)
+			print(stocklist)
 			print(stocks[1][0])
-			for user in table:
-				print(stocks[user[3]][1])
+			# for user in table:
+			# 	print(stocks[user[3]][1])
 			
-			return render(request, "userwallet.html", {"table": table , "stocks": stocks})
+			return render(request, "userwallet.html", {"table": table , "stocks": stocks, "stocklist":stocklist})
 		else:
 			return render(request, "buymembershipp.html", {"error": "To access WALLET section please activate SILVER or any premium plan!"})
 	else:

@@ -149,15 +149,40 @@ th {
 	
 
   <tr style="color:black;">
-    {% with company=user.3 %}
-    <td class="center"><a href="priyankgupta.co.in/portfolio/?id=ADANIPORTS"><button style="width:100%;" class="button button1">{{stocks.company.0}}</button></a></td>
+    <td class="center"><a href="priyankgupta.co.in/portfolio/?id=ADANIPORTS"><button style="width:100%;" class="button button1">{{user.3}}</button></a></td>
     <td>{{user.1}}</td>
     <td>{{user.2}}</td>
     <td>{{user.4}}</td>
-    <td>{{stocks.company.1}}</td>
-    <td>{{stocks.company.1}}</td>    
-    <!--  -->  </tr>
-	 {% endwith %}
+    <td id = "{{user.3}}"></td>
+    <td id = "{{user.3}}total"></td>    
+  </tr>
+  <script>
+
+cInterval= setInterval(function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  var stockname ="{{user.3}}";
+  var url = "../getcmp/";
+  xhttp.onreadystatechange=function() {
+    
+      if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("{{user.3}}").innerHTML = this.responseText;
+      var price = parseFloat(this.responseText);
+      var Quantity = parseFloat("{{user.1}}");
+      var total = price*Quantity;
+      document.getElementById("{{user.3}}total").innerHTML = total;
+    }
+    
+  };
+  xhttp.open("GET", url+stockname, true);
+  xhttp.send();
+  
+}
+, 3000);
+$$(document).on('page:beforeout', function () { clearInterval(cInterval); });
+</script>
+
+ 
+
 
   {% endfor %}	
 	
