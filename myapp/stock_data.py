@@ -3,10 +3,66 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings 
 import pymysql
 from yahoo_finance import Share
-
+import bs4
+import requests
+from bs4 import BeautifulSoup 
 
 def get_cmp(request, ticker):
-	print(ticker)
-	temp = Share(ticker)
-	print(temp.get_open())
-	pass
+	# url = requests.get('https://finance.yahoo.com/quote/RELIANCE.NS?p=RELIANCE.NS')
+	# soup = bs4.BeautifulSoup(url.text, features="html.parser")
+	# price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
+	conn = pymysql.connect( 
+			        host='localhost',
+					port =3306 ,
+			        user='root',  
+			        password = "1234", 
+			        db='pgrdb', 
+			        ) 
+	cur = conn.cursor()
+	cur.execute("SELECT company from STOCKS")
+	conn.commit()
+	companies = cur.fetchall()
+	for company in companies:
+		url = requests.get('https://finance.yahoo.com/quote/{0}?p={0}'.format(company))
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
+		q="UPDATE STOCKS SET CMP={0} WHERE COMPANY={1}".format(price,company)
+		conn.commit()
+	conn.close
+
+
+def updatecmp(request):
+	conn = pymysql.connect( 
+			        host='localhost',
+					port =3306 ,
+			        user='root',  
+			        password = "1234", 
+			        db='pgrdb', 
+			        ) 
+	cur = conn.cursor()
+	cur.execute("SELECT company from STOCKS")
+	conn.commit()
+	companies = cur.fetchall()
+	for company in companies:
+
+		url = requests.get('https://finance.yahoo.com/quote/{0}?p={0}'.format(company[0]))
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
+		price = price.replace(',','')
+		price = float(price)
+		close = soup.find("td", {'data-test': 'PREV_CLOSE-value'}).text
+		close = close.replace(',','')
+		close = float(close)
+		openp = soup.find("td", {'data-test': 'OPEN-value'}).text
+		openp = openp.replace(',','')
+		openp = float(openp)
+		
+		lowhigh = soup.find("td", {'data-test': 'DAYS_RANGE-value'}).text
+		lowhigh = lowhigh.replace(',','')
+		low,high = lowhigh.split(" - ")
+		low = float(low)
+		high = float(high)
+		cur.execute("UPDATE STOCKS SET CMP='{0}', OPEN = '{1}', CLOSE = '{2}', HIGH = '{3}', LOW = '{4}' WHERE COMPANY='{5}' ".format(price,openp,close,high,low,company[0]))
+		conn.commit()
+	conn.commit()
+	conn.close()

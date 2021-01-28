@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^adminaccept/(\d+)/', accept, name = 'accept'),
     path('check_username_exist', check_username_exist, name = 'check_username_exist'),
     url(r'^getcmp/(?P<ticker>[\w\-]+)/$', get_cmp, name = 'get_cmp'),
-    
+    path('updatecmp', updatecmp,name = 'updatecmp'),
     path('user/', User.ActionUserInterface),
     path('usersubmit', User.ActionUserSubmit),
 
