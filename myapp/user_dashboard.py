@@ -80,12 +80,6 @@ def user_wallet(request):
 			stocklist = cur.fetchall()
 			conn.commit()
 			conn.close()
-			print("###############################")
-			print(stocks)
-			print(stocklist)
-			print(stocks[1][0])
-			# for user in table:
-			# 	print(stocks[user[3]][1])
 			
 			return render(request, "userwallet.html", {"table": table , "stocks": stocks, "stocklist":stocklist})
 		else:

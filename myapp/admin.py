@@ -19,8 +19,8 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS STOCKS( COMPANY varchar(15) PRIMARY
 
 # ########################## Uncomment this part to add few entries in table################################
 
-# cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 100, 15, "TITAN.NS", 1500)  ''')
-# cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 200, 150, "RELIANCE.NS", 30000)  ''')
+# cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 100, 15, "ADANIPORTS.NS", 1500)  ''')
+# cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 200, 150, "BAJAJFINSV.NS", 30000)  ''')
 # cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 100, 150, "MSFT", 15000)  ''')
 # import bs4
 # import requests

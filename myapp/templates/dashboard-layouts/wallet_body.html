@@ -162,14 +162,35 @@ cInterval= setInterval(function loadDoc() {
   var xhttp = new XMLHttpRequest();
   var stockname ="{{user.3}}";
   var url = "../getcmp/";
+  var cmp = document.getElementById("{{user.3}}");
+  var total_amount = document.getElementById("{{user.3}}total");
+  var spangreen = "<font color = green>";
+  var spanred = "<font color = red>";
+  var spangrey = "<font color = grey>";
+  var spanclose = "</font>";
   xhttp.onreadystatechange=function() {
-    
-      if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("{{user.3}}").innerHTML = this.responseText;
-      var price = parseFloat(this.responseText);
-      var Quantity = parseFloat("{{user.1}}");
-      var total = price*Quantity;
-      document.getElementById("{{user.3}}total").innerHTML = total;
+  var i =1;
+  if (this.readyState == 4 && this.status == 200) {
+        var previous_price = parseFloat(cmp.innerText);
+        var price = parseFloat(this.responseText);
+        var Quantity = parseFloat("{{user.1}}");
+        var total = price*Quantity;
+        total_amount.innerHTML = total.toFixed(2);
+        var change = parseFloat(price - previous_price);
+            
+        if(change > 0){
+      var res_g = spangreen.concat(this.responseText, spanclose); 
+        cmp.innerHTML = res_g;
+      }
+      else if(change < 0){
+      var res_g = spanred.concat(this.responseText, spanclose); 
+        cmp.innerHTML = res_g;
+      }
+      else{
+      var res_g = spangrey.concat(this.responseText, spanclose); 
+        cmp.innerHTML = res_g;
+      }
+      
     }
     
   };
@@ -177,7 +198,7 @@ cInterval= setInterval(function loadDoc() {
   xhttp.send();
   
 }
-, 3000);
+, 1000);
 $$(document).on('page:beforeout', function () { clearInterval(cInterval); });
 </script>
 
