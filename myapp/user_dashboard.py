@@ -68,7 +68,9 @@ def user_wallet(request):
 			        host='localhost',
 					port =3306 ,
 			        user='root',  
+
 			        password = "123",
+
 			        db='pgrdb', 
 			        ) 
 			cur = conn.cursor()
@@ -138,7 +140,9 @@ def user_buyplan(request,planid,expiry):
 			        host='localhost',
 					port =3306 ,
 			        user='root',  
+
 			        password = "123",
+
 			        db='pgrdb', 
 			        ) 
 		cur = conn.cursor()

@@ -34,7 +34,9 @@ def user_login_submit(request):
 			        host='localhost',
 					port =3306 ,
 			        user='root',  
+
 			        password = "123",
+
 			        db='pgrdb', 
 			        ) 
 			cur = conn.cursor()
@@ -66,7 +68,9 @@ def check_username_exist(request):
 			        host='localhost',
 					port =3306 ,
 			        user='root',  
+
 			        password = "123",
+
 			        db='pgrdb', 
 			        ) 
 	cur = conn.cursor()
