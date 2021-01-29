@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.conf import settings 
-import sqlite3
+import pymysql
 
 
 def user_dashboard(request):
@@ -64,22 +64,24 @@ def user_wallet(request):
 	if(request.session.has_key("username")):
 		if( int(request.session['plan']) >= 1):
 			print("hello_wallet")
-			conn = sqlite3.connect('pgr-database.db')
+			conn = pymysql.connect( 
+			        host='localhost',
+					port =3306 ,
+			        user='root',  
+			        password = "123",
+			        db='pgrdb', 
+			        ) 
 			cur = conn.cursor()
 			cur.execute("SELECT * FROM STOCKS")
 			stocks = cur.fetchall()
-			cur.execute("SELECT * FROM HOLDINGS WHERE username = ?", (request.session['username'],))
+			cur.execute("SELECT * FROM HOLDINGS WHERE username = '{0}'".format(request.session['username']))
 			table = cur.fetchall()
-			cur.close()
+			cur.execute("SELECT company FROM HOLDINGS WHERE username = '{0}'".format(request.session['username']))
+			stocklist = cur.fetchall()
 			conn.commit()
 			conn.close()
-			print("###############################")
-			print(stocks)
-			print(stocks[1][0])
-			for user in table:
-				print(stocks[user[3]][1])
 			
-			return render(request, "userwallet.html", {"table": table , "stocks": stocks})
+			return render(request, "userwallet.html", {"table": table , "stocks": stocks, "stocklist":stocklist})
 		else:
 			return render(request, "buymembershipp.html", {"error": "To access WALLET section please activate SILVER or any premium plan!"})
 	else:
@@ -132,17 +134,24 @@ def user_buyplan(request,planid,expiry):
 			expirydate = datetime.now() + timedelta(days=365) 
 		else:
 			expirydate = ""
-		conn = sqlite3.connect('pgr-database.db')
+		conn = pymysql.connect( 
+			        host='localhost',
+					port =3306 ,
+			        user='root',  
+			        password = "123",
+			        db='pgrdb', 
+			        ) 
 		cur = conn.cursor()
-		cur.execute("UPDATE USERS SET plan = ?, pending = ?, approved = ?, expiry = ? WHERE username=?", (planid,1,0,expirydate,request.session['username']))
-		cur.close()
+		q="UPDATE USERS SET plan = '{0}', pending = '{1}', approved = '{2}', expiry = '{3}' WHERE username='{4}'".format(planid,1,0,expirydate,request.session['username'])
+		print(request.session['username'])
+		cur.execute(q)
 		conn.commit()
 		conn.close()
 		print("hello")
 		request.session['plan'] = planid
 		return redirect("/userdashboard")
 	else:
-		return redirect("/userlogout")
+		return redirect("/login")
 
 
 def user_logout(request):

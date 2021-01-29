@@ -6,6 +6,7 @@ from django.urls import path
 from . import User
 from . import UserLogin
 from . import Admin
+from myapp.stock_data import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
 
@@ -23,7 +24,8 @@ urlpatterns = [
     url(r'^adminreject/(\d+)/', reject, name = 'reject'),
     url(r'^adminaccept/(\d+)/', accept, name = 'accept'),
     path('check_username_exist', check_username_exist, name = 'check_username_exist'),
-    
+    url(r'^getcmp/(?P<ticker>[\D\-]+)/$', getcmp, name = 'getcmp'),
+    path('updatecmp', updatecmp,name = 'updatecmp'),
     path('user/', User.ActionUserInterface),
     path('usersubmit', User.ActionUserSubmit),
 

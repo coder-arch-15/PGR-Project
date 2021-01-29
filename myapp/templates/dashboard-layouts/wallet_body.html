@@ -149,15 +149,61 @@ th {
 	
 
   <tr style="color:black;">
-    {% with company=user.3 %}
-    <td class="center"><a href="priyankgupta.co.in/portfolio/?id=ADANIPORTS"><button style="width:100%;" class="button button1">{{stocks.company.0}}</button></a></td>
+    <td class="center"><a href="priyankgupta.co.in/portfolio/?id=ADANIPORTS"><button style="width:100%;" class="button button1">{{user.3}}</button></a></td>
     <td>{{user.1}}</td>
     <td>{{user.2}}</td>
     <td>{{user.4}}</td>
-    <td>{{stocks.company.1}}</td>
-    <td>{{stocks.company.1}}</td>    
-    <!--  -->  </tr>
-	 {% endwith %}
+    <td id = "{{user.3}}"></td>
+    <td id = "{{user.3}}total"></td>    
+  </tr>
+  <script>
+
+cInterval= setInterval(function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  var stockname ="{{user.3}}";
+  var url = "../getcmp/";
+  var cmp = document.getElementById("{{user.3}}");
+  var total_amount = document.getElementById("{{user.3}}total");
+  var spangreen = "<font color = green>";
+  var spanred = "<font color = red>";
+  var spangrey = "<font color = grey>";
+  var spanclose = "</font>";
+  xhttp.onreadystatechange=function() {
+  var i =1;
+  if (this.readyState == 4 && this.status == 200) {
+        var previous_price = parseFloat(cmp.innerText);
+        var price = parseFloat(this.responseText);
+        var Quantity = parseFloat("{{user.1}}");
+        var total = price*Quantity;
+        total_amount.innerHTML = total.toFixed(2);
+        var change = parseFloat(price - previous_price);
+            
+        if(change > 0){
+      var res_g = spangreen.concat(this.responseText, spanclose); 
+        cmp.innerHTML = res_g;
+      }
+      else if(change < 0){
+      var res_g = spanred.concat(this.responseText, spanclose); 
+        cmp.innerHTML = res_g;
+      }
+      else{
+      var res_g = spangrey.concat(this.responseText, spanclose); 
+        cmp.innerHTML = res_g;
+      }
+      
+    }
+    
+  };
+  xhttp.open("GET", url+stockname, true);
+  xhttp.send();
+  
+}
+, 1000);
+$$(document).on('page:beforeout', function () { clearInterval(cInterval); });
+</script>
+
+ 
+
 
   {% endfor %}	
 	
