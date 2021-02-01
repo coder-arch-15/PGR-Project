@@ -32,7 +32,7 @@ urlpatterns = [
 
     path('userlogin/', UserLogin.ActionUserLogin),
     path('checkuser', UserLogin.ActionCheckUserLogin),
-    path('logout/', UserLogin.ActionLogout),
+    path('logout/', Admin.ActionLogout),
     path('displayalluserlogin/', User.ActionDisplayAllUserLogin),
     path('userdisplaybyidlogin/', User.ActionDisplayByIdLogin),
     path('usereditdeletesubmitlogin', User.ActionUserEditDeleteSubmitLogin),
