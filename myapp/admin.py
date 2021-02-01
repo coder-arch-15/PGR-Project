@@ -14,7 +14,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS USERS( username varchar(15) PRIMARY
 cursor.execute('''CREATE TABLE IF NOT EXISTS USER_CASH( username varchar(15) PRIMARY KEY NOT NULL, cash VARCHAR(15) NOT NULL) ''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS TRANS ( username varchar(15) NOT NULL, tid varchar(10) NOT NULL, date TEXT(10) NOT NULL, company INT NOT NULL, quantity FLOAT(6) NOT NULL, tp FLOAT(7) NOT NULL, TTYPE TEXT(4), TOTAL FLOAT(12) NOT NULL, comment VARCHAR (50) )''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS HOLDINGS( username varchar(15) NOT NULL, quantity FLOAT(10) NOT NULL, tp FLOAT(5) NOT NULL, COMPANY VARCHAR(15) NOT NULL, TOTAL FLOAT(15) NOT NULL) ''')
-cursor.execute('''CREATE TABLE IF NOT EXISTS STOCKS( COMPANY varchar(15) PRIMARY KEY NOT NULL, CMP FLOAT(5) NOT NULL, OPEN FLOAT(5) NOT NULL, CLOSE FLOAT(5) NOT NULL, LOW FLOAT(5) NOT NULL, HIGH FLOAT(5) NOT NULL,COMPANY_NAME VARCHAR(35) NOT NULL) ''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS STOCKS( COMPANY varchar(15) PRIMARY KEY NOT NULL, CMP FLOAT(5) NOT NULL, OPEN FLOAT(5) NOT NULL, CLOSE FLOAT(5) NOT NULL, LOW FLOAT(5) NOT NULL, HIGH FLOAT(5) NOT NULL,COMPANY_NAME VARCHAR(100) NOT NULL) ''')
 
 
 
@@ -24,23 +24,27 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS STOCKS( COMPANY varchar(15) PRIMARY
 # cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 100, 15, "ADANIPORTS.NS", 1500)  ''')
 # cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 200, 150, "BAJAJFINSV.NS", 30000)  ''')
 # cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 100, 150, "MSFT", 15000)  ''')
+
+
+
+
 # import bs4
 # import requests
 # from bs4 import BeautifulSoup 
-# url = requests.get('https://finance.yahoo.com/quote/%5ENSEI/components?p=%5ENSEI')
+# url = requests.get('https://en.wikipedia.org/wiki/NIFTY_50')
 # soup = bs4.BeautifulSoup(url.text, features="html.parser")
-# for i in range(30):
-# 	ticker = soup.find_all("tr", {'class': 'BdT Bdc($seperatorColor) Ta(end) Fz(s)'})[i].text
-# 	tick,cname = ticker.split(".NS")
-# 	tick="'"+tick+".NS'"
-# 	companyname,remaining = cname.split("Limited")
-# 	companyname="'"+companyname+"Limited'"
-# 	print(tick)
-# 	print(companyname)
-# 	q= "INSERT INTO STOCKS(company,cmp,open,close,high,low,CHNG,COMPANY_NAME) VALUES({0}, 0, 0, 0,0 , 0, 0, {1})".format(tick,companyname)
-# 	print(q)
+# i=0
+# while(i<150):
+# 	ticker = soup.find_all("table", {'id': 'constituents'})[0].find_all('td')[i+1].text
+# 	companyname = soup.find_all("table", {'id': 'constituents'})[0].find_all('td')[i].text
+# 	companyname+=" Limited"
+# 	i+=3
+# 	print("Tick = "+ticker+" companyname =" +companyname) 
+# 	q= "INSERT INTO STOCKS(company,cmp,open,close,high,low,COMPANY_NAME) VALUES('{0}', 0, 0, 0 , 0, 0, '{1}')".format(ticker,companyname)
 # 	cursor.execute(q)
 # 	conn.commit()
+
+	
 ###############################################################
 
 

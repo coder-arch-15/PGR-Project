@@ -41,11 +41,10 @@ def user_login_submit(request):
 			        ) 
 			cur = conn.cursor()
 			cur.execute("SELECT pasw,plan FROM users WHERE username='{0}'".format(username))
-			pasw,plan = cur.fetchone()
-			print(user)
-			conn.commit()
-			conn.close()
-			if user is not None:
+			if cur.rowcount!=0:
+				pasw,plan = cur.fetchone()
+				conn.commit()
+				conn.close()
 				if (password == pasw):
 					request.session['username'] = username
 					request.session['plan'] = plan
@@ -53,6 +52,8 @@ def user_login_submit(request):
 				else:
 					return render(request, "userlogin.html", {"error": "Invalid Username or Password!"} )
 			else:
+				conn.commit()
+				conn.close()
 				return render(request, "userlogin.html", {"error": "Invalid Username or Password!"} )
 	
 		return redirect("/login")
