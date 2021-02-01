@@ -26,6 +26,7 @@ urlpatterns = [
     path('check_username_exist', check_username_exist, name = 'check_username_exist'),
     url(r'^getcmp/(?P<ticker>[\D\-]+)/$', getcmp, name = 'getcmp'),
     path('updatecmp', updatecmp,name = 'updatecmp'),
+    path('updatepriceaction', updatepriceaction,name = 'updatepriceaction'),
     path('user/', User.ActionUserInterface),
     path('usersubmit', User.ActionUserSubmit),
  
