@@ -30,7 +30,7 @@ urlpatterns = [
     path('user/', User.ActionUserInterface),
     path('usersubmit', User.ActionUserSubmit),
  
-    path("buyplanpage", buyplanpage, name = 'buyplanpage' ),
+    path("buyplanpage/", buyplanpage, name = 'buyplanpage' ),
     path("usershowstocks", user_show_stocks, name = 'user_show_stocks' ),
     path("useradvstocks", user_adv_stocks, name = 'user_adv_stocks' ),
     path("userwatchlist", user_watchlist, name = 'user_watchlist' ),
