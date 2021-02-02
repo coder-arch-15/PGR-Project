@@ -16,11 +16,11 @@ def user_dashboard(request):
 
 
 def buyplanpage(request):
-	# error = request.GET.get('status', None)
-	# if error is not None:
-	# 	return render(request, "buymembershipp.html", {"error":error})
-	# else:
-	return render(request, "buymembershipp.html")
+	error = request.GET.get('error', None)
+	if error is not None:
+		return render(request, "buymembershipp.html", {"error":error})
+	else:
+		return render(request, "buymembershipp.html")
 
 
 def user_show_stocks(request):
@@ -28,9 +28,7 @@ def user_show_stocks(request):
 		if( int(request.session['plan']) >= 1):
 			return render(request, "usershowstocks.html")
 		else:
-			return redirect("/buyplanpage")
-			#return HttpResponseRedirect('/buyplanpage/?status=To access NIFTY-50 STOCKS section please activate SILVER or any premium plan!')
-			#return render(request, "buymembershipp.html", {"error": "To access NIFTY-50 STOCKS section please activate SILVER or any premium plan!"})
+			return redirect("/buyplanpage/?error=To access NIFTY-50 STOCKS section please activate SILVER or any premium plan!")
 	else:
 		return redirect("/login")
 

@@ -26,9 +26,9 @@ def ActionCheckAdminLogin(request):
 def ActionDisplayAllUser(request):
     try:
 
-     dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='pgrdb')
+     dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
      cmd = dbe.cursor()
-     q = "select * from users"
+     q = "select U.* from user U"
      cmd.execute(q)
      rows=cmd.fetchall()
      dbe.close()
@@ -41,9 +41,9 @@ def ActionDisplayAllUser(request):
 def ActionDisplayById(request):
     try:
      ccid=request.GET['ccid']
-     dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='pgrdb')
+     dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
      cmd = dbe.cursor()
-     q = "select * from users where username={0}".format(ccid)
+     q = "select * from user where id={0}".format(ccid)
      cmd.execute(q)
      row=cmd.fetchone()
      dbe.close()
@@ -58,25 +58,25 @@ def ActionAdminEditDeleteSubmit(request):
         btn=request.POST['btn']
         try:
          if(btn=='Pending'):
-          dbe=mysql.connect(host='localhost',port=3306,password='123',user='root',db='pgrdb')
+          dbe=mysql.connect(host='localhost',port=3306,password='123',user='root',db='dummy')
           cmd=dbe.cursor()
-          q="update users set approved='{0}' where username='{1}'".format(0,ccid)
+          q="update user set adminact='{0}' where id={1}".format(btn,ccid)
           cmd.execute(q)
           dbe.commit()
           dbe.close()
           return ActionDisplayAllUser(request)
          elif(btn=='Approved'):
-             dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='pgrdb')
+             dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
              cmd = dbe.cursor()
-             q = "update users set approved='{0}' where username='{1}'".format(1,ccid)
+             q = "update user set adminact='{0}' where id={1}".format(btn, ccid)
              cmd.execute(q)
              dbe.commit()
              dbe.close()
              return ActionDisplayAllUser(request)
          elif (btn == 'DisApproved'):
-             dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='pgrdb')
+             dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='dummy')
              cmd = dbe.cursor()
-             q = "update users set approved='{0}' where username='{1}'".format(0,ccid)
+             q = "update user set adminact='{0}' where id={1}".format(btn, ccid)
              cmd.execute(q)
              dbe.commit()
              dbe.close()
@@ -87,4 +87,4 @@ def ActionAdminEditDeleteSubmit(request):
 
 def ActionLogout(request):
     auth.logout(request)
-    return render(request,"AdminLogin.html",{'msg':""})
+    return render(request,"AdminLogin.html",{'msg':[]})
