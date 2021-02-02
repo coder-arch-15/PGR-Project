@@ -12,7 +12,7 @@ conn = pymysql.connect(
 cursor = conn.cursor()
 cursor.execute('''CREATE TABLE IF NOT EXISTS USERS( username varchar(15) PRIMARY KEY NOT NULL, pasw VARCHAR(15) NOT NULL, name varchar(30) NOT NULL,  email varchar(30) NOT NULL,  mob varchar(10) NOT NULL, plan varchar(10) NOT NULL,expiry TEXT(10), pending int NOT NULL, approved INT NOT NULL )''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS USER_CASH( username varchar(15) PRIMARY KEY NOT NULL, cash VARCHAR(15) NOT NULL) ''')
-cursor.execute('''CREATE TABLE IF NOT EXISTS TRANS ( username varchar(15) NOT NULL, tid varchar(10) NOT NULL, date TEXT(10) NOT NULL, company INT NOT NULL, quantity FLOAT(6) NOT NULL, tp FLOAT(7) NOT NULL, TTYPE TEXT(4), TOTAL FLOAT(12) NOT NULL, comment VARCHAR (50) )''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS ORDERS ( username varchar(15) NOT NULL, date VARCHAR(25) NOT NULL, company VARCHAR(15) NOT NULL, quantity FLOAT(10) NOT NULL, tp FLOAT(8) NOT NULL, TTYPE TEXT(4), STATUS VARCHAR (20) )''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS HOLDINGS( username varchar(15) NOT NULL, quantity FLOAT(10) NOT NULL, tp FLOAT(5) NOT NULL, COMPANY VARCHAR(15) NOT NULL, TOTAL FLOAT(15) NOT NULL) ''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS STOCKS( COMPANY varchar(15) PRIMARY KEY NOT NULL, CMP FLOAT(5) NOT NULL, OPEN FLOAT(5) NOT NULL, CLOSE FLOAT(5) NOT NULL, LOW FLOAT(5) NOT NULL, HIGH FLOAT(5) NOT NULL,COMPANY_NAME VARCHAR(100) NOT NULL, symbol VARCHAR(35)) ''')
 
@@ -24,9 +24,6 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS STOCKS( COMPANY varchar(15) PRIMARY
 # cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 100, 15, "ADANIPORTS.NS", 1500)  ''')
 # cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 200, 150, "BAJAJFINSV.NS", 30000)  ''')
 # cursor.execute(''' INSERT INTO HOLDINGS VALUES("aa", 100, 150, "MSFT", 15000)  ''')
-
-
-
 
 # import bs4
 # import requests

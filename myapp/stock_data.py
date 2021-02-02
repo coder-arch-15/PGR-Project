@@ -8,11 +8,25 @@ import requests
 from bs4 import BeautifulSoup 
 
 def getcmp(request,ticker):
-	url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker))
-	soup = bs4.BeautifulSoup(url.text, features="html.parser")
-	price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
-	price=price.replace(',','')
-	return HttpResponse(price)
+	try:
+		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=1.5)
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
+		price=price.replace(',','')
+		return HttpResponse(price)
+	except requests.Timeout as e:
+		text = ticker+" stock price"
+		url = 'https://google.com/search?q=' + text
+		req = requests.get(url, timeout=2)
+		soup = bs4.BeautifulSoup(req.text, features="html.parser")
+		price = soup.find("span", {'jsname': 'vWLAgc'}).text
+		price=price.replace(',','')
+		return HttpResponse(price)
+	else:
+		pass
+	finally:
+		pass
+	
 
 
 def updatecmp(request):
