@@ -14,7 +14,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS USERS( username varchar(15) PRIMARY
 cursor.execute('''CREATE TABLE IF NOT EXISTS USER_CASH( username varchar(15) PRIMARY KEY NOT NULL, cash VARCHAR(15) NOT NULL) ''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS TRANS ( username varchar(15) NOT NULL, tid varchar(10) NOT NULL, date TEXT(10) NOT NULL, company INT NOT NULL, quantity FLOAT(6) NOT NULL, tp FLOAT(7) NOT NULL, TTYPE TEXT(4), TOTAL FLOAT(12) NOT NULL, comment VARCHAR (50) )''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS HOLDINGS( username varchar(15) NOT NULL, quantity FLOAT(10) NOT NULL, tp FLOAT(5) NOT NULL, COMPANY VARCHAR(15) NOT NULL, TOTAL FLOAT(15) NOT NULL) ''')
-cursor.execute('''CREATE TABLE IF NOT EXISTS STOCKS( COMPANY varchar(15) PRIMARY KEY NOT NULL, CMP FLOAT(5) NOT NULL, OPEN FLOAT(5) NOT NULL, CLOSE FLOAT(5) NOT NULL, LOW FLOAT(5) NOT NULL, HIGH FLOAT(5) NOT NULL,COMPANY_NAME VARCHAR(100) NOT NULL) ''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS STOCKS( COMPANY varchar(15) PRIMARY KEY NOT NULL, CMP FLOAT(5) NOT NULL, OPEN FLOAT(5) NOT NULL, CLOSE FLOAT(5) NOT NULL, LOW FLOAT(5) NOT NULL, HIGH FLOAT(5) NOT NULL,COMPANY_NAME VARCHAR(100) NOT NULL, symbol VARCHAR(35)) ''')
 
 
 
@@ -44,7 +44,14 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS STOCKS( COMPANY varchar(15) PRIMARY
 # 	cursor.execute(q)
 # 	conn.commit()
 
-	
+###############################adding symbol names to the table#####################
+# x = ['Adani Ports SEZ', 'Asian Paints', 'Axis Bank', 'BPCL', 'Bajaj Auto', 'Bajaj Finance', 'Bajaj Finserv', 'Bharti Airtel', 'Britannia Inds.', 'Cipla', 'Coal India Ltd', 'Divis Labs', 'Dr. Reddys', 'Eicher Motors', 'GAIL', 'Grasim Inds.', 'HCL Tech', 'HDFC', 'HDFC Bank', 'HDFC Life', 'Hero MotoCorp', 'Hind. Unilever', 'Hindalco Inds.', 'ICICI Bank', 'ITC', 'Indian Oil Corp', 'IndusInd Bank', 'Infosys', 'JSW Steel', 'Kotak Bank', 'Larsen & Toubro', 'M&M', 'Maruti Suzuki', 'NTPC', 'Nestle India', 'ONGC', 'PowerGrid', 'RIL', 'SBI', 'SBI Life', 'Shree Cements', 'Sun Pharma', 'TCS', 'Tata Motors', 'Tata Steel', 'Tech Mahindra', 'Titan Company ', 'UPL ', 'UltraTech Cem.', 'Wipro']
+# y = ['ADANIPORTS.NS', 'ASIANPAINT.NS', 'AXISBANK.NS', 'BAJAJ-AUTO.NS', 'BAJAJFINSV.NS', 'BAJFINANCE.NS', 'BHARTIARTL.NS', 'BPCL.NS', 'BRITANNIA.NS', 'CIPLA.NS', 'COALINDIA.NS', 'DIVISLAB.NS', 'DRREDDY.NS', 'EICHERMOT.NS', 'GAIL.NS', 'GRASIM.NS', 'HCLTECH.NS', 'HDFC.NS', 'HDFCBANK.NS', 'HDFCLIFE.NS', 'HEROMOTOCO.NS', 'HINDALCO.NS', 'HINDUNILVR.NS', 'ICICIBANK.NS', 'INDUSINDBK.NS', 'INFY.NS', 'IOC.NS', 'ITC.NS', 'JSWSTEEL.NS', 'KOTAKBANK.NS', 'LT.NS', 'M&M.NS', 'MARUTI.NS', 'NESTLEIND.NS', 'NTPC.NS', 'ONGC.NS', 'POWERGRID.NS', 'RELIANCE.NS', 'SBILIFE.NS', 'SBIN.NS', 'SHREECEM.NS', 'SUNPHARMA.NS', 'TATAMOTORS.NS', 'TATASTEEL.NS', 'TCS.NS', 'TECHM.NS', 'TITAN.NS', 'ULTRACEMCO.NS', 'UPL.NS', 'WIPRO.NS']
+# for tick,cname in zip(y,x):
+# 	q = "UPDATE STOCKS SET symbol = '{0}' WHERE COMPANY = '{1}'".format(cname, tick)
+# 	cursor.execute(q)
+# 	conn.commit()
+
 ###############################################################
 
 

@@ -6,8 +6,8 @@ import pymysql
 
 
 def user_dashboard(request):
-	if(request.session.has_key("username")):
-		if( int(request.session['plan']) != 0):
+	if(request.session.has_key("user")):
+		if( int(request.session['user'][5]) != 0):
 			return render(request, "userdashboard.html")
 		else:
 			return redirect("/buyplanpage")
@@ -24,8 +24,8 @@ def buyplanpage(request):
 
 
 def user_show_stocks(request):
-	if(request.session.has_key("username")):
-		if( int(request.session['plan']) >= 1):
+	if(request.session.has_key("user")):
+		if( int(request.session['user'][5]) >= 1):
 			return render(request, "usershowstocks.html")
 		else:
 			return redirect("/buyplanpage/?error=To access NIFTY-50 STOCKS section please activate SILVER or any premium plan!")
@@ -34,8 +34,8 @@ def user_show_stocks(request):
 
 
 def user_adv_stocks(request):
-	if(request.session.has_key("username")):
-		if( int(request.session['plan']) >= 2):
+	if(request.session.has_key("user")):
+		if( int(request.session['user'][5]) >= 2):
 			return render(request, "useradvstocks.html")
 		else:
 			return redirect("/buyplanpage/?error=To access ADVANCE STOCKS section please activate GOLD or any premium plan!")
@@ -44,8 +44,8 @@ def user_adv_stocks(request):
 
 
 def user_analysis(request):
-	if(request.session.has_key("username")):
-		if( int(request.session['plan']) >= 3):
+	if(request.session.has_key("user")):
+		if( int(request.session['user'][5]) >= 3):
 			print("hello_analysis")
 			return render(request, "useranalysis.html")
 		else:
@@ -55,8 +55,8 @@ def user_analysis(request):
 
 
 def user_watchlist(request):
-	if(request.session.has_key("username")):
-		if( int(request.session['plan']) >= 1):
+	if(request.session.has_key("user")):
+		if( int(request.session['user'][5]) >= 1):
 			print("hello_watchlist")
 			return render(request, "userwatchlist.html")
 		else:
@@ -66,24 +66,15 @@ def user_watchlist(request):
 
 
 def user_wallet(request):
-	if(request.session.has_key("username")):
-		if( int(request.session['plan']) >= 1):
-			print("hello_wallet")
-			conn = pymysql.connect( 
-			        host='localhost',
-					port =3306 ,
-			        user='root',  
-
-			        password = "123",
-
-			        db='pgrdb', 
-			        ) 
+	if(request.session.has_key("user")):
+		if( int(request.session['user'][5]) >= 1):
+			conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
 			cur = conn.cursor()
 			cur.execute("SELECT * FROM STOCKS")
 			stocks = cur.fetchall()
-			cur.execute("SELECT * FROM HOLDINGS WHERE username = '{0}'".format(request.session['username']))
+			cur.execute("SELECT * FROM HOLDINGS WHERE username = '{0}'".format(request.session['user'][0]))
 			table = cur.fetchall()
-			cur.execute("SELECT company FROM HOLDINGS WHERE username = '{0}'".format(request.session['username']))
+			cur.execute("SELECT company FROM HOLDINGS WHERE username = '{0}'".format(request.session['user'][0]))
 			stocklist = cur.fetchall()
 			conn.commit()
 			conn.close()
@@ -96,8 +87,8 @@ def user_wallet(request):
 
 
 def user_transaction(request):
-	if(request.session.has_key("username")):
-		if( int(request.session['plan']) >= 1):
+	if(request.session.has_key("user")):
+		if( int(request.session['user'][5]) >= 1):
 			print("hello_transaction")
 			return render(request, "usertransaction.html")
 		else:
@@ -107,7 +98,7 @@ def user_transaction(request):
 
 
 def user_membership_account(request):
-	if(request.session.has_key("username")):
+	if(request.session.has_key("user")):
 		print("hello_account")
 		return render(request, "useraccount.html")
 	else:
@@ -116,8 +107,8 @@ def user_membership_account(request):
 
 
 def user_leaderboard(request):
-	if(request.session.has_key("username")):
-		if( int(request.session['plan']) >= 1):
+	if(request.session.has_key("user")):
+		if( int(request.session['user'][5]) >= 1):
 			print("hello_leaderboard")
 			return render(request, "userleaderboard.html")
 		else:
@@ -127,7 +118,7 @@ def user_leaderboard(request):
 
 
 def user_buyplan(request,planid,expiry):
-	if(request.session.has_key("username")):
+	if(request.session.has_key("user")):
 		from datetime import datetime, timedelta
 		planid = int(planid)
 
@@ -141,23 +132,15 @@ def user_buyplan(request,planid,expiry):
 			expirydate = datetime.now() + timedelta(days=365) 
 		else:
 			expirydate = ""
-		conn = pymysql.connect( 
-			        host='localhost',
-					port =3306 ,
-			        user='root',  
-
-			        password = "123",
-
-			        db='pgrdb', 
-			        ) 
+		conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
 		cur = conn.cursor()
-		q="UPDATE USERS SET plan = '{0}', pending = '{1}', approved = '{2}', expiry = '{3}' WHERE username='{4}'".format(planid,1,0,expirydate,request.session['username'])
-		print(request.session['username'])
+		q="UPDATE USERS SET plan = '{0}', pending = '{1}', approved = '{2}', expiry = '{3}' WHERE username='{4}'".format(planid,1,0,expirydate,request.session['user'][0])
 		cur.execute(q)
+		cur.execute("SELECT * FROM users WHERE username='{0}'".format(request.session['user'][0]))
+		user= cur.fetchone()
+		request.session['user'] = user
 		conn.commit()
-		conn.close()
-		print("hello")
-		request.session['plan'] = planid
+		conn.close()		
 		return redirect("/userdashboard")
 	else:
 		return redirect("/login")
@@ -165,8 +148,7 @@ def user_buyplan(request,planid,expiry):
 
 def user_logout(request):
 	try:
-		del request.session['username']
-		del request.session['plan']
+		del request.session['user']
 	except:
 		pass
 	return redirect('/')
