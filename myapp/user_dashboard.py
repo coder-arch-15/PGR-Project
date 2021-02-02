@@ -23,6 +23,19 @@ def buyplanpage(request):
 		return render(request, "buymembershipp.html")
 
 
+
+def stockpage(request):
+	ticker = str(request.GET.get('ticker', None))
+	tradingview_ticker=ticker.split(".NS")
+	return render(request, "stockpage.html", {"tradingview_ticker":tradingview_ticker[0]})
+
+
+def advanceStockChart(request):
+	ticker = str(request.GET.get('ticker', None))
+	tradingview_ticker=ticker.split(".NS")
+	return render(request, "advstockchart.html", {"tradingview_ticker":tradingview_ticker[0]})
+
+
 def user_show_stocks(request):
 	if(request.session.has_key("user")):
 		if( int(request.session['user'][5]) >= 1):

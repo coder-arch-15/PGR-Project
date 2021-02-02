@@ -1,0 +1,810 @@
+
+
+				<div id="content" class="site-content">
+						<div class="hmc-container">
+        <div id="breadcrumbs" class="centurylib-breadcrumbs-wrapper">
+            <div class="breadcrumbs-wrap layout1 no-image" style="background-image:url();" >
+                <div class="centurylib-bdcb-container">
+                    <div role="navigation" class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb"><ul class="trail-items" itemscope itemtype="http://schema.org/BreadcrumbList"><meta name="numberOfItems" content="2" /><meta name="itemListOrder" content="Ascending" /><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item trail-begin"><a href="https://priyankgupta.co.in" rel="home"><span itemprop="name">Home</span></a><meta content="1" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item trail-end"><span itemprop="name">Market Live</span><meta content="2" /></li></ul></div>                </div><!-- .container -->
+            </div>
+        </div><!-- #breadcrumb -->
+        	<div id="primary" class="content-area main-content-area">
+
+		<main id="main" class="site-main" role="main">
+			<article id="post-60" class="post-60 page type-page status-publish hentry pmpro-level-required pmpro-level-1 pmpro-level-2 pmpro-level-3 pmpro-level-4 pmpro-level-5 pmpro-level-6 pmpro-level-7 pmpro-level-8 pmpro-level-9 pmpro-has-access">
+			<div class="hmc-article-thumb">
+					</div><!-- .hmc-article-thumb -->
+		<header class="entry-header">
+		<h1 class="entry-title">Market Live</h1>	</header><!-- .entry-header -->
+	<div class="entry-content">
+		<div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper">
+	<div class="wpb_raw_code wpb_content_element wpb_raw_html" >
+		<div class="wpb_wrapper">
+			<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style> 
+input[type=number] {
+  width: 180px;
+  box-sizing: border-box;
+  /* border: 2px solid #ccc; */
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  /* background-image: url('searchicon.png'); */
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  /* transition: width 0.4s ease-in-out; */
+}
+
+/* input[type=number]:focus {
+  width: 27%;
+} */
+
+    /* BUTTON STYLE */
+
+    .buttonX {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  /* display: inline-block; */
+  font-size: 16px;
+  margin: 4px 2px;
+  /* transition-duration: 0.4s; */
+  cursor: pointer;
+}
+
+.buttonX1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.buttonX1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.buttonX2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid red;
+}
+
+.buttonX2:hover {
+  background-color: red;
+  color: white;
+}  
+
+/* model cssss */
+
+
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modalX {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modalX-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close,.closedup,.close1,.close11,.close2,.close22 {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* expanding grid */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* The grid: Three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 50px;
+  text-align: center;
+  font-size: 25px;
+  cursor: pointer;
+  color: white;
+}
+
+.containerTab {
+  padding: 20px;
+  color: white;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Closable button inside the container tab */
+.closebtn {
+  float: right;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+div.tradingview-widget-container-profile{
+	width: 52%;
+	height:auto;
+	float:  left;
+}
+div.tradingview-widget-container-technical{
+	width: 30%;
+	height:auto;
+	float:  right;
+	margin-right: 140px;
+	border-style: solid;
+}
+div.widget-column{
+	width: 100%;
+	height: auto;
+}
+}
+</style>
+</head>
+<body>
+
+	<!-- Live Chart -->
+	
+<script>
+window.onload = function() {
+
+  var dataPoints1 = [];
+  var dataPoints2 = [];
+var chart = new CanvasJS.Chart("chartContainer", {
+  zoomEnabled: true,
+  animationEnabled: true,
+  exportEnabled: true,
+
+	theme: "light2",
+	title: {
+		text: "{{tradingview_ticker}}"
+	},
+  axisY: {
+  includeZero:false,
+  prefix: "₹",
+  title: "Price"
+},
+toolTip: {
+		shared: true
+	},
+
+	data: [{
+		type: "line",
+    showInLegend: true,
+		name: "Live Price",
+    xValueType: "dateTime",
+	xValueFormatString: "hh:mm:ss TT",
+		dataPoints: dataPoints1
+	},
+]
+});
+updateData();
+
+// Initial Values
+//var xValue = 0;
+//var yValue = 10;
+var newDataCount1 = 6;
+
+function addData1(data) {
+	if(newDataCount1 != 1) {
+		$.each(data, function(key, value) {
+			dataPoints1.push({x: value[0], y: parseFloat(value[1])});
+			//xValue++;
+			//yValue = parseFloat(value[1]);
+		});
+	} else {
+		//dataPoints1.shift();
+		dataPoints1.push({x: data[0][0], y: parseFloat(data[0][1])});
+		//xValue++;
+		//yValue = parseFloat(data[0][1]);
+	}
+
+	newDataCount1 = 1;
+	chart.render();
+	setTimeout(updateLastData, 3000);
+}
+
+
+function updateData() {
+	$.getJSON("https://priyankgupta.co.in/ticker.php?flag=1&symbol=TATAMOTORS", addData1);
+}
+	function updateLastData() {
+	$.getJSON("https://priyankgupta.co.in/ticker.php?flag=1&last=1&symbol=TATAMOTORS", addData1);
+}
+
+}
+</script>
+
+
+
+<div id="chartContainer" style="height: 500px; width: 100%;"></div>
+<strong>For Viewing Advance Interactive Chart for {{tradingview_ticker}}, <a href="../advstockchart/?ticker={{tradingview_ticker}}" target="_blank">click here</a>. </strong>
+<center><h5 style='color:red; font-weight:bold;'>(you can do trade after filling the given Fields)</h5></center><!-- expanding grid-->
+  <div class="row">
+    <center>
+      <button style="width: 20%; background-color: #7ECA1E; font-weight: bold;" type="button" class="btn btn-sucess" onclick="openTab('b1');">Buy</button>
+      <button style="width: 20%; background-color: #E74423; font-weight: bold;" type="button" class="btn btn-danger" onclick="openTab('b2');">Sell</button>
+    </center>
+  </div>
+  <br>
+  <!-- Full-width columns: (hidden by default) -->
+  <center>
+      <div id="b1" class="containerTab" style="display:none;background:white; width:50%; border: 2px solid #7ECA1E;">
+        <span onclick="this.parentElement.style.display='none'" class="closebtn" style="color:black;">&times;</span>
+        <form id="form" action="https://priyankgupta.co.in/process/" method="POST" onsubmit="return message();"> 
+              <center><label for="svol" style="color:black;">Quantity:</label>
+                  <input style="border: 2px solid #7ECA1E;" id="q_stock" class="quantity" name="svol" type="number" min="0" required="*" placeholder="Enter Quantity" />
+                  
+                <label for="sprice" style="color:black;">Price:</label>
+                  <input style="border: 2px solid #7ECA1E;" id="price_stock" name="sprice" type="number" step="0.01" required="*" value="321.4" min="289.26" max="353.54" placeholder="Enter Price" onkeyup="checkinteger();" /><br><br>
+                  
+                <textarea style="width:350px; height:100px; border: 2px solid #7ECA1E;" name="remarks" rows="40" cols="30" required="*" placeholder="Why you want to Buy/Sell this Share?"></textarea>
+                  
+                <input id="sid" name="sid" type="hidden" value="TATAMOTORS" />
+                  <!-- <input id="stype" name="stype" type="hidden" />  -->
+                  <br/><br/>
+                  <input id="pen" type="hidden" name="stype" value="" />
+            
+                  <!-- <button name="stype" type="submit" value="1">Buy</button> <button name="stype" type="submit" value="0">Sell</button> -->
+                  <button id="submit_buy"  class="buttonX buttonX1" type="submit" onclick="clicked='1'" >PlaceOrder</button>
+                  <!-- <button id="submit_sell" class="buttonX buttonX2" type="submit" onclick="clicked='0'" style="display: none;" >Sell</button> -->
+                  
+                  
+                  <!-- <input id="submit_buy" type="submit" value="BUY" style="display: none;">
+                  <input id="submit_sell" type="submit" value="SELL" style="display: none;"> -->
+              </center>       
+        </form>
+      </div>
+
+      <div id="b2" class="containerTab" style="display:none;background:white; width:50%; border: 2px solid #E74423;">
+        <span onclick="this.parentElement.style.display='none'" class="closebtn" style="color:black;">&times;</span>
+        <form id="form1" action="https://priyankgupta.co.in/process/" method="POST" onsubmit="return message1();"> 
+              <center><label for="svol" style="color:black;">Quantity:</label>
+                  <input style="border: 2px solid #E74423;" id="q_stocks" class="quantity" name="svol" type="number" required="*" min="0" placeholder="Enter Quantity" />
+                  
+                <label for="sprice" style="color:black;">Price:</label>
+                  <input style="border: 2px solid #E74423;" id="price_stocks" name="sprice" type="number" step="0.01" required="*" value="321.4" max="353.54" placeholder="Enter Price" onkeyup="checkinteger22();" /><br><br>
+                  
+                <textarea style="width:350px; height:100px; border: 2px solid #E74423;" name="remarks" rows="40" cols="30" required="*" placeholder="Why you want to Buy/Sell this Share?"></textarea>
+                  
+                <input id="sid1" name="sid" type="hidden" value="TATAMOTORS" />
+                  <!-- <input id="stype" name="stype" type="hidden" />  -->
+                  <br/><br/>
+                  <input id="pen1" type="hidden" name="stype" value="" />
+            
+                  <!-- <button name="stype" type="submit" value="1">Buy</button> <button name="stype" type="submit" value="0">Sell</button> -->
+                  <!-- <button id="submit_buy"  class="buttonX buttonX1" type="submit" onclick="clicked='1'" style="display: none;" >Buy</button> -->
+                  <button id="submit_sell" class="buttonX buttonX2" type="submit" onclick="clicked='0'" >PlaceOrder</button>
+                  
+                  
+                  <!-- <input id="submit_buy" type="submit" value="BUY" style="display: none;">
+                  <input id="submit_sell" type="submit" value="SELL" style="display: none;"> -->
+              </center>       
+        </form>
+      </div>
+  </center>
+	</br>
+
+      <!-- model -->
+
+      <div id="myModal" class="modalX" style="display: none;">
+
+        <!-- Modal content -->
+        <div class="modalX-content">
+          <span class="close">&times;</span>
+          <br/>
+          <center><p style="font-size: 25px; ">Do you want to <strong id="buy_sell" value="" style="color: red;"></strong> Shares of <strong id="user" value="" style="color: red;"></strong> at the Price of Rs. <strong id="rup" value="" style="color: red;"></strong>/share</p></center>
+          <br/>
+          <center><button id="ok" class='btn btn-outline-primary' style="width: 90px;">OK</button>&nbsp;&nbsp;&nbsp;<button type="hidden" class="close"></button></center>
+        </div>
+      </div>
+
+      <!-- duplicate model1 -->
+      <div id="myModaldup" class="modalX" style="display: none;">
+
+        <!-- Modal content -->
+        <div class="modalX-content">
+          <span class="closedup">&times;</span>
+          <br/>
+          <center><p style="font-size: 25px; ">Do you want to <strong id="buy_sell1" value="" style="color: red;"></strong> Shares of <strong id="user_1" value="" style="color: red;"></strong> at the Price of Rs. <strong id="rup1" value="" style="color: red;"></strong>/share</p></center>
+          <br/>
+          <center><button id="okdup" class='btn btn-outline-primary' style="width: 90px;">OK</button>&nbsp;&nbsp;&nbsp;<button type="hidden" class="close"></button></center>
+        </div>
+      </div>
+      <!-- duplicate model1 -->
+
+      <div id="myModal1" class="modalX" style="display: none;">  
+        <div class="modalX-content">
+          <span class="close1">&times;</span>
+          <br/>
+          <center><p style="font-size: 25px; ">You have insufficient balance to purchase the share of <strong id="user1" value="" style="color:red;"></strong></p></center>
+          <br/>
+          <center><button id="ok1" class='btn btn-outline-primary' style="width: 90px;">OK</button>&nbsp;&nbsp;&nbsp;<button type="hidden" class="close"></button></center>
+        </div>
+      </div>
+
+      <!-- duplicate model2 -->
+      <div id="myModal11" class="modalX" style="display: none;">  
+        <div class="modalX-content">
+          <span class="close11">&times;</span>
+          <br/>
+          <center><p style="font-size: 25px; ">You have insufficient balance to purchase the share of <strong id="user11" value="" style="color:red;"></strong></p></center>
+          <br/>
+          <center><button id="ok11" class='btn btn-outline-primary' style="width: 90px;">OK</button>&nbsp;&nbsp;&nbsp;<button type="hidden" class="close"></button></center>
+        </div>
+      </div>
+      <!-- duplicate model2 -->
+
+      <div id="myModal2" class="modalX" style="display: none;">  
+        <div class="modalX-content">
+          <span class="close2">&times;</span>
+          <br/>
+          <center><p style="font-size: 25px; ">You have insufficient Share of <strong id="user2" value="" style="color:red;"></strong> to Sell.</p></center>
+          <br/>
+          <center><button id="ok2" class='btn btn-outline-primary' style="width: 90px;">OK</button>&nbsp;&nbsp;&nbsp;<button type="hidden" class="close"></button></center>
+        </div>
+      </div>
+
+      <!-- duplicate model3 -->
+      <div id="myModal22" class="modalX" style="display: none;">  
+        <div class="modalX-content">
+          <span class="close22">&times;</span>
+          <br/>
+          <center><p style="font-size: 25px; ">You have insufficient Share of <strong id="user22" value="" style="color:red;"></strong> to Sell.</p></center>
+          <br/>
+          <center><button id="ok22" class='btn btn-outline-primary' style="width: 90px;">OK</button>&nbsp;&nbsp;&nbsp;<button type="hidden" class="close"></button></center>
+        </div>
+      </div>
+      <!-- duplicate model3 -->
+	</br>
+
+      
+        
+        
+<script>
+            function checkinteger()
+            {
+                var field = document.getElementById('q_stock').value;
+                // console.log(field);
+                if(field>0)
+                {
+                    console.log('correct');
+                    document.getElementById('submit_buy').style.display = 'inline-block';
+                    // document.getElementById('submit_sell').style.display = 'inline-block';
+                }
+                
+                else
+                {
+                    console.log('invailed');
+                    alert('The input values are invailed');
+                    document.getElementById('submit_buy').style.display = 'none';
+                    // document.getElementById('submit_sell').style.display = 'none';
+                }
+                // else if(field == 'empty')
+                // {
+                //   document.getElementById('submit_buy').style.display = 'inline-none';
+                //   document.getElementById('submit_sell').style.display = 'inline-none';
+                // }
+            }
+
+            function checkinteger22()
+            {
+                var field = document.getElementById('q_stocks').value;
+                // console.log(field);
+                if(field>0)
+                {
+                    console.log('correct');
+                    // document.getElementById('submit_buy').style.display = 'inline-block';
+                    document.getElementById('submit_sell').style.display = 'inline-block';
+                }
+                
+                else
+                {
+                    console.log('invailed');
+                    alert('The input values are invailed');
+                    // document.getElementById('submit_buy').style.display = 'none';
+                    document.getElementById('submit_sell').style.display = 'none';
+                }
+                // else if(field == 'empty')
+                // {
+                //   document.getElementById('submit_buy').style.display = 'inline-none';
+                //   document.getElementById('submit_sell').style.display = 'inline-none';
+                // }
+            }
+
+            document.getElementsByClassName('close')[0].onclick = function() {
+              console.log('close');
+              document.getElementById('myModal').style.display = 'none';
+            }
+
+            // duplicate close
+            document.getElementsByClassName('closedup')[0].onclick = function() {
+              console.log('closedup');
+              document.getElementById('myModaldup').style.display = 'none';
+            }
+            // duplicateclose
+
+            document.getElementsByClassName('close1')[0].onclick = function() {
+              console.log('close1');
+              document.getElementById('myModal1').style.display = 'none';
+            }
+            // duplicateclose1
+            document.getElementsByClassName('close11')[0].onclick = function() {
+              console.log('close11');
+              document.getElementById('myModal11').style.display = 'none';
+            }
+            //duplicateclose1
+
+            document.getElementsByClassName('close2')[0].onclick = function() {
+              console.log('close2');
+              document.getElementById('myModal2').style.display = 'none';
+            }
+            // duplicateclose2
+            document.getElementsByClassName('close22')[0].onclick = function() {
+              console.log('close22');
+              document.getElementById('myModal22').style.display = 'none';
+            }
+            // duplicateclose2
+
+
+            document.getElementById('ok').onclick = function() {
+              console.log('ok');
+              document.getElementById('myModal').style.display = 'none';
+     
+              document.getElementById('form').submit();
+            }
+
+            // duplicate submit
+            document.getElementById('okdup').onclick = function() {
+              console.log('okdup');
+              document.getElementById('myModaldup').style.display = 'none';
+     
+              document.getElementById('form1').submit();
+            }
+
+            // duplicate submit
+
+            document.getElementById('ok1').onclick = function() {
+              console.log('ok1');
+              document.getElementById('myModal1').style.display = 'none';
+     
+              //document.getElementById('form').submit();
+            }
+            // duplicatesubmit1
+            document.getElementById('ok11').onclick = function() {
+              console.log('ok11');
+              document.getElementById('myModal11').style.display = 'none';
+     
+              //document.getElementById('form').submit();
+            }
+            // duplicatesubmit1
+
+
+            document.getElementById('ok2').onclick = function() {
+              console.log('ok2');
+              document.getElementById('myModal2').style.display = 'none';
+     
+              //document.getElementById('form').submit();
+            }
+            // duplicatesubmit2
+            document.getElementById('ok22').onclick = function() {
+              console.log('ok22');
+              document.getElementById('myModal22').style.display = 'none';
+     
+              //document.getElementById('form').submit();
+            }
+            // duplicatesubmit2
+
+
+
+
+            function message()
+            {
+              // return false;
+              // var step = document.getElementById('submit_buy').value; 
+              // // console.log("buy ", value);
+
+              // var sold = document.getElementById('submit_sell').value;
+              // // console.log("sell ", value1);
+              // // console.log("value ", values);
+              var volume = document.getElementById('q_stock').value;
+              // var volume1 = document.getElementById('q_stocks').value;
+              let price = document.getElementById('price_stock').value;
+              // price = (price*1).toFixed(2);
+              var stockid = "TATAMOTORS";
+              console.log(stockid);
+              var currcash = "210086";
+
+              var totalamt = volume * price;
+              // var totalamt1 = volume1 * price;
+              var totalshare = "3100";
+              
+              var delivery = "3100";
+              
+              console.log(clicked);
+              document.getElementById('pen').value = clicked;
+
+              if(clicked == '1')
+              {
+                if(currcash <= totalamt)
+                {
+                              // console.log('buy');
+                              document.getElementById('user1').innerHTML = stockid;
+                  document.getElementById('myModal1').style.display = 'block';
+                              
+                  
+
+                  return false;
+                }
+                else
+                {
+                  document.getElementById('myModal').style.display = 'block';
+                  document.getElementById('buy_sell').innerHTML = 'BUY '+volume;
+                  document.getElementById('rup').innerHTML = price;
+                  document.getElementById('user').innerHTML = stockid;
+                  
+
+                  return false;
+                }
+              }
+              else if(clicked == '0')
+              {
+
+                // console.log('total: ',totalshare);
+                // console.log('volume :',volume);
+                if(delivery < volume)
+                {
+                
+                // console.log('sell');
+                document.getElementById('myModal2').style.display = 'block';
+                              
+                document.getElementById('user2').innerHTML = stockid;
+                
+
+                return false;
+                }
+                else
+                {
+                  document.getElementById('myModal').style.display = 'block';
+                  document.getElementById('buy_sell').innerHTML = 'SELL '+volume;
+                  document.getElementById('rup').innerHTML = price;
+                  document.getElementById('user').innerHTML = stockid;
+
+                  return false;
+                }
+              }
+
+              // return false;
+
+
+              // if(clicked == '1')
+              // {
+              //   console.log('buy');
+
+              //   //alert("Do you want to Buy "+ volume +" Shares of "+ stockid +" at the Price of Rs. "+ price+"/share");
+              // }
+              // else if(clicked == '0')
+              // {
+              //   alert("Do you want to Sell "+ volume +" Shares of "+ stockid +" at the Price of Rs. "+ price+"/share");
+              // }
+              // return false;
+               
+            }
+
+
+            // message function 2
+
+            function message1()
+            {
+              // return false;
+              // var step = document.getElementById('submit_buy').value; 
+              // // console.log("buy ", value);
+
+              // var sold = document.getElementById('submit_sell').value;
+              // // console.log("sell ", value1);
+              // // console.log("value ", values);
+              var volume1 = document.getElementById('q_stocks').value;
+              // var volume1 = document.getElementById('q_stocks').value;
+              let price1 = document.getElementById('price_stocks').value;
+              // price = (price*1).toFixed(2);
+              var stockid1 = document.getElementById('sid1').value;
+              var currcash1 = "210086";
+
+              var totalamt1 = volume1 * price1;
+              // var totalamt1 = volume1 * price;
+              var totalshare1 = "3100";
+              totalshare1 = parseInt(totalshare1);
+              volume1 = parseInt(volume1);
+              
+              var delivery1 = "3100";
+              
+              console.log(clicked);
+              document.getElementById('pen1').value = clicked;
+
+              if(clicked == '1')
+              {
+                if(currcash1 <= totalamt1)
+                {
+                              // console.log('buy');
+                  document.getElementById('myModal11').style.display = 'block';
+                              
+                  document.getElementById('user11').innerHTML = stockid1;
+
+                  return false;
+                }
+                else
+                {
+                  document.getElementById('myModaldup').style.display = 'block';
+                  document.getElementById('buy_sell1').innerHTML = 'BUY '+volume1;
+                  document.getElementById('rup1').innerHTML = price1;
+                  document.getElementById('user1').innerHTML = stockid1;
+                  
+
+                  return false;
+                }
+              }
+              else if(clicked == '0')
+              {
+
+                // console.log('total: ',totalshare);
+                // console.log('volume :',volume);
+                if(delivery1 < volume1)
+                {
+                
+                // console.log('sell');
+                document.getElementById('myModal22').style.display = 'block';
+                              
+                document.getElementById('user22').innerHTML = stockid1;
+                
+
+                return false;
+                }
+                else
+                {
+                  document.getElementById('myModaldup').style.display = 'block';
+                  document.getElementById('buy_sell1').innerHTML = 'SELL '+volume1;
+                  document.getElementById('rup1').innerHTML = price1;
+                  document.getElementById('user_1').innerHTML = stockid1;
+
+                  return false;
+                }
+              }
+               
+            }
+            
+            // Expanding Grid
+            function openTab(tabName) 
+            {
+              var i, x;
+              x = document.getElementsByClassName("containerTab");
+              for (i = 0; i < x.length; i++) 
+              {
+                x[i].style.display = "none";
+              }
+              document.getElementById(tabName).style.display = "block";
+            }
+            
+        </script>
+        
+
+</body>
+</html>
+		</div>
+	</div>
+</div></div></div></div>
+			
+
+<br><!-- TradingView Widget BEGIN -->
+<div class ="widget-column">
+<div class="tradingview-widget-container-profile">
+  
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js" async="">
+			{
+				"symbol": "NSE:{{tradingview_ticker}}",
+				"width": "100%",
+				"height": 400,
+				"colorTheme": "light",
+				"isTransparent": false,
+				"locale": "in"
+			}
+		</script> 
+</div>
+<!-- TradingView Widget END -->
+<!-- TradingView Widget BEGIN -->
+
+  <div class="tradingview-widget-container-technical">
+
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+				{
+					"interval": "1m",
+					"width": 425,
+					"isTransparent": true,
+					"height": 450,
+					"symbol": "NSE:{{tradingview_ticker}}",
+					"showIntervalTabs": true,
+					"locale": "in",
+					"colorTheme": "light"
+				}
+			</script> 
+  </div>
+</div>
+<!-- TradingView Widget END -->
+
+		</div>
+	</div>
+
+	<div class="wpb_raw_code wpb_content_element wpb_raw_html" >
+		<div class="wpb_wrapper">
+			<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-financials.js" async="">
+			{
+				"symbol": "NSE:{{tradingview_ticker}}",
+				"colorTheme": "light",
+				"isTransparent": true,
+				"largeChartUrl": "",
+				"displayMode": "regular",
+				"width": "100%",
+				"height": 830,
+				"locale": "in"
+			}
+		</script> 
+</div>
+<!-- TradingView Widget END -->
+
+
+		</div>
+	</div>
+</div></div></div></div><div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper"></div></div></div></div>
+	</div><!-- .entry-content -->
+
+
