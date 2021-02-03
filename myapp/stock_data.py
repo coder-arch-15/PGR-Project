@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 def getcmp(request,ticker):
 	try:
-		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=1.5)
+		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=2)
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
 		price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
 		price=price.replace(',','')
@@ -78,21 +78,43 @@ def updatepriceaction(request):
 
 
 def updateIndices(request):
-	import json
-	url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true')
-	soup = bs4.BeautifulSoup(url.text, features="html.parser")
-	indices = {
-        "NIFTY50":soup.find_all("td", {'align': 'right'})[6].text ,
-        "NIFTY50CHNG":soup.find_all("td", {'align': 'right'})[7].text,
-        "NIFTY50PCHNG":soup.find_all("td", {'align': 'right'})[8].text,
-        "NIFTYBANK":soup.find_all("td", {'align': 'right'})[276].text,
-        "NIFTYBANKCHNG":soup.find_all("td", {'align': 'right'})[277].text,
-        "NIFTYBANKPCHNG":soup.find_all("td", {'align': 'right'})[278].text,
-        "NIFTYENERGY":soup.find_all("td", {'align': 'right'})[294].text,
-        "NIFTYENERGYCHNG":soup.find_all("td", {'align': 'right'})[295].text,
-        "NIFTYENERGYPCHNG":soup.find_all("td", {'align': 'right'})[296].text,
-        "NIFTYIT":soup.find_all("td", {'align': 'right'})[318].text,
-        "NIFTYITCHNG":soup.find_all("td", {'align': 'right'})[319].text,
-        "NIFTYITPCHNG":soup.find_all("td", {'align': 'right'})[320].text
-        }
-	return HttpResponse(json.dumps(indices))
+	try:
+		import json
+		url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		indices = {
+	        "NIFTY50":soup.find_all("td", {'align': 'right'})[6].text ,
+	        "NIFTY50CHNG":soup.find_all("td", {'align': 'right'})[7].text,
+	        "NIFTY50PCHNG":soup.find_all("td", {'align': 'right'})[8].text,
+	        "NIFTYBANK":soup.find_all("td", {'align': 'right'})[276].text,
+	        "NIFTYBANKCHNG":soup.find_all("td", {'align': 'right'})[277].text,
+	        "NIFTYBANKPCHNG":soup.find_all("td", {'align': 'right'})[278].text,
+	        "NIFTYENERGY":soup.find_all("td", {'align': 'right'})[294].text,
+	        "NIFTYENERGYCHNG":soup.find_all("td", {'align': 'right'})[295].text,
+	        "NIFTYENERGYPCHNG":soup.find_all("td", {'align': 'right'})[296].text,
+	        "NIFTYIT":soup.find_all("td", {'align': 'right'})[318].text,
+	        "NIFTYITCHNG":soup.find_all("td", {'align': 'right'})[319].text,
+	        "NIFTYITPCHNG":soup.find_all("td", {'align': 'right'})[320].text
+	        }
+		return HttpResponse(json.dumps(indices))
+	except Exception as e:
+		import json
+		url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		indices = {
+	        "NIFTY50":soup.find_all("td", {'align': 'right'})[6].text ,
+	        "NIFTY50CHNG":soup.find_all("td", {'align': 'right'})[7].text,
+	        "NIFTY50PCHNG":soup.find_all("td", {'align': 'right'})[8].text,
+	        "NIFTYBANK":soup.find_all("td", {'align': 'right'})[276].text,
+	        "NIFTYBANKCHNG":soup.find_all("td", {'align': 'right'})[277].text,
+	        "NIFTYBANKPCHNG":soup.find_all("td", {'align': 'right'})[278].text,
+	        "NIFTYENERGY":soup.find_all("td", {'align': 'right'})[294].text,
+	        "NIFTYENERGYCHNG":soup.find_all("td", {'align': 'right'})[295].text,
+	        "NIFTYENERGYPCHNG":soup.find_all("td", {'align': 'right'})[296].text,
+	        "NIFTYIT":soup.find_all("td", {'align': 'right'})[318].text,
+	        "NIFTYITCHNG":soup.find_all("td", {'align': 'right'})[319].text,
+	        "NIFTYITPCHNG":soup.find_all("td", {'align': 'right'})[320].text
+	        }
+		return HttpResponse(json.dumps(indices))
+	else:
+		return HttpResponse(True)

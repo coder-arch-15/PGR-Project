@@ -3,7 +3,7 @@
 	</div>
 <div class="hmc-top-header-wrap">
 	<div>
-					<!--  top marquee begins -->
+		<!--  top marquee begins -->
 <CENTER>
     <div  class="top-marquee" style="display: inline; margin-left: 25px;">
       <h4 style="display: inline;"><strong>NIFTY 50  </strong></h4>
@@ -25,10 +25,12 @@
     </div> 
     
     <div  class="top-marquee" style="display: inline; margin-left: 25px;">
+      <strong>
       <h4 style="display: inline;"><strong>NIFTY IT  </strong></h4>
       <h5 style="display: inline; margin-right: 4px;" id="NIFTYITLTP"></h5>
       <span id="NIFTYITCHNG" style="margin-right: 4px;"></span>
       <span id="NIFTYITPCHNG"></span>
+    </strong>
     </div> 
 </CENTER>
 
@@ -54,7 +56,7 @@ cInterval= setInterval(function loadDoc() {
   var niftyENERGYchng = document.getElementById("NIFTYENERGYCHNG");
   var niftyENERGYpchng = document.getElementById("NIFTYENERGYPCHNG");
 
-  var spanclose = "</font>";
+  var spanclose = "</strong></font>";
   xhttp.onreadystatechange=function() {
   if (this.readyState == 4 && this.status == 200) {
         var data = JSON.parse(this.response);
@@ -62,13 +64,13 @@ cInterval= setInterval(function loadDoc() {
         
       var change =data["NIFTY50CHNG"];   
         if(change > 0){
-       span = "<font color = green>";
+       span = "<font color = green><strong>";
       }
       else if(change < 0){
-         span = "<font color = red>";
+         span = "<font color = red><strong>";
       }
       else{
-       span = "<font color = grey>";
+       span = "<font color = grey><strong>";
       }
 
       var pchng = span.concat("+",data["NIFTY50PCHNG"], spanclose); 
@@ -81,13 +83,13 @@ cInterval= setInterval(function loadDoc() {
 
        change =data["NIFTYBANKCHNG"];   
         if(change > 0){
-       span = "<font color = green>";
+       span = "<font color = green><strong>";
       }
       else if(change < 0){
-         span = "<font color = red>";
+         span = "<font color = red><strong>";
       }
       else{
-       span = "<font color = grey>";
+       span = "<font color = grey><strong>";
       }
 
        pchng = span.concat("+",data["NIFTYBANKPCHNG"], spanclose); 
@@ -100,13 +102,13 @@ cInterval= setInterval(function loadDoc() {
 
        change =data["NIFTYENERGYCHNG"];   
         if(change > 0){
-       span = "<font color = green>";
+       span = "<font color = green><strong>";
       }
       else if(change < 0){
-         span = "<font color = red>";
+         span = "<font color = red><strong>";
       }
       else{
-       span = "<font color = grey>";
+       span = "<font color = grey><strong>";
       }
 
        pchng = span.concat("+",data["NIFTYENERGYPCHNG"], spanclose); 
@@ -119,13 +121,13 @@ cInterval= setInterval(function loadDoc() {
 
        change =data["NIFTYITCHNG"];   
         if(change > 0){
-       span = "<font color = green>";
+       span = "<font color = green><strong>";
       }
       else if(change < 0){
-         span = "<font color = red>";
+         span = "<font color = red><strong>";
       }
       else{
-       span = "<font color = grey>";
+       span = "<font color = grey><strong>";
       }
 
        pchng = span.concat("+",data["NIFTYITPCHNG"], spanclose); 
