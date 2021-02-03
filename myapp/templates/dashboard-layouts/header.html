@@ -10,7 +10,10 @@
 
 
 <!--  top marquee begins -->
-<CENTER>
+<div id = "marketclose" style="background-color: #cfcecc; height: 27px;">
+<marquee ><H5>Market is Closed! Please check back during Market hours (09:15 - 15:30).</H5></marquee> </div>
+
+<CENTER id = "marketinfo">
     <div  class="top-marquee" style="display: inline; margin-left: 25px;">
       <h4 style="display: inline;"><strong>NIFTY 50  </strong></h4>
       <h5 style="display: inline; margin-right: 4px;" id="NIFTY50LTP"></h5>
@@ -40,9 +43,29 @@
     </div> 
 </CENTER>
 
-<script>
 
-cInterval= setInterval(function loadDoc() {
+
+<script>
+var currentD = new Date();
+var startHourD = new Date();
+startHourD.setHours(9,15,0); // 9.15 am
+var endHourD = new Date();
+endHourD.setHours(15,30,0); // 3.30 pm
+
+if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+  document.getElementById("marketclose").style.display = "none";
+    refreshDATA();
+}
+ else{
+  loadDoc();
+/*  document.getElementById("marketinfo").style.display = "none";
+  document.getElementById("marketclose").style.display = "block";*/
+ }
+
+function refreshDATA() {    cInterval= setInterval(loadDoc, 10000);   }
+
+
+function loadDoc() {
   var xhttp = new XMLHttpRequest();
   var url = "../updateindices";
 
@@ -148,9 +171,7 @@ cInterval= setInterval(function loadDoc() {
   };
   xhttp.open("GET", url, true);
   xhttp.send();
-  
-}
-, 10000);
+  }
 </script>
 
 <!--   top marquee ends -->
