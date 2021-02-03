@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings 
 import pymysql
-
+import json 
 import bs4
 import requests
 from bs4 import BeautifulSoup 
@@ -20,6 +20,53 @@ def getcmp(request,ticker):
 		pass
 	finally:
 		pass
+
+
+def updateStockInfo(request,ticker):
+	try:
+		prices = []
+		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=2)
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
+		price=price.replace(',','')
+		chngline = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span', {'data-reactid': '33'}).text
+		chng,pchng = chngline.split('(')
+		pchng = pchng.replace(")","")
+
+		openp = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[0].find('span').text
+		close = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[1].find('span').text
+		lowhigh = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[4].text
+		lowhigh52 = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[5].text
+		volume = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[6].find('span').text
+		mcap = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[8].find('span').text
+		prices = [price, chng, pchng, openp, close, lowhigh, lowhigh52, volume, mcap]
+		return HttpResponse(json.dumps(prices))
+
+	except Exception as e:
+		conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
+		cur = conn.cursor()
+		cur.execute("SELECT bsecode from STOCKS where company = '{0}'".format(ticker))
+		code = cur.fetchone()
+		conn.commit()
+		conn.close()
+		from bsedata.bse import BSE
+		b = BSE()
+		q = b.getQuote(str(code[0]))
+		price = q['currentValue']
+		price=price.replace(',','')
+		chng = q['change']
+		pchng = q['pChange']
+		openp = q['previousOpen']
+		close = q['previousClose']
+		lowhigh = q['dayLow'] + ' - ' + q['dayHigh']
+		lowhigh52 = q['52weekLow'] + ' - ' + q['52weekHigh']
+		volume = q['totalTradedQuantity']
+		mcap = q['marketCapFull']
+		prices=[]
+		prices = [price, chng, pchng, openp, close, lowhigh, lowhigh52, volume, mcap]
+		return HttpResponse(json.dumps(prices))
+	else:
+		return HttpResponse(true)
 	
 
 

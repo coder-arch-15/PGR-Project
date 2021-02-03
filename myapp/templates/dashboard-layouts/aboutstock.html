@@ -222,7 +222,7 @@ div.widget-column{
 }
 
 div.stockinfo{
-	width: 30%;
+	width: 40%;
 	height:auto;
 	float:  left;
 }
@@ -308,22 +308,23 @@ function updateData() {
 
 }
 </script>
+
 <div class="stockinfo">
-<h2 style="display: inline;"><strong>stock_name</strong></h4>
-<h5 style="display: inline;"><strong>{{tradingview_ticker}}</strong></h5><br>
-<h1 style="display: inline;"  id = "cmp">cmp 111</h1>
-<h3 style="display: inline;" id = "chng">  2222</h3>
-<h3 style="display: inline;" id = "pchng">  65</h3><br><br>
-<h6 id="open">Open : </h6>
-<h6 id="close">Close : </h6>
-<h6 id="range">Days Range : </h6>
-<h6 id="52range">52 Week Range : </h6>
+<h2 style="display: inline;"><strong>{{info.6}}</strong></h4>
+<h5 style="display: inline; margin-left: 7px;"><strong>{{info.0}}</strong></h5><br>
+<h1 style="display: inline;"  id = "cmp">{{info.1}}</h1>
+<h3 style="display: inline; margin-left: 7px;" id = "chng"></h3>
+<h3 style="display: inline; margin-left: 7px;" id = "pchng"></h3><br><br>
+<h6 id="open">Open : {{info.2}}</h6>
+<h6 id="close">Close : {{info.3}}</h6>
+<h6 id="range">Day Range : {{info.4}} - {{info.5}}</h6>
+<h6 id="range52">52 Week Range : </h6>
 <h6 id="volume">Volume : </h6>
 <h6 id="mcap">Market Cap : </h6><br><br>
-
-
 </div>
-<script type="text/javascript">
+
+
+<script>
 var currentD = new Date();
 var startHourD = new Date();
 startHourD.setHours(9,15,0); // 9.15 am
@@ -331,7 +332,6 @@ var endHourD = new Date();
 endHourD.setHours(15,30,0); // 3.30 pm
 
 if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
-  document.getElementById("marketclose").style.display = "none";
     refreshDATA();
 }
  else{
@@ -341,39 +341,53 @@ if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD )
 function refreshDATA() {    cInterval= setInterval(loadDoc, 5000);   }
 
 function loadDoc() {
-	var stockname ="{{user.3}}";
+  var stockname ="{{info.0}}";
   var xhttp = new XMLHttpRequest();
-  var url = "../updateindices";
+  var url = "../updatestockinfo/";
 
-  var nifty50ltp = document.getElementById("NIFTY50LTP");
-  var nifty50chng = document.getElementById("NIFTY50CHNG");
-  var nifty50pchng = document.getElementById("NIFTY50PCHNG");
+  var cmp = document.getElementById("cmp");
+  var chng = document.getElementById("chng");
+  var pchng = document.getElementById("pchng");
+  var open = document.getElementById("open");
+  var close = document.getElementById("close");
+  var range = document.getElementById("range");
+  var range52 = document.getElementById("range52");
+  var volume = document.getElementById("volume");
+  var mcap = document.getElementById("mcap");
 
-  var spanclose = "</strong></font>";
+  var spanclose = "</font>";
   xhttp.onreadystatechange=function() {
   if (this.readyState == 4 && this.status == 200) {
         var data = JSON.parse(this.response);
         var span="";
         
-      var change =data["NIFTY50CHNG"];   
+      var change =data[1];   
         if(change > 0){
-       span = "<font color = green><strong>";
+       span = "<font color = green>";
       }
       else if(change < 0){
-         span = "<font color = red><strong>";
+         span = "<font color = red>";
       }
       else{
-       span = "<font color = grey><strong>";
+       span = "<font color = grey>";
       }
 
-      var pchng = span.concat("+",data["NIFTY50PCHNG"], spanclose); 
-        nifty50pchng.innerHTML = pchng;
-      var ltp = span.concat(data["NIFTY50"], spanclose); 
-        nifty50ltp.innerHTML = ltp;
-      var chng = span.concat(data["NIFTY50CHNG"], spanclose); 
-        nifty50chng.innerHTML = chng;
+      var pchng1 = span.concat(data[2], spanclose); 
+        pchng.innerHTML = pchng1;
+      var chng1 = span.concat(data[1], spanclose); 
+        chng.innerHTML = chng1;
+      var cmp1 = span.concat(data[0], spanclose); 
+        cmp.innerHTML = cmp1;
+
+      open.innerHTML ="<strong>Open :</strong> "+ data[3];
+      close.innerHTML = "<strong>Close :</strong> "+data[4];
+      range.innerHTML = "<strong>Day Range :</strong> "+data[5];
+      range52.innerHTML = "<strong>52 Week Range :</strong> "+data[6];
+      volume.innerHTML = "<strong>Volume :</strong> "+data[7];
+      mcap.innerHTML ="<strong>Market Cap :</strong> "+ data[8];
     
-  };
+  }
+};
   xhttp.open("GET", url+stockname, true);
   xhttp.send();
   }
@@ -393,26 +407,28 @@ function loadDoc() {
         <div class="heading">
           <h4 style="color:#ffffff ">Trade {{tradingview_ticker}} </h4>
         </div>
-<br>
    <div class="form-group">
-     <label class="radio-inline"><input type="radio" name="cname"  value="Buy" checked="true"> Buy</label>&nbsp;&nbsp;
-       <label class="radio-inline"><input type="radio" name="cname"  value="Sell"> Sell</label>
+     <label class="radio-inline"><input type="radio" id="buy-button" name="cname" onchange="reqcash()" value="Buy" checked="true"> Buy</label>&nbsp;&nbsp;
+       <label class="radio-inline"><input type="radio" name="cname" onchange="reqcash()" value="Sell"> Sell</label>
    </div>
     <div class="form-group">
-        <table><tr>
+        <table style="display: inline; border: none;"><tr>
           <td>Quantity</td>
-           <td><input type="text" name="quantity" class="form-control" pattern="[0-9]{1,9}" placeholder="Enter Quantity" required></td>
+           <td><input type="text" onchange="reqcash()" id="quantity" name="quantity" class="form-control" pattern="[0-9]{1,9}" placeholder="Enter Quantity" required></td>
          </tr> </table>
    </div>
     <div class="form-group">
         <label class="radio-inline"><b>Order-Type</b></label>&nbsp;&nbsp;&nbsp;
-     <label class="radio-inline"><input type="radio" name="otype"   id="label1" value="mrt" checked="true"> MRKT</label>&nbsp;&nbsp;
-       <label class="radio-inline"><input type="radio" name="otype" id="label2" value="limit"> LIMIT</label>&nbsp;
-        <label class="radio-inline"><input type="text" style="width: 50%;" rows="1" id="price" disabled="true" pattern='[0-9]{1,9}' placeholder="Enter Price"></input></label>
+     <label class="radio-inline"><input type="radio" name="otype" onchange="reqcash()"  id="MRKT" value="mrt" checked="true"> MRKT</label>&nbsp;&nbsp;
+       <label class="radio-inline"><input type="radio" name="otype" id="LIMIT"  value="limit"> LIMIT</label>&nbsp;
+        <label class="radio-inline"><input type="text" style="width: 50%;" onchange="reqcash()" rows="1" id="limit-price" disabled="true" pattern='[0-9]{1,9}' required placeholder="Enter Price"></input></label>
    </div>
 
      <div class="form-group">
-         <center><input type="submit" class="btn btn-primary" value="Submit"></center>
+     	<strong>Avl V-Cash : {{cash}}</strong>
+     	<strong style="margin-left: 80px;">Req V-Cash* : <span id="req-cash"></span></strong><br>
+     	<strong>Currently Holding : {{current_holdings}}</strong>
+         <center><input style="margin-bottom: -29px; margin-top: 2px; width: 100%" type="submit" class="btn btn-primary" value="Place Order"></center>
      </div>
     <label>{{msg}}</label>
   </div>
@@ -421,14 +437,26 @@ function loadDoc() {
      </form>
 </body>
 <script>
+	function reqcash(){
+		if(document.getElementById("buy-button").checked){
+			if(document.getElementById("MRKT").checked){		var cmp = document.getElementById("cmp").innerText;		}
+			else{	var cmp = document.getElementById("limit-price").value 	}
+
+			var quantity = document.getElementById("quantity").value;
+			document.getElementById("req-cash").innerHTML = cmp *  quantity;
+		}
+		else{
+			document.getElementById("req-cash").innerHTML = "0";
+		}
+	}
 $(document).ready(function(){
-   $('#label1').click(function(){
-      $('#price').prop("disabled",true);
+   $('#MRKT').click(function(){
+      $('#limit-price').prop("disabled",true);
    });
 });
 $(document).ready(function(){
-   $('#label2').click(function(){
-      $('#price').prop("disabled",false);
+   $('#LIMIT').click(function(){
+      $('#limit-price').prop("disabled",false);
    });
 });
 

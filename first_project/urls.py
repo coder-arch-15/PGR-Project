@@ -28,6 +28,8 @@ urlpatterns = [
     path('updatecmp', updatecmp,name = 'updatecmp'),
     path('updatepriceaction', updatepriceaction,name = 'updatepriceaction'),
     path('updateindices', updateIndices,name = 'updateIndices'),
+    url(r'^updatestockinfo/(?P<ticker>[\D\-]+)/$', updateStockInfo, name = 'updateStockInfo'),
+
 
     path("buyplanpage/", buyplanpage, name = 'buyplanpage' ),
     path("usershowstocks", user_show_stocks, name = 'user_show_stocks' ),
