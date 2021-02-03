@@ -2,15 +2,175 @@
 			<div class="custom-header-media">
 	</div>
 <div class="hmc-top-header-wrap">
-	<div class="hmc-container">
-					<span></span> 
-				<div class="hmc-top-left-section-wrapper">
-						
-					</div><!-- .hmc-top-left-section-wrapper -->
-		<div class="hmc-top-right-section-wrapper">
-			
-		</div><!-- .hmc-top-right-section-wrapper -->
-		<span><div><marquee direction="left">Market is closed! Please check back during Market hours.</marquee></div></span>	</div>
+	<div>
+		<!--  top marquee begins -->
+<div id = "marketclose" style="background-color: #cfcecc; height: 27px;">
+<marquee ><H5>Market is Closed! Please check back during Market hours (09:15 - 15:30).</H5></marquee> </div>
+
+<CENTER id = "marketinfo">
+    <div  class="top-marquee" style="display: inline; margin-left: 25px;">
+      <h4 style="display: inline;"><strong>NIFTY 50  </strong></h4>
+      <h5 style="display: inline; margin-right: 4px;" id="NIFTY50LTP"></h5>
+      <span id="NIFTY50CHNG" style="margin-right: 4px;"></span>
+      <span id="NIFTY50PCHNG"></span>
+    </div>  
+    <div  class="top-marquee" style="display: inline; margin-left: 25px;">
+      <h4 style="display: inline;"><strong>NIFTY BANK  </strong></h4>
+      <h5 style="display: inline; margin-right: 4px;" id="NIFTYBANKLTP"></h5>
+      <span id="NIFTYBANKCHNG" style="margin-right: 4px;"></span>
+      <span id="NIFTYBANKPCHNG"></span>
+    </div>  
+    <div  class="top-marquee" style="display: inline; margin-left: 25px;">
+      <h4 style="display: inline;"><strong>NIFTY ENERGY  </strong></h4>
+      <h5 style="display: inline; margin-right: 4px;" id="NIFTYENERGYLTP"></h5>
+      <span id="NIFTYENERGYCHNG" style="margin-right: 4px;"></span>
+      <span id="NIFTYENERGYPCHNG"></span>
+    </div> 
+    
+    <div  class="top-marquee" style="display: inline; margin-left: 25px;">
+      <strong>
+      <h4 style="display: inline;"><strong>NIFTY IT  </strong></h4>
+      <h5 style="display: inline; margin-right: 4px;" id="NIFTYITLTP"></h5>
+      <span id="NIFTYITCHNG" style="margin-right: 4px;"></span>
+      <span id="NIFTYITPCHNG"></span>
+    </strong>
+    </div> 
+</CENTER>
+
+
+
+<script>
+var currentD = new Date();
+var startHourD = new Date();
+startHourD.setHours(9,15,0); // 9.15 am
+var endHourD = new Date();
+endHourD.setHours(15,30,0); // 3.30 pm
+
+if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+  document.getElementById("marketclose").style.display = "none";
+    refreshDATA();
+}
+ else{
+  loadDoc();
+/*  document.getElementById("marketinfo").style.display = "none";
+  document.getElementById("marketclose").style.display = "block";*/
+ }
+
+function refreshDATA() {    cInterval= setInterval(loadDoc, 10000);   }
+
+
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  var url = "../updateindices";
+
+  var nifty50ltp = document.getElementById("NIFTY50LTP");
+  var nifty50chng = document.getElementById("NIFTY50CHNG");
+  var nifty50pchng = document.getElementById("NIFTY50PCHNG");
+
+  var niftyBANKltp = document.getElementById("NIFTYBANKLTP");
+  var niftyBANKchng = document.getElementById("NIFTYBANKCHNG");
+  var niftyBANKpchng = document.getElementById("NIFTYBANKPCHNG");
+
+  var niftyITltp = document.getElementById("NIFTYITLTP");
+  var niftyITchng = document.getElementById("NIFTYITCHNG");
+  var niftyITpchng = document.getElementById("NIFTYITPCHNG");
+
+  var niftyENERGYltp = document.getElementById("NIFTYENERGYLTP");
+  var niftyENERGYchng = document.getElementById("NIFTYENERGYCHNG");
+  var niftyENERGYpchng = document.getElementById("NIFTYENERGYPCHNG");
+
+  var spanclose = "</strong></font>";
+  xhttp.onreadystatechange=function() {
+  if (this.readyState == 4 && this.status == 200) {
+        var data = JSON.parse(this.response);
+        var span="";
+        
+      var change =data["NIFTY50CHNG"];   
+        if(change > 0){
+       span = "<font color = green><strong>";
+      }
+      else if(change < 0){
+         span = "<font color = red><strong>";
+      }
+      else{
+       span = "<font color = grey><strong>";
+      }
+
+      var pchng = span.concat("+",data["NIFTY50PCHNG"], spanclose); 
+        nifty50pchng.innerHTML = pchng;
+      var ltp = span.concat(data["NIFTY50"], spanclose); 
+        nifty50ltp.innerHTML = ltp;
+      var chng = span.concat(data["NIFTY50CHNG"], spanclose); 
+        nifty50chng.innerHTML = chng;
+
+
+       change =data["NIFTYBANKCHNG"];   
+        if(change > 0){
+       span = "<font color = green><strong>";
+      }
+      else if(change < 0){
+         span = "<font color = red><strong>";
+      }
+      else{
+       span = "<font color = grey><strong>";
+      }
+
+       pchng = span.concat("+",data["NIFTYBANKPCHNG"], spanclose); 
+        niftyBANKpchng.innerHTML = pchng;
+       ltp = span.concat(data["NIFTYBANK"], spanclose); 
+        niftyBANKltp.innerHTML = ltp;
+       chng = span.concat(data["NIFTYBANKCHNG"], spanclose); 
+        niftyBANKchng.innerHTML = chng;
+
+
+       change =data["NIFTYENERGYCHNG"];   
+        if(change > 0){
+       span = "<font color = green><strong>";
+      }
+      else if(change < 0){
+         span = "<font color = red><strong>";
+      }
+      else{
+       span = "<font color = grey><strong>";
+      }
+
+       pchng = span.concat("+",data["NIFTYENERGYPCHNG"], spanclose); 
+        niftyENERGYpchng.innerHTML = pchng;
+       ltp = span.concat(data["NIFTYENERGY"], spanclose); 
+        niftyENERGYltp.innerHTML = ltp;
+       chng = span.concat(data["NIFTYENERGYCHNG"], spanclose); 
+        niftyENERGYchng.innerHTML = chng;
+
+
+       change =data["NIFTYITCHNG"];   
+        if(change > 0){
+       span = "<font color = green><strong>";
+      }
+      else if(change < 0){
+         span = "<font color = red><strong>";
+      }
+      else{
+       span = "<font color = grey><strong>";
+      }
+
+       pchng = span.concat("+",data["NIFTYITPCHNG"], spanclose); 
+        niftyITpchng.innerHTML = pchng;
+       ltp = span.concat(data["NIFTYIT"], spanclose); 
+        niftyITltp.innerHTML = ltp;
+       chng = span.concat(data["NIFTYITCHNG"], spanclose); 
+        niftyITchng.innerHTML = chng;
+      
+    }
+    
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+  }
+</script>
+
+<!--   top marquee ends -->
+ 
+				
 </div>
 
 <div class="hmc-logo-section-wrapper">

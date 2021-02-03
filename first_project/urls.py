@@ -28,9 +28,8 @@ urlpatterns = [
     url(r'^getcmp/(?P<ticker>[\D\-]+)/$', getcmp, name = 'getcmp'),
     path('updatecmp', updatecmp,name = 'updatecmp'),
     path('updatepriceaction', updatepriceaction,name = 'updatepriceaction'),
-    path('user/', User.ActionUserInterface),
-    path('usersubmit', User.ActionUserSubmit),
- 
+    path('updateindices', updateIndices,name = 'updateIndices'),
+
     path("buyplanpage/", buyplanpage, name = 'buyplanpage' ),
     path("usershowstocks", user_show_stocks, name = 'user_show_stocks' ),
     path("useradvstocks", user_adv_stocks, name = 'user_adv_stocks' ),
@@ -41,11 +40,12 @@ urlpatterns = [
     path("userleaderboard", user_leaderboard, name = 'user_leaderboard' ),
     path("usermembershipaccount", user_membership_account, name = 'user_membership_account' ),
     url(r'^buyplan/(\d+)/(\d+)/', user_buyplan, name = 'user_buyplan'),
+    path("stockpage/", stockpage, name = 'stockpage' ),
+    path("advstockchart/", advanceStockChart, name = 'advanceStockChart' ),
 
 
-
-
-
+    path('user/', User.ActionUserInterface),
+    path('usersubmit', User.ActionUserSubmit),
     path('userlogin/', UserLogin.ActionUserLogin),
     path('checkuser', UserLogin.ActionCheckUserLogin),
     path('logout/', Admin.ActionLogout),
