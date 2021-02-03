@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^getcmp/(?P<ticker>[\D\-]+)/$', getcmp, name = 'getcmp'),
     path('updatecmp', updatecmp,name = 'updatecmp'),
     path('updatepriceaction', updatepriceaction,name = 'updatepriceaction'),
- 
+    path('updateindices', updateIndices,name = 'updateIndices'),
+
     path("buyplanpage/", buyplanpage, name = 'buyplanpage' ),
     path("usershowstocks", user_show_stocks, name = 'user_show_stocks' ),
     path("useradvstocks", user_adv_stocks, name = 'user_adv_stocks' ),
