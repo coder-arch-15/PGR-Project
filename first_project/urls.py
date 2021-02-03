@@ -6,6 +6,7 @@ from django.urls import path
 from . import User
 from . import UserLogin
 from . import Admin
+from . import Nifty50
 from myapp.stock_data import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
@@ -58,6 +59,8 @@ urlpatterns = [
     path('admineditdeletesubmit', Admin.ActionAdminEditDeleteSubmit),
     path('userregister/',User.ActionUserInterface),
     path('usersubmit', User.ActionUserSubmit),
+    path('shownifty50/',Nifty50.ActionShowNifty50),
+    path('buysellform/',Nifty50.ActionBuySellForm),
 
 ]
 

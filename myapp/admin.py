@@ -30,16 +30,16 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS STOCKS( COMPANY varchar(15) PRIMARY
 
 # import bs4
 # import requests
-# from bs4 import BeautifulSoup 
+# from bs4 import BeautifulSoup
 # url = requests.get('https://en.wikipedia.org/wiki/NIFTY_50')
 # soup = bs4.BeautifulSoup(url.text, features="html.parser")
-# i=0
+# i=39
 # while(i<150):
 # 	ticker = soup.find_all("table", {'id': 'constituents'})[0].find_all('td')[i+1].text
 # 	companyname = soup.find_all("table", {'id': 'constituents'})[0].find_all('td')[i].text
 # 	companyname+=" Limited"
 # 	i+=3
-# 	print("Tick = "+ticker+" companyname =" +companyname) 
+# 	print("Tick = "+ticker+" companyname =" +companyname)
 # 	q= "INSERT INTO STOCKS(company,cmp,open,close,high,low,COMPANY_NAME) VALUES('{0}', 0, 0, 0 , 0, 0, '{1}')".format(ticker,companyname)
 # 	cursor.execute(q)
 # 	conn.commit()

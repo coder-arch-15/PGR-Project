@@ -10,6 +10,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
@@ -27,7 +28,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../minor" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../musicmusic" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -105,6 +106,22 @@
       <workItem from="1612183549346" duration="1766000" />
       <workItem from="1612185965438" duration="1010000" />
       <workItem from="1612199274678" duration="143000" />
+      <workItem from="1612275797258" duration="1792000" />
+      <workItem from="1612278199351" duration="1753000" />
+      <workItem from="1612280020910" duration="794000" />
+      <workItem from="1612282545219" duration="1679000" />
+      <workItem from="1612284376817" duration="835000" />
+      <workItem from="1612286984707" duration="1819000" />
+      <workItem from="1612288854071" duration="1206000" />
+      <workItem from="1612291231613" duration="1783000" />
+      <workItem from="1612293059161" duration="1772000" />
+      <workItem from="1612294879933" duration="1666000" />
+      <workItem from="1612346895267" duration="1792000" />
+      <workItem from="1612348908687" duration="1744000" />
+      <workItem from="1612350742681" duration="1769000" />
+      <workItem from="1612352570975" duration="597000" />
+      <workItem from="1612374687758" duration="1824000" />
+      <workItem from="1612376574079" duration="924000" />
     </task>
     <servers />
   </component>
@@ -112,13 +129,17 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1611935128582">
+    <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612283655531">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611935128582" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1612186088292">
+    <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1612283655531" />
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1612295018855">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1612186088292" />
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612295018855" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1612376577886">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1612376577886" />
   </component>
 </project>
