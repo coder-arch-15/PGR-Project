@@ -10,7 +10,8 @@
 
 				{% include 'dashboard-layouts/header.html' %}
 
-<table>
+<center>
+<table style="width: 60%; margin-top: 50px;">
     <thead>
       <tr>
               <th>Symbol</th>
@@ -18,20 +19,18 @@
               <th class="smw-tablesort smw-Decimal">Last Price</th>
               <th class="smw-tablesort smw-Decimal">Change</th>
               <th class="smw-tablesort smw-Percent">% Change</th>
-              <th class="smw-tablesort smw-Int">Market Cap</th>
-
       </tr>
     </thead>
     <tbody>
 
     	{% for ticker in stocks%}
     	<tr>
-    	<td>{{ticker.0}}</td>
+    	<td><a href="../stockpage/?ticker={{ticker.0}}" target="_blank"> <strong>{{ticker.0}}</strong></a></td>
               <td>{{ticker.6}}</td>
               <td class="smw-tablesort smw-Decimal"  id="{{ticker.0}}cmp">{{ticker.2}}</td>
               <td class="smw-tablesort smw-Decimal" id="{{ticker.0}}chng"></td>
               <td class="smw-tablesort smw-Percent" id="{{ticker.0}}pchng"></td>
-              <td class="smw-tablesort smw-Int"></td>
+              
           </tr>
           
     	{%endfor%}
@@ -108,7 +107,7 @@ $$(document).on('page:beforeout', function () { clearInterval(cInterval); });
 </script>
     </tbody>
 </table>
-
+</center>
 
 
 {% include 'layouts/home_footer.html' %}
