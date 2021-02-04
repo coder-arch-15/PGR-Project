@@ -62,7 +62,7 @@ urlpatterns = [
     path('userregister/',User.ActionUserInterface),
     path('usersubmit', User.ActionUserSubmit),
     path('shownifty50/',Nifty50.ActionShowNifty50),
-    path('buysellform/',Nifty50.ActionBuySellForm),
+    path('updateshownifty50',updateshownifty50),
 
 ]
 

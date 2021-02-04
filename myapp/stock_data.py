@@ -7,7 +7,7 @@ import bs4
 import requests
 from bs4 import BeautifulSoup 
 
-def getcmp(request,ticker):
+def getcmp(request,ticker):        #this function retuurns cmp of ticker
 	try:
 		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=2)
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
@@ -22,7 +22,7 @@ def getcmp(request,ticker):
 		pass
 
 
-def updateStockInfo(request,ticker):
+def updateStockInfo(request,ticker):		#this function retuurns cmp,chng,pchng... of ticker
 	try:
 		prices = []
 		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=2)
@@ -70,7 +70,30 @@ def updateStockInfo(request,ticker):
 	
 
 
-def updatecmp(request):
+def updateshownifty50(request):
+    url = requests.get(
+        'https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=9')
+    soup = bs4.BeautifulSoup(url.text, features="html.parser")
+    tickers = []
+    i = 0
+    pricel=[]
+    chngl=[]
+    pchngl=[]
+    y = ['ADANIPORTS.NS', 'ASIANPAINT.NS', 'AXISBANK.NS', 'BAJAJ-AUTO.NS', 'BAJAJFINSV.NS', 'BAJFINANCE.NS', 'BHARTIARTL.NS', 'BPCL.NS', 'BRITANNIA.NS', 'CIPLA.NS', 'COALINDIA.NS', 'DIVISLAB.NS', 'DRREDDY.NS', 'EICHERMOT.NS', 'GAIL.NS', 'GRASIM.NS', 'HCLTECH.NS', 'HDFC.NS', 'HDFCBANK.NS', 'HDFCLIFE.NS', 'HEROMOTOCO.NS', 'HINDALCO.NS', 'HINDUNILVR.NS', 'ICICIBANK.NS', 'INDUSINDBK.NS', 'INFY.NS', 'IOC.NS', 'ITC.NS', 'JSWSTEEL.NS', 'KOTAKBANK.NS', 'LT.NS', 'M&M.NS', 'MARUTI.NS', 'NESTLEIND.NS', 'NTPC.NS', 'ONGC.NS', 'POWERGRID.NS', 'RELIANCE.NS', 'SBILIFE.NS', 'SBIN.NS', 'SHREECEM.NS', 'SUNPHARMA.NS', 'TATAMOTORS.NS', 'TATASTEEL.NS', 'TCS.NS', 'TECHM.NS', 'TITAN.NS', 'ULTRACEMCO.NS', 'UPL.NS', 'WIPRO.NS']
+    while (i < 200):
+    	price = soup.find_all("td", {'align': 'right'})[i].text
+    	price=price.replace(',','')
+    	chng = soup.find_all("td", {'align': 'right'})[i + 1].text
+    	pchng = soup.find_all("td", {'align': 'right'})[i + 2].text
+    	pricel.append(price)
+    	chngl.append(chng)
+    	pchngl.append(pchng)
+    	i += 4
+    data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
+    return HttpResponse(json.dumps(data))
+
+
+def updatecmp(request):			#this function updates cmps in db
 	conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
 	cur = conn.cursor()
 	cur.execute("SELECT company from STOCKS")
@@ -91,7 +114,7 @@ def updatecmp(request):
 	return HttpResponse("Prices updated successfully!")
 
 
-def updatepriceaction(request):
+def updatepriceaction(request):			#this function updates open close high low in db
 	conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
 	cur = conn.cursor()
 	cur.execute("SELECT company from STOCKS")
@@ -124,7 +147,7 @@ def updatepriceaction(request):
 	return HttpResponse("Price Action updated successfully!")
 
 
-def updateIndices(request):
+def updateIndices(request):		#reurns indices data
 	try:
 		import json
 		url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)

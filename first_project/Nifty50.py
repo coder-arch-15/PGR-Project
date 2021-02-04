@@ -15,6 +15,7 @@ def ActionShowNifty50(request):
     pricel=[]
     chngl=[]
     pchngl=[]
+    y = ['ADANIPORTS.NS', 'ASIANPAINT.NS', 'AXISBANK.NS', 'BAJAJ-AUTO.NS', 'BAJAJFINSV.NS', 'BAJFINANCE.NS', 'BHARTIARTL.NS', 'BPCL.NS', 'BRITANNIA.NS', 'CIPLA.NS', 'COALINDIA.NS', 'DIVISLAB.NS', 'DRREDDY.NS', 'EICHERMOT.NS', 'GAIL.NS', 'GRASIM.NS', 'HCLTECH.NS', 'HDFC.NS', 'HDFCBANK.NS', 'HDFCLIFE.NS', 'HEROMOTOCO.NS', 'HINDALCO.NS', 'HINDUNILVR.NS', 'ICICIBANK.NS', 'INDUSINDBK.NS', 'INFY.NS', 'IOC.NS', 'ITC.NS', 'JSWSTEEL.NS', 'KOTAKBANK.NS', 'LT.NS', 'M&M.NS', 'MARUTI.NS', 'NESTLEIND.NS', 'NTPC.NS', 'ONGC.NS', 'POWERGRID.NS', 'RELIANCE.NS', 'SBILIFE.NS', 'SBIN.NS', 'SHREECEM.NS', 'SUNPHARMA.NS', 'TATAMOTORS.NS', 'TATASTEEL.NS', 'TCS.NS', 'TECHM.NS', 'TITAN.NS', 'ULTRACEMCO.NS', 'UPL.NS', 'WIPRO.NS']
 
     while (i < 200):
         price = soup.find_all("td", {'align': 'right'})[i].text
@@ -29,7 +30,7 @@ def ActionShowNifty50(request):
     q = "select * from stocks"
     cmd.execute(q)
     rec = cmd.fetchall()
-    return render(request,"nifty50page.html",{'stocks':rec,'price':pricel,'chng':chngl,'pchng':pchngl})
+    return render(request,"tempnifty50.html",{'stocks':rec,'price':pricel,'chng':chngl,'pchng':pchngl})
 
 def ActionBuySellForm(request):
     return render(request, "buysellform.html")
