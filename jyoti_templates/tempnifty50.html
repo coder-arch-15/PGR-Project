@@ -36,9 +36,24 @@
           
     	{%endfor%}
 
-    	<script>
+  <script>
 
-cInterval= setInterval(function loadDoc() {
+    	var currentD = new Date();
+		var startHourD = new Date();
+		startHourD.setHours(9,15,0); // 9.15 am
+		var endHourD = new Date();
+		endHourD.setHours(15,30,0); // 3.30 pm
+
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		    refreshDATA();
+		}
+		 else{
+		  loadDoc();
+		 }
+
+		function refreshDATA() {    cInterval= setInterval(loadDoc, 5000);   }
+
+		function loadDoc() {
   var xhttp = new XMLHttpRequest();
   var url = "../updateshownifty50";
 
@@ -88,7 +103,7 @@ for (i=0;i<50;i++){
   xhttp.send();
   
 }
-, 10000);
+
 $$(document).on('page:beforeout', function () { clearInterval(cInterval); });
 </script>
     </tbody>
