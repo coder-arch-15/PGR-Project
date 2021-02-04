@@ -29,7 +29,7 @@ def ActionShowNifty50(request):
     q = "select * from stocks"
     cmd.execute(q)
     rec = cmd.fetchall()
-    return render(request,"nifty50.html",{'stocks':rec,'price':pricel,'chng':chngl,'pchng':pchngl})
+    return render(request,"nifty50page.html",{'stocks':rec,'price':pricel,'chng':chngl,'pchng':pchngl})
 
 def ActionBuySellForm(request):
     return render(request, "buysellform.html")
