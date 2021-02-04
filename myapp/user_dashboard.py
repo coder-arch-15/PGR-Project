@@ -16,18 +16,40 @@ def user_dashboard(request):
 
 
 def buyplanpage(request):
-	error = request.GET.get('error', None)
-	if error is not None:
-		return render(request, "buymembershipp.html", {"error":error})
+	if(request.session.has_key("user")):
+		error = request.GET.get('error', None)
+		if error is not None:
+			return render(request, "buymembershipp.html", {"error":error})
+		else:
+			return render(request, "buymembershipp.html")
 	else:
-		return render(request, "buymembershipp.html")
+		return redirect("/login")
+	
 
 
 
 def stockpage(request):
-	ticker = str(request.GET.get('ticker', None))
-	tradingview_ticker=ticker.split(".NS")
-	return render(request, "stockpage.html", {"tradingview_ticker":tradingview_ticker[0]})
+	if(request.session.has_key("user")):
+		if( int(request.session['user'][5]) != 0):
+			ticker = str(request.GET.get('ticker', None))
+			tradingview_ticker=ticker.split(".NS")
+			conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
+			cur = conn.cursor()
+			ticker+=".NS"
+			cur.execute("SELECT * FROM STOCKS WHERE company = '{0}'".format(ticker))
+			stocks = cur.fetchone()
+			cur.execute("SELECT quantity FROM HOLDINGS WHERE company = '{0}' and username = '{0}'".format(ticker, request.session['user'][0]))
+			if cur.rowcount==0:
+				current_holdings =[0]
+			else:
+				current_holdings = cur.fetchone()
+			conn.commit()
+			conn.close()
+			return render(request, "stockpage.html", {"tradingview_ticker":tradingview_ticker[0], "info":stocks, "cash":request.session['user'][9], "current_holdings": current_holdings[0] })
+		else:
+			return redirect("/buyplanpage")
+	else:
+		return redirect("/login")
 
 
 def advanceStockChart(request):

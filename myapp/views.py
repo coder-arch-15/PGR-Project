@@ -88,8 +88,6 @@ def check_username_exist(request):
 	else:
 		q="insert into users(username,pasw,name,email, mob,plan,pending,approved) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')".format(username, pasw, name,email,mob,free,1,0)
 		cur.execute(q)
-		q="insert into user_cash (username,cash) values ('{0}','{1}')".format(username, 1000000)
-		cur.execute(q)
 		conn.commit()
 		conn.close()
 		return redirect("/")
