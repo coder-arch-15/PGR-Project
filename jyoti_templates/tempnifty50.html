@@ -28,7 +28,7 @@
     	<tr>
     	<td>{{ticker.0}}</td>
               <td>{{ticker.6}}</td>
-              <td class="smw-tablesort smw-Decimal"  id="{{ticker.0}}cmpaa">{{ticker.2}}</td>
+              <td class="smw-tablesort smw-Decimal"  id="{{ticker.0}}cmp">{{ticker.2}}</td>
               <td class="smw-tablesort smw-Decimal" id="{{ticker.0}}chng"></td>
               <td class="smw-tablesort smw-Percent" id="{{ticker.0}}pchng"></td>
               <td class="smw-tablesort smw-Int"></td>
@@ -44,22 +44,20 @@ cInterval= setInterval(function loadDoc() {
 
   var tickers = ['ADANIPORTS.NS', 'ASIANPAINT.NS', 'AXISBANK.NS', 'BAJAJ-AUTO.NS', 'BAJAJFINSV.NS', 'BAJFINANCE.NS', 'BHARTIARTL.NS', 'BPCL.NS', 'BRITANNIA.NS', 'CIPLA.NS', 'COALINDIA.NS', 'DIVISLAB.NS', 'DRREDDY.NS', 'EICHERMOT.NS', 'GAIL.NS', 'GRASIM.NS', 'HCLTECH.NS', 'HDFC.NS', 'HDFCBANK.NS', 'HDFCLIFE.NS', 'HEROMOTOCO.NS', 'HINDALCO.NS', 'HINDUNILVR.NS', 'ICICIBANK.NS', 'INDUSINDBK.NS', 'INFY.NS', 'IOC.NS', 'ITC.NS', 'JSWSTEEL.NS', 'KOTAKBANK.NS', 'LT.NS', 'M&M.NS', 'MARUTI.NS', 'NESTLEIND.NS', 'NTPC.NS', 'ONGC.NS', 'POWERGRID.NS', 'RELIANCE.NS', 'SBILIFE.NS', 'SBIN.NS', 'SHREECEM.NS', 'SUNPHARMA.NS', 'TATAMOTORS.NS', 'TATASTEEL.NS', 'TCS.NS', 'TECHM.NS', 'TITAN.NS', 'ULTRACEMCO.NS', 'UPL.NS', 'WIPRO.NS'];
  var i;
+ xhttp.onreadystatechange=function() {
+ 	if (this.readyState == 4 && this.status == 200) {
+ 		var data = JSON.parse(this.responseText);
 for (i=0;i<50;i++){
 	var tickercmp = tickers[i].concat("cmp");
 	var tickerchng = tickers[i].concat("chng");
 	var tickerpchng = tickers[i].concat("pchng");
 	var cmp = document.getElementById(tickercmp);
-  var chng = document.getElementById(tickerchng);
-  var pchng = document.getElementById(tickerpchng);
+ 	var chng = document.getElementById(tickerchng);
+  	var pchng = document.getElementById(tickerpchng);
+  	var spanclose = "</font>";
+  	console.log(tickercmp);
 
-  xhttp.onreadystatechange=function() {
-  	 var data = JSON.parse(this.responseText);
-  	 console.log(tickercmp);
-  	 console.log(i);
-  if (this.readyState == 4 && this.status == 200) {
-        var price = parseFloat(this.responseText);
-     	
-        var change =data["chng"][i];
+    var change =data["chng"][i];
 
       var span="";
           
@@ -72,12 +70,12 @@ for (i=0;i<50;i++){
       else{
        span = "<font color = grey>";
       }
-      console.log(data["pchng"])
+      console.log(data["pchng"][i]);
       var pchng1 = span.concat(data["pchng"][i], spanclose); 
         pchng.innerHTML = pchng1;
       var chng1 = span.concat(data["chng"][i], spanclose); 
         chng.innerHTML = chng1;
-      var cmp1 = span.concat(data["cmp"][i], spanclose); 
+      var cmp1 = span.concat(data["price"][i], spanclose); 
         cmp.innerHTML = cmp1;
       
     }
