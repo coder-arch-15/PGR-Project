@@ -4,6 +4,8 @@ import bs4
 import requests
 from bs4 import BeautifulSoup
 from difflib import get_close_matches
+import time
+starttime=time.time()
 
 
 def ActionShowNifty50(request):
@@ -31,6 +33,7 @@ def ActionShowNifty50(request):
     cmd.execute(q)
     rec = cmd.fetchall()
     return render(request,"tempnifty50.html",{'stocks':rec,'price':pricel,'chng':chngl,'pchng':pchngl})
+
 
 def ActionBuySellForm(request):
     return render(request, "buysellform.html")
