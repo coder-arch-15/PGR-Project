@@ -35,7 +35,7 @@ def stockpage(request):
 			tradingview_ticker=ticker.split(".NS")
 			conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
 			cur = conn.cursor()
-			ticker+=".NS"
+			
 			cur.execute("SELECT * FROM STOCKS WHERE company = '{0}'".format(ticker))
 			stocks = cur.fetchone()
 			cur.execute("SELECT quantity FROM HOLDINGS WHERE company = '{0}' and username = '{0}'".format(ticker, request.session['user'][0]))
