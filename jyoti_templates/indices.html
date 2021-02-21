@@ -14,22 +14,20 @@
 <table style="width: 60%; margin-top: 50px;">
     <thead>
       <tr>
-              <th>Symbol</th>
-              <th>Company Name</th>
-              <th class="smw-tablesort smw-Decimal">Last Price</th>
+              <th>Index Name</th>
+              <th class="smw-tablesort smw-Decimal">Current Value</th>
               <th class="smw-tablesort smw-Decimal">Change</th>
               <th class="smw-tablesort smw-Percent">% Change</th>
       </tr>
     </thead>
     <tbody>
 
-    	{% for ticker in stocks%}
+    	{% for index in indices%}
     	<tr>
-    	<td><a href="../stockpage/?ticker={{ticker.0}}" target="_blank"> <strong>{{ticker.0}}</strong></a></td>
-              <td>{{ticker.6}}</td>
-              <td class="smw-tablesort smw-Decimal"  id="{{ticker.0}}cmp">{{ticker.2}}</td>
-              <td class="smw-tablesort smw-Decimal" id="{{ticker.0}}chng"></td>
-              <td class="smw-tablesort smw-Percent" id="{{ticker.0}}pchng"></td>
+    	<td><a href="../indexpage/?ticker={{index}}" target="_blank"> <strong>{{index}}</strong></a></td>
+              <td class="smw-tablesort smw-Decimal"  id="{{index}}cmp"></td>
+              <td class="smw-tablesort smw-Decimal" id="{{index}}chng"></td>
+              <td class="smw-tablesort smw-Percent" id="{{index}}pchng"></td>
               
           </tr>
           
@@ -54,22 +52,22 @@
 
 		function loadDoc() {
   var xhttp = new XMLHttpRequest();
-  var url = "../updateshownifty50";
+  var url = "../updateallindices";
 
-  var tickers = ['ADANIPORTS.NS', 'ASIANPAINT.NS', 'AXISBANK.NS', 'BAJAJ-AUTO.NS', 'BAJAJFINSV.NS', 'BAJFINANCE.NS', 'BHARTIARTL.NS', 'BPCL.NS', 'BRITANNIA.NS', 'CIPLA.NS', 'COALINDIA.NS', 'DIVISLAB.NS', 'DRREDDY.NS', 'EICHERMOT.NS', 'GAIL.NS', 'GRASIM.NS', 'HCLTECH.NS', 'HDFC.NS', 'HDFCBANK.NS', 'HDFCLIFE.NS', 'HEROMOTOCO.NS', 'HINDALCO.NS', 'HINDUNILVR.NS', 'ICICIBANK.NS', 'INDUSINDBK.NS', 'INFY.NS', 'IOC.NS', 'ITC.NS', 'JSWSTEEL.NS', 'KOTAKBANK.NS', 'LT.NS', 'M&M.NS', 'MARUTI.NS', 'NESTLEIND.NS', 'NTPC.NS', 'ONGC.NS', 'POWERGRID.NS', 'RELIANCE.NS', 'SBILIFE.NS', 'SBIN.NS', 'SHREECEM.NS', 'SUNPHARMA.NS', 'TATAMOTORS.NS', 'TATASTEEL.NS', 'TCS.NS', 'TECHM.NS', 'TITAN.NS', 'ULTRACEMCO.NS', 'UPL.NS', 'WIPRO.NS'];
+  var indices = ['NIFTY 50', 'NIFTY Midcap 100', 'NIFTY MIDCAP 50', 'NIFTY Smallcap 100', 'NIFTY 100', 'NIFTY 500', 'NIFTY AUTO', 'NIFTY BANK', 'NIFTY COMMODITIES', 'NIFTY CONSUMPTION', 'NIFTY ENERGY', 'NIFTY FIN SERVICE', 'NIFTY FMCG', 'NIFTY INFRA', 'NIFTY IT', 'NIFTY MEDIA', 'NIFTY METAL', 'NIFTY MNC', 'NIFTY PHARMA', 'NIFTY PSE', 'NIFTY PSU BANK', 'NIFTY PVT BANK', 'NIFTY REALTY', 'NIFTY SERV SECTOR'];
+    
  var i;
  xhttp.onreadystatechange=function() {
  	if (this.readyState == 4 && this.status == 200) {
  		var data = JSON.parse(this.responseText);
-for (i=0;i<50;i++){
-	var tickercmp = tickers[i].concat("cmp");
-	var tickerchng = tickers[i].concat("chng");
-	var tickerpchng = tickers[i].concat("pchng");
+for (i=0;i<24;i++){
+	var tickercmp = indices[i].concat("cmp");
+	var tickerchng = indices[i].concat("chng");
+	var tickerpchng = indices[i].concat("pchng");
 	var cmp = document.getElementById(tickercmp);
  	var chng = document.getElementById(tickerchng);
   	var pchng = document.getElementById(tickerpchng);
   	var spanclose = "</font>";
-  	console.log(tickercmp);
 
     var change =data["chng"][i];
 
@@ -93,6 +91,7 @@ for (i=0;i<50;i++){
         cmp.innerHTML = cmp1;
       
     }
+  
     
   };
 

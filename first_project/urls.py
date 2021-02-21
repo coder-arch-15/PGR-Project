@@ -29,6 +29,9 @@ urlpatterns = [
     path('updatecmp', updatecmp,name = 'updatecmp'),
     path('updatepriceaction', updatepriceaction,name = 'updatepriceaction'),
     path('updateindices', updateIndices,name = 'updateIndices'),
+    path('updateallindices', updateAllIndices,name = 'updateAllIndices'),
+    path('allindices', all_indices ,name = 'all_indices'),
+
     url(r'^updatestockinfo/(?P<ticker>[\D\-]+)/$', updateStockInfo, name = 'updateStockInfo'),
 
 
@@ -43,6 +46,7 @@ urlpatterns = [
     path("usermembershipaccount", user_membership_account, name = 'user_membership_account' ),
     url(r'^buyplan/(\d+)/(\d+)/', user_buyplan, name = 'user_buyplan'),
     path("stockpage/", stockpage, name = 'stockpage' ),
+    path("indexpage/", index_page, name = 'index_page' ),
     path("advstockchart/", advanceStockChart, name = 'advanceStockChart' ),
 
 
