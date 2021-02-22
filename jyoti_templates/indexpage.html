@@ -11,10 +11,11 @@
         {% include 'dashboard-layouts/header.html' %}
 
 <center>
-<table style="width: 60%; margin-top: 50px;">
+  <br><br>
+  <strong><h1>{{index}} Constituents</h1></strong>
+<table style="width: 60%; margin-top: 30px;">
     <thead>
       <tr>
-              <th>Symbol</th>
               <th>Company Name</th>
               <th class="smw-tablesort smw-Decimal">Last Price</th>
               <th class="smw-tablesort smw-Decimal">Change</th>
@@ -26,10 +27,9 @@
       {% for ticker in stocks%}
       <tr>
       <td><a href="../stockpage/?ticker={{ticker.0}}" target="_blank"> <strong>{{ticker.0}}</strong></a></td>
-              <td>{{ticker.6}}</td>
               <td class="smw-tablesort smw-Decimal"  id="{{ticker.0}}cmp">{{ticker.2}}</td>
-              <td class="smw-tablesort smw-Decimal" id="{{ticker.0}}chng"></td>
-              <td class="smw-tablesort smw-Percent" id="{{ticker.0}}pchng"></td>
+              <td class="smw-tablesort smw-Decimal" id="{{ticker.0}}chng">{{ticker.3}}</td>
+              <td class="smw-tablesort smw-Percent" id="{{ticker.0}}pchng">{{ticker.4}}</td>
               
           </tr>
           

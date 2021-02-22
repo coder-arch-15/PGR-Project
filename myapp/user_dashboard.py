@@ -3,7 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.conf import settings 
 import pymysql
-
+import bs4
+import requests
+from bs4 import BeautifulSoup 
 
 def user_dashboard(request):
 	if(request.session.has_key("user")):
@@ -36,8 +38,8 @@ def stockpage(request):
 			conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
 			cur = conn.cursor()
 			
-			cur.execute("SELECT * FROM STOCKS WHERE company = '{0}'".format(ticker))
-			stocks = cur.fetchone()
+			# cur.execute("SELECT * FROM STOCKS WHERE company = '{0}'".format(ticker))
+			# stocks = cur.fetchone()
 			cur.execute("SELECT quantity FROM HOLDINGS WHERE company = '{0}' and username = '{0}'".format(ticker, request.session['user'][0]))
 			if cur.rowcount==0:
 				current_holdings =[0]
@@ -45,7 +47,7 @@ def stockpage(request):
 				current_holdings = cur.fetchone()
 			conn.commit()
 			conn.close()
-			return render(request, "stockpage.html", {"tradingview_ticker":tradingview_ticker[0], "info":stocks, "cash":request.session['user'][9], "current_holdings": current_holdings[0] })
+			return render(request, "stockpage.html", {"tradingview_ticker":tradingview_ticker[0], "cash":request.session['user'][9], "current_holdings": current_holdings[0] })
 		else:
 			return redirect("/buyplanpage")
 	else:
@@ -203,7 +205,31 @@ def index_page(request):
 		value = [9,27,31,53,28,7,52,23,48,56,38,47,39,35,19,50,51,40,41,42,43,79,34,44]
 		indices = ['NIFTY 50', 'NIFTY Midcap 100', 'NIFTY MIDCAP 50', 'NIFTY Smallcap 100', 'NIFTY 100', 'NIFTY 500', 'NIFTY AUTO', 'NIFTY BANK', 'NIFTY COMMODITIES', 'NIFTY CONSUMPTION', 'NIFTY ENERGY', 'NIFTY FIN SERVICE', 'NIFTY FMCG', 'NIFTY INFRA', 'NIFTY IT', 'NIFTY MEDIA', 'NIFTY METAL', 'NIFTY MNC', 'NIFTY PHARMA', 'NIFTY PSE', 'NIFTY PSU BANK', 'NIFTY PVT BANK', 'NIFTY REALTY', 'NIFTY SERV SECTOR']
 		ticker = str(request.GET.get('ticker', None))
-		
-		return render(request, "indexpage.html")
+		index_value = value[indices.index(ticker)]
+		url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index={0}'.format(index_value))
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		i = 0
+		tickerl = []
+		pricel=[]
+		industryl  =[]
+		chngl=[]
+		pchngl=[]
+		try:
+		    while(True):
+		        ticker = soup.find_all("td", {"class":"brdrgtgry"})[i].text.split("\n")[0]
+		        industry = soup.find_all("td", {"class":"brdrgtgry"})[i+1].text
+		        price = soup.find_all("td", {"class":"brdrgtgry"})[i+2].text
+		        chng = soup.find_all("td", {"class":"brdrgtgry"})[i+3].text
+		        pchng = soup.find_all("td", {"class":"brdrgtgry"})[i+4].text
+		        i+=6
+		        industryl.append(industry)
+		        tickerl.append(ticker)
+		        pricel.append(price)
+		        chngl.append(chng)
+		        pchngl.append(pchng)
+		except:
+		    True
+		data = {"ticker":tickerl, "industry":industryl, "price":pricel, "chng": chngl, "pchng":pchngl} 
+		return render(request, "indexpage.html", {"stocks": data})
 	else:
 		return redirect("/login")
