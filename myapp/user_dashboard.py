@@ -3,7 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.conf import settings 
 import pymysql
-
+import bs4
+import requests
+from bs4 import BeautifulSoup 
 
 def user_dashboard(request):
 	if(request.session.has_key("user")):
@@ -204,6 +206,30 @@ def index_page(request):
 		indices = ['NIFTY 50', 'NIFTY Midcap 100', 'NIFTY MIDCAP 50', 'NIFTY Smallcap 100', 'NIFTY 100', 'NIFTY 500', 'NIFTY AUTO', 'NIFTY BANK', 'NIFTY COMMODITIES', 'NIFTY CONSUMPTION', 'NIFTY ENERGY', 'NIFTY FIN SERVICE', 'NIFTY FMCG', 'NIFTY INFRA', 'NIFTY IT', 'NIFTY MEDIA', 'NIFTY METAL', 'NIFTY MNC', 'NIFTY PHARMA', 'NIFTY PSE', 'NIFTY PSU BANK', 'NIFTY PVT BANK', 'NIFTY REALTY', 'NIFTY SERV SECTOR']
 		ticker = str(request.GET.get('ticker', None))
 		index_value = value[indices.index(ticker)]
-		return render(request, "indexpage.html", {"index": ticker, "index_value":index_value})
+		url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index={0}'.format(index_value))
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		i = 0
+		tickerl = []
+		pricel=[]
+		industryl  =[]
+		chngl=[]
+		pchngl=[]
+		try:
+		    while(True):
+		        ticker = soup.find_all("td", {"class":"brdrgtgry"})[i].text.split("\n")[0]
+		        industry = soup.find_all("td", {"class":"brdrgtgry"})[i+1].text
+		        price = soup.find_all("td", {"class":"brdrgtgry"})[i+2].text
+		        chng = soup.find_all("td", {"class":"brdrgtgry"})[i+3].text
+		        pchng = soup.find_all("td", {"class":"brdrgtgry"})[i+4].text
+		        i+=6
+		        industryl.append(industry)
+		        tickerl.append(ticker)
+		        pricel.append(price)
+		        chngl.append(chng)
+		        pchngl.append(pchng)
+		except:
+		    True
+		data = {"ticker":tickerl, "industry":industryl, "price":pricel, "chng": chngl, "pchng":pchngl} 
+		return render(request, "indexpage.html", {"stocks": data})
 	else:
 		return redirect("/login")
