@@ -147,7 +147,7 @@ def updatepriceaction(request):			#this function updates open close high low in 
 	return HttpResponse("Price Action updated successfully!")
 
 
-def updateIndices(request):		#reurns indices data
+def updateIndices(request):		#returns indices data
 	try:
 		import json
 		url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
@@ -186,5 +186,32 @@ def updateIndices(request):		#reurns indices data
 	        "NIFTYITPCHNG":soup.find_all("td", {'align': 'right'})[320].text
 	        }
 		return HttpResponse(json.dumps(indices))
+	else:
+		return HttpResponse(True)
+
+
+
+def updateAllIndices(request):		#returns indices data
+	try:
+		import json
+		url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		i = 0
+		pricel=[]
+		chngl=[]
+		pchngl=[]
+		for i in range(70):
+			if (i==1 or ((i>39) and (i<63))):
+				price = soup.find_all("td", {'align': 'right'})[6*i].text
+				price=price.replace(',','')
+				chng = soup.find_all("td", {'align': 'right'})[6*i+1].text
+				pchng = soup.find_all("td", {'align': 'right'})[6*i+2].text
+				pricel.append(price)
+				chngl.append(chng)
+				pchngl.append(pchng)
+		data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
+		return HttpResponse(json.dumps(data))
+	except Exception as e:
+		return HttpResponse(True)
 	else:
 		return HttpResponse(True)
