@@ -7,6 +7,7 @@ from . import User
 from . import UserLogin
 from . import Admin
 from . import Nifty50
+from . import Nifty500
 from myapp.stock_data import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
@@ -67,6 +68,7 @@ urlpatterns = [
     path('usersubmit', User.ActionUserSubmit),
     path('shownifty50/',Nifty50.ActionShowNifty50),
     path('updateshownifty50',updateshownifty50),
+    path('shownifty500/',Nifty500.shownifty500),
 
 ]
 
