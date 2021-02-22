@@ -68,7 +68,9 @@ urlpatterns = [
     path('usersubmit', User.ActionUserSubmit),
     path('shownifty50/',Nifty50.ActionShowNifty50),
     path('updateshownifty50',updateshownifty50),
+    path('updateshownifty500',Nifty500.updateshownifty500),
     path('shownifty500/',Nifty500.shownifty500),
+
 
 ]
 
