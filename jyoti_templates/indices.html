@@ -60,6 +60,7 @@
  xhttp.onreadystatechange=function() {
  	if (this.readyState == 4 && this.status == 200) {
  		var data = JSON.parse(this.responseText);
+    if (data != "True"){
 for (i=0;i<24;i++){
 	var tickercmp = indices[i].concat("cmp");
 	var tickerchng = indices[i].concat("chng");
@@ -91,7 +92,7 @@ for (i=0;i<24;i++){
         cmp.innerHTML = cmp1;
       
     }
-  
+  }
     
   };
 

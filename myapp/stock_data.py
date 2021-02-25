@@ -6,6 +6,9 @@ import json
 import bs4
 import requests
 from bs4 import BeautifulSoup 
+from . import hreflist
+
+
 
 def getcmp(request,ticker):        #this function retuurns cmp of ticker
 	try:
@@ -22,9 +25,12 @@ def getcmp(request,ticker):        #this function retuurns cmp of ticker
 		pass
 
 
-def updateStockInfo(request,ticker):		#this function retuurns cmp,chng,pchng... of ticker
+def updateStockInfo(request):		#this function retuurns cmp,chng,pchng... of ticker
+	ticker = str(request.GET.get('ticker', None))
+	
 	try:
 		prices = []
+		
 		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=2)
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
 		price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
@@ -65,8 +71,8 @@ def updateStockInfo(request,ticker):		#this function retuurns cmp,chng,pchng... 
 		prices=[]
 		prices = [price, chng, pchng, openp, close, lowhigh, lowhigh52, volume, mcap]
 		return HttpResponse(json.dumps(prices))
-	else:
-		return HttpResponse(true)
+	except:
+		return HttpResponse(json.dumps("True"))
 	
 
 
@@ -186,8 +192,8 @@ def updateIndices(request):		#returns indices data
 	        "NIFTYITPCHNG":soup.find_all("td", {'align': 'right'})[320].text
 	        }
 		return HttpResponse(json.dumps(indices))
-	else:
-		return HttpResponse(True)
+	except:
+		return HttpResponse(json.dumps("True"))
 
 
 
@@ -211,10 +217,8 @@ def updateAllIndices(request):		#returns indices data
 				pchngl.append(pchng)
 		data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
 		return HttpResponse(json.dumps(data))
-	except Exception as e:
-		return HttpResponse(True)
-	else:
-		return HttpResponse(True)
+	except:
+		return HttpResponse(json.dumps("True"))
 
 
 def updateIndexConstituents(request):
@@ -237,7 +241,41 @@ def updateIndexConstituents(request):
 				pchngl.append(pchng)
 		data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
 		return HttpResponse(json.dumps(data))
-	except Exception as e:
-		return HttpResponse(True)
-	else:
-		return HttpResponse(True)
+	except:
+		return HttpResponse(json.dumps("True"))
+
+
+def update_index_page(request):
+	try:
+		value = [9,27,31,53,28,7,52,23,48,56,38,47,39,35,19,50,51,40,41,42,43,79,34,44]
+		indices = ['NIFTY 50', 'NIFTY Midcap 100', 'NIFTY MIDCAP 50', 'NIFTY Smallcap 100', 'NIFTY 100', 'NIFTY 500', 'NIFTY AUTO', 'NIFTY BANK', 'NIFTY COMMODITIES', 'NIFTY CONSUMPTION', 'NIFTY ENERGY', 'NIFTY FIN SERVICE', 'NIFTY FMCG', 'NIFTY INFRA', 'NIFTY IT', 'NIFTY MEDIA', 'NIFTY METAL', 'NIFTY MNC', 'NIFTY PHARMA', 'NIFTY PSE', 'NIFTY PSU BANK', 'NIFTY PVT BANK', 'NIFTY REALTY', 'NIFTY SERV SECTOR']
+		ticker = str(request.GET.get('ticker', None))
+		index_value = value[indices.index(ticker)]
+		url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index={0}'.format(index_value))
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		i = 0
+		tickerl = []
+		pricel=[]
+		industryl  =[]
+		chngl=[]
+		pchngl=[]
+		try:
+		    while(True):
+		        ticker = soup.find_all("td", {"class":"brdrgtgry"})[i].text.split("\n")[0]
+		        industry = soup.find_all("td", {"class":"brdrgtgry"})[i+1].text
+		        price = soup.find_all("td", {"class":"brdrgtgry"})[i+2].text
+		        chng = soup.find_all("td", {"class":"brdrgtgry"})[i+3].text
+		        pchng = soup.find_all("td", {"class":"brdrgtgry"})[i+4].text
+		        i+=6
+		        industryl.append(industry)
+		        tickerl.append(ticker)
+		        pricel.append(price)
+		        chngl.append(chng)
+		        pchngl.append(pchng)
+		except:
+		    True
+		data = {"ticker":tickerl, "industry":industryl, "price":pricel, "chng": chngl, "pchng":pchngl} 
+		return HttpResponse(json.dumps(data))
+
+	except:
+		return HttpResponse(json.dumps("True"))

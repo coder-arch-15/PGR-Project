@@ -341,9 +341,11 @@ if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD )
 function refreshDATA() {    cInterval= setInterval(loadDoc, 5000);   }
 
 function loadDoc() {
+
   var stockname ="{{info.0}}";
+  console.log(stockname);
   var xhttp = new XMLHttpRequest();
-  var url = "../updatestockinfo/";
+  var url = "../updatestockinfo/?ticker=";
 
   var cmp = document.getElementById("cmp");
   var chng = document.getElementById("chng");
@@ -359,6 +361,7 @@ function loadDoc() {
   xhttp.onreadystatechange=function() {
   if (this.readyState == 4 && this.status == 200) {
         var data = JSON.parse(this.response);
+        if (data != "True"){
         var span="";
         
       var change =data[1];   
@@ -387,6 +390,7 @@ function loadDoc() {
       mcap.innerHTML ="<strong>Market Cap :</strong> "+ data[8];
     
   }
+}
 };
   xhttp.open("GET", url+stockname, true);
   xhttp.send();

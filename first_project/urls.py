@@ -33,8 +33,8 @@ urlpatterns = [
     path('updateallindices', updateAllIndices,name = 'updateAllIndices'),
     path('allindices', all_indices ,name = 'all_indices'),
 
-    url(r'^updatestockinfo/(?P<ticker>[\D\-]+)/$', updateStockInfo, name = 'updateStockInfo'),
-
+    # url(r'^updatestockinfo/(?P<ticker>[\D\-]+)/$', updateStockInfo, name = 'updateStockInfo'),
+    path('updatestockinfo/', updateStockInfo, name = 'updateStockInfo'),
 
     path("buyplanpage/", buyplanpage, name = 'buyplanpage' ),
     path("usershowstocks", user_show_stocks, name = 'user_show_stocks' ),
@@ -48,6 +48,7 @@ urlpatterns = [
     url(r'^buyplan/(\d+)/(\d+)/', user_buyplan, name = 'user_buyplan'),
     path("stockpage/", stockpage, name = 'stockpage' ),
     path("indexpage/", index_page, name = 'index_page' ),
+    path("updateindexpage/", update_index_page, name = 'update_index_page' ),
     path("advstockchart/", advanceStockChart, name = 'advanceStockChart' ),
 
 
