@@ -102,7 +102,7 @@ function loadDoc() {
        span = "<font color = grey><strong>";
       }
 
-      var pchng = span.concat("+",data["NIFTY50PCHNG"], spanclose); 
+      var pchng = span.concat(data["NIFTY50PCHNG"], spanclose); 
         nifty50pchng.innerHTML = pchng;
       var ltp = span.concat(data["NIFTY50"], spanclose); 
         nifty50ltp.innerHTML = ltp;
@@ -111,17 +111,17 @@ function loadDoc() {
 
 
        change =data["NIFTYBANKCHNG"];   
-        if(change > 0){
-       span = "<font color = green><strong>";
+        if(change[0]=="-"){
+       span = "<font color = red><strong>";
       }
-      else if(change < 0){
-         span = "<font color = red><strong>";
+      else if(change ==0){
+         span = "<font color = grey><strong>";
       }
       else{
-       span = "<font color = grey><strong>";
+       span = "<font color = green><strong>";
       }
 
-       pchng = span.concat("+",data["NIFTYBANKPCHNG"], spanclose); 
+       pchng = span.concat(data["NIFTYBANKPCHNG"], spanclose); 
         niftyBANKpchng.innerHTML = pchng;
        ltp = span.concat(data["NIFTYBANK"], spanclose); 
         niftyBANKltp.innerHTML = ltp;
@@ -140,7 +140,7 @@ function loadDoc() {
        span = "<font color = grey><strong>";
       }
 
-       pchng = span.concat("+",data["NIFTYENERGYPCHNG"], spanclose); 
+       pchng = span.concat(data["NIFTYENERGYPCHNG"], spanclose); 
         niftyENERGYpchng.innerHTML = pchng;
        ltp = span.concat(data["NIFTYENERGY"], spanclose); 
         niftyENERGYltp.innerHTML = ltp;
@@ -159,7 +159,7 @@ function loadDoc() {
        span = "<font color = grey><strong>";
       }
 
-       pchng = span.concat("+",data["NIFTYITPCHNG"], spanclose); 
+       pchng = span.concat(data["NIFTYITPCHNG"], spanclose); 
         niftyITpchng.innerHTML = pchng;
        ltp = span.concat(data["NIFTYIT"], spanclose); 
         niftyITltp.innerHTML = ltp;

@@ -74,14 +74,14 @@ for (i=0;i<24;i++){
 
       var span="";
           
-        if(change > 0){
-       span = "<font color = green>";
+        if(change[0] == "-"){
+       span = "<font color = red>";
       }
-      else if(change < 0){
-         span = "<font color = red>";
+      else if(change == 0){
+         span = "<font color = grey>";
       }
       else{
-       span = "<font color = grey>";
+       span = "<font color = green>";
       }
  
       var pchng1 = span.concat(data["pchng"][i], spanclose); 

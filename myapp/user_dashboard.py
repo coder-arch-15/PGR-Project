@@ -6,7 +6,7 @@ import pymysql
 import bs4
 import requests
 from bs4 import BeautifulSoup  
-from . import hreflist
+from . import hreflist as hf
 
 def user_dashboard(request):
 	if(request.session.has_key("user")):
@@ -35,21 +35,27 @@ def stockpage(request):
 	if(request.session.has_key("user")):
 		if( int(request.session['user'][5]) != 0):
 			ticker = str(request.GET.get('ticker', None))
-			tradingview_ticker=ticker.split(".NS")
+			if ".NS" in ticker:
+				tradingview_ticker=ticker.split(".NS")
 
-			conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
-			cur = conn.cursor()
-			
-			cur.execute("SELECT * FROM STOCKS WHERE company = '{0}'".format(ticker))
-			stocks = cur.fetchone()
-			cur.execute("SELECT quantity FROM HOLDINGS WHERE company = '{0}' and username = '{0}'".format(ticker, request.session['user'][0]))
-			if cur.rowcount==0:
-				current_holdings =[0]
+				conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
+				cur = conn.cursor()
+				
+				cur.execute("SELECT * FROM STOCKS WHERE company = '{0}'".format(ticker))
+				stocks = cur.fetchone()
+				cur.execute("SELECT quantity FROM HOLDINGS WHERE company = '{0}' and username = '{0}'".format(ticker, request.session['user'][0]))
+				if cur.rowcount==0:
+					current_holdings =[0]
+				else:
+					current_holdings = cur.fetchone()
+				conn.commit()
+				conn.close()
+				return render(request, "stockpage.html", {"info":stocks,"tradingview_ticker":tradingview_ticker[0], "cash":request.session['user'][9], "current_holdings": current_holdings[0] })
 			else:
-				current_holdings = cur.fetchone()
-			conn.commit()
-			conn.close()
-			return render(request, "stockpage.html", {"info":stocks,"tradingview_ticker":tradingview_ticker[0], "cash":request.session['user'][9], "current_holdings": current_holdings[0] })
+				stocks = []
+				stocks.append(hf.codes[ticker][1]+".NS")
+				tradingview_ticker = hf.codes[ticker][1]
+				return render(request, "stockpage.html", {"info":stocks,"tradingview_ticker":tradingview_ticker})
 		else:
 			return redirect("/buyplanpage")
 	else:

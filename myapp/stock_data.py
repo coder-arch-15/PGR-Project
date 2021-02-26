@@ -6,7 +6,7 @@ import json
 import bs4
 import requests
 from bs4 import BeautifulSoup 
-from . import hreflist
+from . import hreflist as hf
 
 
 
@@ -27,7 +27,8 @@ def getcmp(request,ticker):        #this function retuurns cmp of ticker
 
 def updateStockInfo(request):		#this function retuurns cmp,chng,pchng... of ticker
 	ticker = str(request.GET.get('ticker', None))
-	
+	if ".NS" not in ticker:
+		ticker = hf.codes[ticker][0] + ".NS"
 	try:
 		prices = []
 		
@@ -210,6 +211,7 @@ def updateAllIndices(request):		#returns indices data
 			if (i==1 or ((i>39) and (i<63))):
 				price = soup.find_all("td", {'align': 'right'})[6*i].text
 				price=price.replace(',','')
+				price = float(price)
 				chng = soup.find_all("td", {'align': 'right'})[6*i+1].text
 				pchng = soup.find_all("td", {'align': 'right'})[6*i+2].text
 				pricel.append(price)
@@ -264,6 +266,7 @@ def update_index_page(request):
 		        ticker = soup.find_all("td", {"class":"brdrgtgry"})[i].text.split("\n")[0]
 		        industry = soup.find_all("td", {"class":"brdrgtgry"})[i+1].text
 		        price = soup.find_all("td", {"class":"brdrgtgry"})[i+2].text
+		        price = price.replace(',','')
 		        chng = soup.find_all("td", {"class":"brdrgtgry"})[i+3].text
 		        pchng = soup.find_all("td", {"class":"brdrgtgry"})[i+4].text
 		        i+=6
