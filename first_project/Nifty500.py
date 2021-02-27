@@ -29,8 +29,8 @@ def updateshownifty500(request):
         chngl.append(chng)
         pchngl.append(pchng)
         i += 4
-      min+=200
-      max+=200
+    data = {"price": pricel, "chng": chngl, "pchng": pchngl}
+    return HttpResponse(json.dumps(data))
     # while(i>=200 and i<400):
     #     price = soup.find_all("td", {'align':'right'})[i].text
     #     price = price.replace(',','')
@@ -58,8 +58,7 @@ def updateshownifty500(request):
     #     chngl.append(chng)
     #     pchngl.append(pchng)
     #     i += 4
-    data = {"price":pricel, "chng": chngl, "pchng":pchngl}
-    return HttpResponse(json.dumps(data))
+
 
 def shownifty500(request):
     dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='pgrdb')

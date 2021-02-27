@@ -1,3 +1,6 @@
+<style>
+    .mydiv{width:50%;}
+</style>
 <!doctype html>
 <html lang="en-US">
 <head>{% include 'layouts/home_head.html' %}
@@ -9,11 +12,16 @@
 
 
 				{% include 'dashboard-layouts/header.html' %}
-
+        <br><br>
+<center>
+    <div class="mydiv">
+    <input type="text" placeholder="Search Stocks Here!.." onkeyup="search_stocks()" id='myinput' name="">
+    </div>
+</center>
 <center>
 
 
-<table style="width: 60%; margin-top: 50px;">
+<table style="width: 60%; margin-top: 50px;" id="stock">
     <thead>
       <tr>
 
@@ -106,6 +114,29 @@ for (i=0;i<489;i++){
 }
 
 $$(document).on('page:beforeout', function () { clearInterval(cInterval); });
+</script>
+
+<script>
+    function search_stocks(){
+        let input=document.getElementById('myinput').value.toLowerCase();
+        let x=document.getElementsById('stock');
+        let tr=x.getElementsByTagName('tr');
+        for(var i=0;i<tr.length;i++){
+            let td=tr[i].getElementsByTagName('td')[0];
+            if(td)
+            {
+                let textvalue=td.textContent || td.innerHTML;
+                if(textvalue.toLowerCase().indexOf(input)>-1)
+                {
+                    tr[i].style.display="";
+                }
+                else{
+                    tr[i].style.display="none";
+                }
+
+            }
+        }
+    }
 </script>
     </tbody>
 </table>
