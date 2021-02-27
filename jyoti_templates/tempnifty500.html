@@ -5,17 +5,15 @@
 </head>
 
 <body class="home page-template-default page page-id-5539 wp-custom-logo theme-hamroclass pmpro-body-has-access woocommerce-no-js hmc_fullwidth_layout no-sidebar wpb-js-composer js-comp-ver-6.4.2 vc_responsive elementor-default elementor-kit-7653"><a class="skip-link screen-reader-text" href="#content">Skip to content</a>
-    <div id="page" class="site">
+		<div id="page" class="site">
 
 
-        {% include 'dashboard-layouts/header.html' %}
+				{% include 'dashboard-layouts/header.html' %}
 
 <center>
 
-<div class="mydiv">
   <br><br>
     <input type="text" placeholder="Search Stocks Here!.." onkeyup="searchFunction(this)" id="myInput" style="width: 50%;">
-    </div>
 
     <script>
     function searchFunction(e){
@@ -44,14 +42,7 @@
     }
 </script>
 
-<table style="width: 50%; margin-top: 50px;" id="myTable123">
-  <colgroup>
-       
-       <col span="1" style="width: 30%; font-size: 15px;">
-       <col span="1" style="width: 15%;">
-       <col span="1" style="width: 15%;">
-       <col span="1" style="width: 15%;">
-    </colgroup>
+<table style="width: 60%; margin-top: 50px;">
     <thead>
       <tr>
 
@@ -63,9 +54,9 @@
     </thead>
     <tbody>
 
-      {% for ticker in stocks%}
-      <tr>
-      <td><a href="../stockpage/?ticker={{ticker}}" target="_blank"> <strong>{{ticker}}</strong></a></td>
+    	{% for ticker in stocks%}
+    	<tr>
+    	<td><a href="../stockpage/?ticker={{ticker}}" target="_blank"> <strong>{{ticker}}</strong></a></td>
 
               <td class="smw-tablesort smw-Decimal"  id="{{ticker}}cmp"></td>
               <td class="smw-tablesort smw-Decimal" id="{{ticker}}chng"></td>
@@ -73,46 +64,46 @@
 
           </tr>
 
-      {%endfor%}
+    	{%endfor%}
 
   <script>
 
-      var currentD = new Date();
-    var startHourD = new Date();
-    startHourD.setHours(9,15,0); // 9.15 am
-    var endHourD = new Date();
-    endHourD.setHours(15,30,0); // 3.30 pm
+    	var currentD = new Date();
+		var startHourD = new Date();
+		startHourD.setHours(9,15,0); // 9.15 am
+		var endHourD = new Date();
+		endHourD.setHours(15,30,0); // 3.30 pm
 
-    if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
-        refreshDATA();
-    }
-     else{
-      loadDoc();
-     }
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		    refreshDATA();
+		}
+		 else{
+		  loadDoc();
+		 }
 
-    function refreshDATA() {    cInterval= setInterval(loadDoc, 70000);   }
+		function refreshDATA() {    cInterval= setInterval(loadDoc, 70000);   }
 
-    function loadDoc() {
+		function loadDoc() {
   var xhttp = new XMLHttpRequest();
   var url = "../updateshownifty500";
  var i=0;
  var n=-1;
  xhttp.onreadystatechange=function() {
-  /*if (this.readyState == 4 && this.status == 200) {*/
+ 	/*if (this.readyState == 4 && this.status == 200) {*/
     var tempdata = this.responseText
     if (tempdata != "True"){
-    var data = JSON.parse(tempdata.slice(n+1));
+ 		var data = JSON.parse(tempdata.slice(n+1));
     n = tempdata.indexOf("}",n+1);
     var tick = data["ticker"]
 /*for (i=0;i<489;i++){*/
-  var tickercmp = tick.concat("cmp");
-  var tickerchng = tick.concat("chng");
-  var tickerpchng = tick.concat("pchng");
-  var cmp = document.getElementById(tickercmp);
-  var chng = document.getElementById(tickerchng);
-    var pchng = document.getElementById(tickerpchng);
-    var spanclose = "</font>";
-    
+	var tickercmp = tick.concat("cmp");
+	var tickerchng = tick.concat("chng");
+	var tickerpchng = tick.concat("pchng");
+	var cmp = document.getElementById(tickercmp);
+ 	var chng = document.getElementById(tickerchng);
+  	var pchng = document.getElementById(tickerpchng);
+  	var spanclose = "</font>";
+  	
 
     var change =data["chng"];
 
@@ -149,12 +140,35 @@
 </script>
 
 
+</script>
 
+    </tbody>
+  <script>
+    function myFunction(){
+        var input,filter,table,tr,td,i,textvalue;
+        input=document.getElementById("myInput")
+        filter=input.value.toUpperCase();
+        table=document.getElementById("myTable");
+        tr=table.getElementsByTagName("tr");
+        for(i=0;i<tr.length;i++){
+            td=tr[i].getElementsByTagName("td")[0];
+            if(td)
+            {
+                textvalue=td.textContent || td.innerHTML;
+                if(textvalue.toUpperCase().indexOf(filter)>-1)
+                {
+                    tr[i].style.display="";
+                }
+                else{
+                    tr[i].style.display="none";
+                }
 
-</tbody>
-  
+            }
+        }
+    }
+</script>
 
-    
+    </tbody>
 </table>
 </center>
 
@@ -162,4 +176,5 @@
 {% include 'layouts/home_footer.html' %}
 
 {% include 'layouts/home_additonal_body_contents.html' %}
+</html>
 </html>

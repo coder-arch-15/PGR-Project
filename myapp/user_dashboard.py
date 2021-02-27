@@ -213,6 +213,8 @@ def index_page(request):
 		value = [9,27,31,53,28,7,52,23,48,56,38,47,39,35,19,50,51,40,41,42,43,79,34,44]
 		indices = ['NIFTY 50', 'NIFTY Midcap 100', 'NIFTY MIDCAP 50', 'NIFTY Smallcap 100', 'NIFTY 100', 'NIFTY 500', 'NIFTY AUTO', 'NIFTY BANK', 'NIFTY COMMODITIES', 'NIFTY CONSUMPTION', 'NIFTY ENERGY', 'NIFTY FIN SERVICE', 'NIFTY FMCG', 'NIFTY INFRA', 'NIFTY IT', 'NIFTY MEDIA', 'NIFTY METAL', 'NIFTY MNC', 'NIFTY PHARMA', 'NIFTY PSE', 'NIFTY PSU BANK', 'NIFTY PVT BANK', 'NIFTY REALTY', 'NIFTY SERV SECTOR']
 		tick = str(request.GET.get('ticker', None))
+		if tick == "NIFTY 500":
+			return redirect("/shownifty500")
 		index_value = value[indices.index(tick)]
 		url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index={0}'.format(index_value))
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
