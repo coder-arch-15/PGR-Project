@@ -8,6 +8,7 @@ from . import UserLogin
 from . import Admin
 from . import Nifty50
 from . import Nifty500
+from . import tempnifty500
 from myapp.stock_data import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
@@ -72,7 +73,8 @@ urlpatterns = [
     path('update1shownifty500',Nifty500.update1shownifty500),
     path('update2shownifty500',Nifty500.update2shownifty500),
     path('shownifty500/',Nifty500.shownifty500),
-
+    path('shownifty500temp',tempnifty500.tempshownifty500),
+    path('tempupdateshownifty500',tempnifty500.tempupdateshownifty500),
 
 ]
 

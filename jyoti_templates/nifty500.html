@@ -15,43 +15,12 @@
         <br><br>
 <center>
     <div class="mydiv">
-    <input type="text" placeholder="Search Stocks Here!.." onkeyup="search_stocks()" id='myinput' name="">
+    <input type="text" placeholder="Search Stocks Here!.." onkeyup="search_stocks(this)" id='myinput' name="">
     </div>
 </center>
 
 <center>
 
-<div class="mydiv">
-  <br><br>
-    <input type="text" placeholder="Search Stocks Here!.." onkeyup="searchFunction(this)" id="myInput" style="width: 50%;">
-    </div>
-
-    <script>
-    function searchFunction(e){
-        var filter,table,tr,td,i,textvalue;
-        filter=e.value.toUpperCase();
-        
-        
-        table=document.getElementById("myTable123");
-        tr=table.getElementsByTagName("tr");
-        console.log(tr.length);
-        for(i=0;i<tr.length;i++){
-            td=tr[i].getElementsByTagName("td")[0];
-            if(td)
-            {
-                textvalue=td.textContent || td.innerHTML;
-                if(textvalue.toUpperCase().indexOf(filter)>-1)
-                {
-                    tr[i].style.display="";
-                }
-                else{
-                    tr[i].style.display="none";
-                }
-
-            }
-        }
-    }
-</script>
 
 
 <table style="width: 60%; margin-top: 50px;" id="stock">
@@ -224,10 +193,10 @@ $$(document).on('page:beforeout', function () { clearInterval(cInterval2); });
 </script>
 
 <script>
-    function search_stocks(){
-        let input=document.getElementById('myinput').value.toLowerCase();
-        let x=document.getElementsById('stock');
-        let tr=x.getElementsByTagName('tr');
+    function search_stocks(e){
+        var input=e.value.toLowerCase()
+        var x=document.getElementsById('stock');
+        var tr=x.getElementsByTagName('tr');
         for(var i=0;i<tr.length;i++){
             let td=tr[i].getElementsByTagName('td')[0];
             if(td)

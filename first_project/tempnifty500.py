@@ -60,12 +60,12 @@ def generator_updateshownifty500(soup):
     #     i += 4
     
 
-def updateshownifty500(request):
+def tempupdateshownifty500(request):
     url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=7')
     soup = bs4.BeautifulSoup(url.text, features="html.parser")
     return StreamingHttpResponse(generator_updateshownifty500(soup))
 
-def shownifty500(request):
+def tempshownifty500(request):
     # dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='pgrdb')
     # cmd = dbe.cursor()
     # q = "select * from stocks500"
@@ -75,7 +75,7 @@ def shownifty500(request):
     rec = []
     for key in hf.codes.keys():
         rec.append(key)
-    return render(request,"nifty500.html",{'stocks': rec})
+    return render(request,"tempnifty500.html",{'stocks': rec})
 
 # def temp(request):
 #     url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=7')
