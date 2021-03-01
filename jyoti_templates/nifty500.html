@@ -8,22 +8,20 @@
 </head>
 
 <body class="home page-template-default page page-id-5539 wp-custom-logo theme-hamroclass pmpro-body-has-access woocommerce-no-js hmc_fullwidth_layout no-sidebar wpb-js-composer js-comp-ver-6.4.2 vc_responsive elementor-default elementor-kit-7653"><a class="skip-link screen-reader-text" href="#content">Skip to content</a>
-    <div id="page" class="site">
+		<div id="page" class="site">
 
 
 				{% include 'dashboard-layouts/header.html' %}
         <br><br>
 <center>
     <div class="mydiv">
-    <input type="text" placeholder="Search Stocks Here!.." onkeyup="search_stocks(this)" id='myinput' name="">
+    <input type="text" placeholder="Search Stocks Here!.." onkeyup="myFun()" id="myInput">
     </div>
 </center>
-
 <center>
 
-
-
-<table style="width: 60%; margin-top: 50px;" id="stock">
+<br><br>
+<table style="width: 60%; margin-top: 50px;" id="myTable">
     <thead>
       <tr>
 
@@ -35,19 +33,19 @@
     </thead>
     <tbody>
 
-      {% for ticker in stocks%}
-      <tr>
-      <td><a href="../stockpage/?ticker={{ticker}}" target="_blank"> <strong>{{ticker}}</strong></a></td>
+    	{% for ticker in stocks%}
+    	<tr>
+    	<td>{{ticker.0}}</td>
 
-              <td class="smw-tablesort smw-Decimal"  id="{{ticker}}cmp"></td>
-              <td class="smw-tablesort smw-Decimal" id="{{ticker}}chng"></td>
-              <td class="smw-tablesort smw-Percent" id="{{ticker}}pchng"></td>
+              <td class="smw-tablesort smw-Decimal"  id="{{ticker.0}}cmp"></td>
+              <td class="smw-tablesort smw-Decimal" id="{{ticker.0}}chng"></td>
+              <td class="smw-tablesort smw-Percent" id="{{ticker.0}}pchng"></td>
 
           </tr>
 
-      {%endfor%}
+    	{%endfor%}
 
-  <script>
+   <script>
 
       var currentD = new Date();
     var startHourD = new Date();
@@ -99,15 +97,15 @@ for (i=0;i<50;i++){
        span = "<font color = grey>";
       }
 
-      var pchng1 = span.concat(data["pchng"], spanclose);
+      var pchng1 = span.concat(data["pchng"][i], spanclose);
         pchng.innerHTML = pchng1;
-      var chng1 = span.concat(data["chng"], spanclose);
+      var chng1 = span.concat(data["chng"][i], spanclose);
         chng.innerHTML = chng1;
-      var cmp1 = span.concat(data["price"], spanclose);
+      var cmp1 = span.concat(data["price"][i], spanclose);
         cmp.innerHTML = cmp1;
 
-    /*}*/
-    
+    }
+
 
 }
 };
@@ -157,7 +155,7 @@ for (i=50;i<100;i++){
   	var spanclose = "</font>";
   	console.log(tickercmp);
 
-    var change =data["chng"][i];
+    var change =data["chng"][i-50];
 
       var span="";
 
@@ -171,11 +169,11 @@ for (i=50;i<100;i++){
        span = "<font color = grey>";
       }
 
-      var pchng1 = span.concat(data["pchng"][i], spanclose);
+      var pchng1 = span.concat(data["pchng"][i-50], spanclose);
         pchng.innerHTML = pchng1;
-      var chng1 = span.concat(data["chng"][i], spanclose);
+      var chng1 = span.concat(data["chng"][i-50], spanclose);
         chng.innerHTML = chng1;
-      var cmp1 = span.concat(data["price"][i], spanclose);
+      var cmp1 = span.concat(data["price"][i-50], spanclose);
         cmp.innerHTML = cmp1;
 
     }
@@ -193,16 +191,587 @@ $$(document).on('page:beforeout', function () { clearInterval(cInterval2); });
 </script>
 
 <script>
-    function search_stocks(e){
-        var input=e.value.toLowerCase()
-        var x=document.getElementsById('stock');
-        var tr=x.getElementsByTagName('tr');
-        for(var i=0;i<tr.length;i++){
-            let td=tr[i].getElementsByTagName('td')[0];
+
+    	var currentD = new Date();
+		var startHourD = new Date();
+		startHourD.setHours(9,15,0); // 9.15 am
+		var endHourD = new Date();
+		endHourD.setHours(15,30,0); // 3.30 pm
+
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		    refreshDATA3();
+		}
+		 else{
+		  loadDoc3();
+		 }
+
+		function refreshDATA3() {    cInterval3= setInterval(loadDoc3, 5000);   }
+
+		function loadDoc3() {
+  var xhttp = new XMLHttpRequest();
+  var url = "../update3shownifty500";
+
+  var tickers = ['3M India', 'Aarti Ind', 'AAVAS Financier', 'AB Capital', 'ABB India', 'Abbott India', 'ACC', 'Adani Ports', 'Adani Power', 'Adani Total Gas', 'Adani Trans', 'Aditya Birla F', 'Advanced Enzyme', 'Aegis Logistics', 'AFL', 'AIA Engineering', 'Ajanta Pharma', 'Akzo Nobel', 'Alembic Pharma', 'Alkem Lab', 'Alkyl Amines', 'Allcargo', 'Amara Raja Batt', 'Amber Enterpris', 'Ambuja Cements', 'APL Apollo', 'Apollo Hospital', 'Apollo Tyres', 'Asahi India', 'Ashok Leyland', 'Ashoka Buildcon', 'Asian Paints', 'Aster DM Health', 'Astral Poly Tec', 'AstraZeneca', 'Atul', 'AU Small Financ', 'Aurobindo Pharm', 'Avanti Feeds', 'Avenue Supermar', 'Axis Bank', 'Bajaj Auto', 'Bajaj Consumer ', 'Bajaj Electric', 'Bajaj Finance', 'Bajaj Finserv', 'Bajaj Holdings', 'Balkrishna Ind', 'Balmer Lawrie', 'Balrampur Chini', 'Bandhan Bank', 'Bank of Baroda', 'Bank of India', 'Bank of Mah', 'BASF', 'Bata India', 'Bayer CropScien', 'BEML', 'Berger Paints', 'Bharat Dynamics', 'Bharat Elec', 'Bharat Forge', 'Bharat Rasayan', 'Bharti Airtel', 'BHEL', 'Biocon', 'Birla Corp', 'Birlasoft', 'Bliss GVS', 'Blue Dart', 'Blue Star', 'Bombay Burmah', 'Bombay Dyeing', 'Bosch', 'BPCL', 'Brigade Ent', 'Britannia', 'BSE Limited', 'Cadila Health', 'Can Fin Homes', 'Canara Bank', 'Caplin Labs', 'Capri Global', 'Carborundum', 'CARE Ratings', 'Castrol', 'CCL Products', 'CDSL', 'Ceat', 'Central Bank', 'Century', 'CenturyPlyboard', 'Cera Sanitary', 'CESC', 'CG Consumer', 'Chambal Fert', 'Chennai Petro', 'Cholamandalam (Finance Term Lending)', 'Cholamandalam (Finance-Investment)', 'Cipla', 'City Union Bank', 'Coal India', 'Cochin Shipyard', 'COFORGE LTD.', 'Colgate', 'Container Corp', 'Coromandel Int', 'CreditAccess Gr', 'CRISIL', 'Cummins', 'Cyient', 'Dabur India', 'Dalmia Bharat', 'DB Corp', 'DCB Bank', 'DCM Shriram', 'Deepak Nitrite', 'Delta Corp', 'Dhani Services', 'Dhanuka Agritec', 'Dilip Buildcon', 'Dish TV', 'Dishman Carboge', 'Divis Labs', 'Dixon Technolog', 'DLF', 'Dr Lal PathLab', 'Dr Reddys Labs', 'eClerx Services', 'Edelweiss', 'Eicher Motors', 'EID Parry', 'EIH', 'Elgi Equipments', 'Emami', 'Endurance Techn', 'EngineersInd', 'EPL', 'Equitas Holding', 'Esab India', 'Escorts', 'Exide Ind', 'FDC', 'Federal Bank', 'Fine Organics', 'Finolex Cables', 'Finolex Ind', 'Firstsource Sol', 'Fortis Health', 'Future Consumer', 'Future Retail', 'GAIL', 'Galaxy Surfacta', 'Garden Reach Sh', 'Garware Technic', 'GE Power India', 'GE Shipping', 'GE T&D India', 'General Insuran', 'Gillette India', 'GlaxoSmithKline', 'Glenmark', 'GMM Pfaudler', 'GMR Infra', 'GNFC', 'Godfrey Phillip', 'Godrej Agrovet', 'Godrej Consumer', 'Godrej Ind', 'Godrej Prop', 'Granules India', 'Graphite India', 'Grasim', 'Greaves Cotton', 'Grindwell Norto', 'GSFC', 'Guj Alkali', 'Guj Heavy Chem', 'Guj Mineral', 'Guj State Petro', 'Gujarat Fluoro', 'Gujarat Gas', 'Gujarat Pipavav', 'Gulf Oil Lubric', 'Hathway Cable', 'Hatsun Agro', 'Havells India', 'HCL Tech', 'HDFC', 'HDFC AMC', 'HDFC Bank', 'HDFC Life', 'HEG', 'Heidelberg Cem', 'Heritage Foods', 'Hero Motocorp', 'Hexaware Tech', 'HFCL', 'Himadri Special', 'Himatsingka Sei', 'Hind Copper', 'Hind Zinc', 'Hindalco', 'Hindustan Aeron', 'Honeywell Autom', 'HPCL', 'HUDCO', 'HUL', 'ICICI Bank', 'ICICI Lombard ', 'ICICI Prudentia', 'ICICI Securitie', 'ICRA', 'IDBI Bank', 'IDFC', 'IDFC First Bank', 'IEX', 'IFB Industries', 'IFCI', 'IGL', 'IIFL Finance', 'India Cements', 'India Tourism D', 'Indiabulls Hsg', 'Indiabulls Real', 'Indiamart Inter', 'Indian Bank', 'Indian Hotels', 'Indoco Remedies', 'Indostar Capita', 'INDUS TOWERS', 'IndusInd Bank', 'Infibeam Avenue', 'Info Edge', 'Infosys', 'Ingersoll Rand', 'INOX Leisure', 'Intellect Desig', 'Interglobe Avi', 'IOB', 'IOC', 'Ipca Labs', 'IRB Infra', 'Ircon Internati', 'IRCTC', 'ITC', 'ITI', 'IWML', 'J. K. Cement', 'JagranPrakashan', 'Jai Corp', 'Jamna Auto', 'JB Chemicals', 'Jindal (Hisar)', 'Jindal Saw', 'Jindal Stainles', 'Jindal Steel', 'JK Bank', 'JK Lakshmi Cem', 'JK Paper', 'JK Tyre & Ind', 'JM Financial', 'Johnson Control', 'JSW Energy', 'JSW Steel', 'Jubilant Food', 'Jubilant Pharmo', 'Just Dial', 'Jyothy Labs', 'Kajaria Ceramic', 'Kalpataru Power', 'Kansai Nerolac', 'Karnataka Bank', 'Karur Vysya', 'Kaveri Seed', 'KEC Intl', 'KEI Industries', 'KNR Construct', 'Kolte-Patil', 'Kotak Mahindra', 'KPIT Tech', 'KPR Mill', 'KRBL', 'KSB Pumps', 'L&T Finance', 'L&T Infotech', 'L&T Technology', 'La Opala RG', 'Lakshmi Machine', 'Larsen', 'Laurus Labs', 'Lemon Tree Hote', 'LIC Housing Fin', 'Linde India', 'Lupin', 'Lux Industries', 'M&M', 'Mah Scooters', 'Mah Seamless', 'Mahanagar Gas', 'Mahindra CIE', 'Mahindra Holida', 'Mahindra Logist', 'Manappuram Fin', 'Marico', 'Maruti Suzuki', 'MAS Financial S', 'Max Financial', 'MCX India', 'Metropolis', 'Minda Corp', 'Minda Ind', 'Mindtree', 'Mishra Dhatu Ni', 'MMTC Ltd', 'MOIL', 'Motherson Sumi', 'Motilal Oswal', 'MphasiS', 'MRF', 'MRPL', 'Muthoot Finance', 'NALCO', 'Narayana Hruda', 'Natco Pharma', 'Nava Bharat Ven', 'Navin Fluorine', 'NBCC (India)', 'NCC', 'NESCO', 'Nestle', 'New India Assur', 'NFL', 'NHPC', 'Nilkamal', 'Nippon', 'NLC India', 'NMDC', 'NTPC', 'Oberoi Realty', 'Oil India', 'Omaxe', 'ONGC', 'Oracle Fin Serv', 'Orient Cement', 'Orient Refract', 'P and G', 'Page Industries', 'Persistent', 'Petronet LNG', 'Pfizer', 'Phillips Carbon', 'Phoenix Mills', 'PI Industries', 'Pidilite Ind', 'Piramal Enter', 'PNB', 'PNB Housing Fin', 'PNC Infratech', 'Poly Medicure', 'Polycab', 'Power Finance', 'Power Grid Corp', 'Praj Industries', 'Prestige Estate', 'Prism Cement', 'Procter&Gamble', 'PTC India', 'PVR', 'Quess Corp', 'Radico Khaitan', 'Rail Vikas', 'Rain Industries', 'Rajesh Exports', 'Rallis India', 'Ramco Cements', 'Rashtriya Chem', 'Ratnamani Metal', 'Raymond', 'RBL Bank', 'REC', 'Redington', 'Relaxo Footwear', 'Reliance', 'Repco Home', 'RITES', 'Sadbhav Engg', 'SAIL', 'Sanofi India', 'SBI', 'SBI Life Insura', 'Schaeffler Ind', 'Schneider Infra', 'Sequent Scienti', 'Sheela Foam', 'Shipping Corp', 'Shoppers Stop', 'Shree Cements', 'Shree Renuka', 'Shriram City', 'Shriram Trans', 'Siemens', 'SIS', 'SJVN', 'SKF India', 'Sobha', 'Solar Ind', 'Sonata', 'South Ind Bk', 'SpiceJet', 'SRF', 'Star Cement', 'Sterlite Techno', 'Strides Pharma ', 'Sudarshan Chem', 'SUMITOMO', 'Sun Pharma', 'Sun Pharma Adv', 'Sun TV Network', 'Sundaram Fin', 'Sundram', 'Sunteck Realty', 'Suprajit Eng', 'Supreme Ind', 'Suzlon Energy', 'Swan Energy', 'Symphony', 'Syngene Intl', 'Tasty Bite', 'Tata Comm', 'TATA Cons. Prod', 'Tata Elxsi', 'Tata Inv Corp', 'Tata Motors', 'Tata Power', 'Tata Steel', 'Tata Steel BSL ', 'TCNS Clothing C', 'TCS', 'TeamLease Ser.', 'Tech Mahindra', 'Thermax', 'Thyrocare Techn', 'Time Techno', 'Timken', 'Titan Company', 'TML-D', 'Torrent Pharma', 'Torrent Power', 'Trent', 'Trident', 'TTK Prestige', 'TV TodayNetwork', 'TV18 Broadcast', 'TVS Motor', 'UCO Bank', 'Uflex', 'Ujjivan Financi', 'UltraTechCement', 'Union Bank', 'United Brewerie', 'United Spirits', 'UPL', 'V-Guard Ind', 'V-Mart Retail', 'Vaibhav Global', 'Vakrangee', 'Vardhman Text', 'Varroc Engineer', 'Varun Beverages', 'Vedanta', 'Venkys', 'Vesuvius India', 'Vinati Organics', 'VIP Industries', 'Vodafone Idea', 'Voltas', 'VRL Logistics', 'VST', 'WABCO India', 'Welspun Corp', 'Welspun India', 'Westlife Dev', 'Whirlpool', 'Wipro', 'Wockhardt', 'Zee Entertain', 'Zensar Tech', 'Zydus Wellness'];
+ var i;
+ xhttp.onreadystatechange=function() {
+ 	if (this.readyState == 4 && this.status == 200) {
+ 		var data = JSON.parse(this.responseText);
+for (i=100;i<150;i++){
+	var tickercmp = tickers[i].concat("cmp");
+	var tickerchng = tickers[i].concat("chng");
+	var tickerpchng = tickers[i].concat("pchng");
+	var cmp = document.getElementById(tickercmp);
+ 	var chng = document.getElementById(tickerchng);
+  	var pchng = document.getElementById(tickerpchng);
+  	var spanclose = "</font>";
+  	console.log(tickercmp);
+
+    var change =data["chng"][i-100];
+
+      var span="";
+
+        if(change > 0){
+       span = "<font color = green>";
+      }
+      else if(change < 0){
+         span = "<font color = red>";
+      }
+      else{
+       span = "<font color = grey>";
+      }
+
+      var pchng1 = span.concat(data["pchng"][i-100], spanclose);
+        pchng.innerHTML = pchng1;
+      var chng1 = span.concat(data["chng"][i-100], spanclose);
+        chng.innerHTML = chng1;
+      var cmp1 = span.concat(data["price"][i-100], spanclose);
+        cmp.innerHTML = cmp1;
+
+    }
+
+  };
+
+}
+
+  xhttp.open("GET", url, true);
+  xhttp.send();
+
+}
+
+$$(document).on('page:beforeout', function () { clearInterval(cInterval3); });
+</script>
+
+<script>
+
+    	var currentD = new Date();
+		var startHourD = new Date();
+		startHourD.setHours(9,15,0); // 9.15 am
+		var endHourD = new Date();
+		endHourD.setHours(15,30,0); // 3.30 pm
+
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		    refreshDATA4();
+		}
+		 else{
+		  loadDoc4();
+		 }
+
+		function refreshDATA4() {    cInterval4= setInterval(loadDoc4, 5000);   }
+
+		function loadDoc4() {
+  var xhttp = new XMLHttpRequest();
+  var url = "../update4shownifty500";
+
+  var tickers = ['3M India', 'Aarti Ind', 'AAVAS Financier', 'AB Capital', 'ABB India', 'Abbott India', 'ACC', 'Adani Ports', 'Adani Power', 'Adani Total Gas', 'Adani Trans', 'Aditya Birla F', 'Advanced Enzyme', 'Aegis Logistics', 'AFL', 'AIA Engineering', 'Ajanta Pharma', 'Akzo Nobel', 'Alembic Pharma', 'Alkem Lab', 'Alkyl Amines', 'Allcargo', 'Amara Raja Batt', 'Amber Enterpris', 'Ambuja Cements', 'APL Apollo', 'Apollo Hospital', 'Apollo Tyres', 'Asahi India', 'Ashok Leyland', 'Ashoka Buildcon', 'Asian Paints', 'Aster DM Health', 'Astral Poly Tec', 'AstraZeneca', 'Atul', 'AU Small Financ', 'Aurobindo Pharm', 'Avanti Feeds', 'Avenue Supermar', 'Axis Bank', 'Bajaj Auto', 'Bajaj Consumer ', 'Bajaj Electric', 'Bajaj Finance', 'Bajaj Finserv', 'Bajaj Holdings', 'Balkrishna Ind', 'Balmer Lawrie', 'Balrampur Chini', 'Bandhan Bank', 'Bank of Baroda', 'Bank of India', 'Bank of Mah', 'BASF', 'Bata India', 'Bayer CropScien', 'BEML', 'Berger Paints', 'Bharat Dynamics', 'Bharat Elec', 'Bharat Forge', 'Bharat Rasayan', 'Bharti Airtel', 'BHEL', 'Biocon', 'Birla Corp', 'Birlasoft', 'Bliss GVS', 'Blue Dart', 'Blue Star', 'Bombay Burmah', 'Bombay Dyeing', 'Bosch', 'BPCL', 'Brigade Ent', 'Britannia', 'BSE Limited', 'Cadila Health', 'Can Fin Homes', 'Canara Bank', 'Caplin Labs', 'Capri Global', 'Carborundum', 'CARE Ratings', 'Castrol', 'CCL Products', 'CDSL', 'Ceat', 'Central Bank', 'Century', 'CenturyPlyboard', 'Cera Sanitary', 'CESC', 'CG Consumer', 'Chambal Fert', 'Chennai Petro', 'Cholamandalam (Finance Term Lending)', 'Cholamandalam (Finance-Investment)', 'Cipla', 'City Union Bank', 'Coal India', 'Cochin Shipyard', 'COFORGE LTD.', 'Colgate', 'Container Corp', 'Coromandel Int', 'CreditAccess Gr', 'CRISIL', 'Cummins', 'Cyient', 'Dabur India', 'Dalmia Bharat', 'DB Corp', 'DCB Bank', 'DCM Shriram', 'Deepak Nitrite', 'Delta Corp', 'Dhani Services', 'Dhanuka Agritec', 'Dilip Buildcon', 'Dish TV', 'Dishman Carboge', 'Divis Labs', 'Dixon Technolog', 'DLF', 'Dr Lal PathLab', 'Dr Reddys Labs', 'eClerx Services', 'Edelweiss', 'Eicher Motors', 'EID Parry', 'EIH', 'Elgi Equipments', 'Emami', 'Endurance Techn', 'EngineersInd', 'EPL', 'Equitas Holding', 'Esab India', 'Escorts', 'Exide Ind', 'FDC', 'Federal Bank', 'Fine Organics', 'Finolex Cables', 'Finolex Ind', 'Firstsource Sol', 'Fortis Health', 'Future Consumer', 'Future Retail', 'GAIL', 'Galaxy Surfacta', 'Garden Reach Sh', 'Garware Technic', 'GE Power India', 'GE Shipping', 'GE T&D India', 'General Insuran', 'Gillette India', 'GlaxoSmithKline', 'Glenmark', 'GMM Pfaudler', 'GMR Infra', 'GNFC', 'Godfrey Phillip', 'Godrej Agrovet', 'Godrej Consumer', 'Godrej Ind', 'Godrej Prop', 'Granules India', 'Graphite India', 'Grasim', 'Greaves Cotton', 'Grindwell Norto', 'GSFC', 'Guj Alkali', 'Guj Heavy Chem', 'Guj Mineral', 'Guj State Petro', 'Gujarat Fluoro', 'Gujarat Gas', 'Gujarat Pipavav', 'Gulf Oil Lubric', 'Hathway Cable', 'Hatsun Agro', 'Havells India', 'HCL Tech', 'HDFC', 'HDFC AMC', 'HDFC Bank', 'HDFC Life', 'HEG', 'Heidelberg Cem', 'Heritage Foods', 'Hero Motocorp', 'Hexaware Tech', 'HFCL', 'Himadri Special', 'Himatsingka Sei', 'Hind Copper', 'Hind Zinc', 'Hindalco', 'Hindustan Aeron', 'Honeywell Autom', 'HPCL', 'HUDCO', 'HUL', 'ICICI Bank', 'ICICI Lombard ', 'ICICI Prudentia', 'ICICI Securitie', 'ICRA', 'IDBI Bank', 'IDFC', 'IDFC First Bank', 'IEX', 'IFB Industries', 'IFCI', 'IGL', 'IIFL Finance', 'India Cements', 'India Tourism D', 'Indiabulls Hsg', 'Indiabulls Real', 'Indiamart Inter', 'Indian Bank', 'Indian Hotels', 'Indoco Remedies', 'Indostar Capita', 'INDUS TOWERS', 'IndusInd Bank', 'Infibeam Avenue', 'Info Edge', 'Infosys', 'Ingersoll Rand', 'INOX Leisure', 'Intellect Desig', 'Interglobe Avi', 'IOB', 'IOC', 'Ipca Labs', 'IRB Infra', 'Ircon Internati', 'IRCTC', 'ITC', 'ITI', 'IWML', 'J. K. Cement', 'JagranPrakashan', 'Jai Corp', 'Jamna Auto', 'JB Chemicals', 'Jindal (Hisar)', 'Jindal Saw', 'Jindal Stainles', 'Jindal Steel', 'JK Bank', 'JK Lakshmi Cem', 'JK Paper', 'JK Tyre & Ind', 'JM Financial', 'Johnson Control', 'JSW Energy', 'JSW Steel', 'Jubilant Food', 'Jubilant Pharmo', 'Just Dial', 'Jyothy Labs', 'Kajaria Ceramic', 'Kalpataru Power', 'Kansai Nerolac', 'Karnataka Bank', 'Karur Vysya', 'Kaveri Seed', 'KEC Intl', 'KEI Industries', 'KNR Construct', 'Kolte-Patil', 'Kotak Mahindra', 'KPIT Tech', 'KPR Mill', 'KRBL', 'KSB Pumps', 'L&T Finance', 'L&T Infotech', 'L&T Technology', 'La Opala RG', 'Lakshmi Machine', 'Larsen', 'Laurus Labs', 'Lemon Tree Hote', 'LIC Housing Fin', 'Linde India', 'Lupin', 'Lux Industries', 'M&M', 'Mah Scooters', 'Mah Seamless', 'Mahanagar Gas', 'Mahindra CIE', 'Mahindra Holida', 'Mahindra Logist', 'Manappuram Fin', 'Marico', 'Maruti Suzuki', 'MAS Financial S', 'Max Financial', 'MCX India', 'Metropolis', 'Minda Corp', 'Minda Ind', 'Mindtree', 'Mishra Dhatu Ni', 'MMTC Ltd', 'MOIL', 'Motherson Sumi', 'Motilal Oswal', 'MphasiS', 'MRF', 'MRPL', 'Muthoot Finance', 'NALCO', 'Narayana Hruda', 'Natco Pharma', 'Nava Bharat Ven', 'Navin Fluorine', 'NBCC (India)', 'NCC', 'NESCO', 'Nestle', 'New India Assur', 'NFL', 'NHPC', 'Nilkamal', 'Nippon', 'NLC India', 'NMDC', 'NTPC', 'Oberoi Realty', 'Oil India', 'Omaxe', 'ONGC', 'Oracle Fin Serv', 'Orient Cement', 'Orient Refract', 'P and G', 'Page Industries', 'Persistent', 'Petronet LNG', 'Pfizer', 'Phillips Carbon', 'Phoenix Mills', 'PI Industries', 'Pidilite Ind', 'Piramal Enter', 'PNB', 'PNB Housing Fin', 'PNC Infratech', 'Poly Medicure', 'Polycab', 'Power Finance', 'Power Grid Corp', 'Praj Industries', 'Prestige Estate', 'Prism Cement', 'Procter&Gamble', 'PTC India', 'PVR', 'Quess Corp', 'Radico Khaitan', 'Rail Vikas', 'Rain Industries', 'Rajesh Exports', 'Rallis India', 'Ramco Cements', 'Rashtriya Chem', 'Ratnamani Metal', 'Raymond', 'RBL Bank', 'REC', 'Redington', 'Relaxo Footwear', 'Reliance', 'Repco Home', 'RITES', 'Sadbhav Engg', 'SAIL', 'Sanofi India', 'SBI', 'SBI Life Insura', 'Schaeffler Ind', 'Schneider Infra', 'Sequent Scienti', 'Sheela Foam', 'Shipping Corp', 'Shoppers Stop', 'Shree Cements', 'Shree Renuka', 'Shriram City', 'Shriram Trans', 'Siemens', 'SIS', 'SJVN', 'SKF India', 'Sobha', 'Solar Ind', 'Sonata', 'South Ind Bk', 'SpiceJet', 'SRF', 'Star Cement', 'Sterlite Techno', 'Strides Pharma ', 'Sudarshan Chem', 'SUMITOMO', 'Sun Pharma', 'Sun Pharma Adv', 'Sun TV Network', 'Sundaram Fin', 'Sundram', 'Sunteck Realty', 'Suprajit Eng', 'Supreme Ind', 'Suzlon Energy', 'Swan Energy', 'Symphony', 'Syngene Intl', 'Tasty Bite', 'Tata Comm', 'TATA Cons. Prod', 'Tata Elxsi', 'Tata Inv Corp', 'Tata Motors', 'Tata Power', 'Tata Steel', 'Tata Steel BSL ', 'TCNS Clothing C', 'TCS', 'TeamLease Ser.', 'Tech Mahindra', 'Thermax', 'Thyrocare Techn', 'Time Techno', 'Timken', 'Titan Company', 'TML-D', 'Torrent Pharma', 'Torrent Power', 'Trent', 'Trident', 'TTK Prestige', 'TV TodayNetwork', 'TV18 Broadcast', 'TVS Motor', 'UCO Bank', 'Uflex', 'Ujjivan Financi', 'UltraTechCement', 'Union Bank', 'United Brewerie', 'United Spirits', 'UPL', 'V-Guard Ind', 'V-Mart Retail', 'Vaibhav Global', 'Vakrangee', 'Vardhman Text', 'Varroc Engineer', 'Varun Beverages', 'Vedanta', 'Venkys', 'Vesuvius India', 'Vinati Organics', 'VIP Industries', 'Vodafone Idea', 'Voltas', 'VRL Logistics', 'VST', 'WABCO India', 'Welspun Corp', 'Welspun India', 'Westlife Dev', 'Whirlpool', 'Wipro', 'Wockhardt', 'Zee Entertain', 'Zensar Tech', 'Zydus Wellness'];
+ var i;
+ xhttp.onreadystatechange=function() {
+ 	if (this.readyState == 4 && this.status == 200) {
+ 		var data = JSON.parse(this.responseText);
+for (i=150;i<200;i++){
+	var tickercmp = tickers[i].concat("cmp");
+	var tickerchng = tickers[i].concat("chng");
+	var tickerpchng = tickers[i].concat("pchng");
+	var cmp = document.getElementById(tickercmp);
+ 	var chng = document.getElementById(tickerchng);
+  	var pchng = document.getElementById(tickerpchng);
+  	var spanclose = "</font>";
+  	console.log(tickercmp);
+
+    var change =data["chng"][i-150];
+
+      var span="";
+
+        if(change > 0){
+       span = "<font color = green>";
+      }
+      else if(change < 0){
+         span = "<font color = red>";
+      }
+      else{
+       span = "<font color = grey>";
+      }
+
+      var pchng1 = span.concat(data["pchng"][i-150], spanclose);
+        pchng.innerHTML = pchng1;
+      var chng1 = span.concat(data["chng"][i-150], spanclose);
+        chng.innerHTML = chng1;
+      var cmp1 = span.concat(data["price"][i-150], spanclose);
+        cmp.innerHTML = cmp1;
+
+    }
+
+  };
+
+}
+
+  xhttp.open("GET", url, true);
+  xhttp.send();
+
+}
+
+$$(document).on('page:beforeout', function () { clearInterval(cInterval4); });
+</script>
+
+<script>
+
+    	var currentD = new Date();
+		var startHourD = new Date();
+		startHourD.setHours(9,15,0); // 9.15 am
+		var endHourD = new Date();
+		endHourD.setHours(15,30,0); // 3.30 pm
+
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		    refreshDATA5();
+		}
+		 else{
+		  loadDoc5();
+		 }
+
+		function refreshDATA5() {    cInterval5= setInterval(loadDoc5, 5000);   }
+
+		function loadDoc5() {
+  var xhttp = new XMLHttpRequest();
+  var url = "../update5shownifty500";
+
+  var tickers = ['3M India', 'Aarti Ind', 'AAVAS Financier', 'AB Capital', 'ABB India', 'Abbott India', 'ACC', 'Adani Ports', 'Adani Power', 'Adani Total Gas', 'Adani Trans', 'Aditya Birla F', 'Advanced Enzyme', 'Aegis Logistics', 'AFL', 'AIA Engineering', 'Ajanta Pharma', 'Akzo Nobel', 'Alembic Pharma', 'Alkem Lab', 'Alkyl Amines', 'Allcargo', 'Amara Raja Batt', 'Amber Enterpris', 'Ambuja Cements', 'APL Apollo', 'Apollo Hospital', 'Apollo Tyres', 'Asahi India', 'Ashok Leyland', 'Ashoka Buildcon', 'Asian Paints', 'Aster DM Health', 'Astral Poly Tec', 'AstraZeneca', 'Atul', 'AU Small Financ', 'Aurobindo Pharm', 'Avanti Feeds', 'Avenue Supermar', 'Axis Bank', 'Bajaj Auto', 'Bajaj Consumer ', 'Bajaj Electric', 'Bajaj Finance', 'Bajaj Finserv', 'Bajaj Holdings', 'Balkrishna Ind', 'Balmer Lawrie', 'Balrampur Chini', 'Bandhan Bank', 'Bank of Baroda', 'Bank of India', 'Bank of Mah', 'BASF', 'Bata India', 'Bayer CropScien', 'BEML', 'Berger Paints', 'Bharat Dynamics', 'Bharat Elec', 'Bharat Forge', 'Bharat Rasayan', 'Bharti Airtel', 'BHEL', 'Biocon', 'Birla Corp', 'Birlasoft', 'Bliss GVS', 'Blue Dart', 'Blue Star', 'Bombay Burmah', 'Bombay Dyeing', 'Bosch', 'BPCL', 'Brigade Ent', 'Britannia', 'BSE Limited', 'Cadila Health', 'Can Fin Homes', 'Canara Bank', 'Caplin Labs', 'Capri Global', 'Carborundum', 'CARE Ratings', 'Castrol', 'CCL Products', 'CDSL', 'Ceat', 'Central Bank', 'Century', 'CenturyPlyboard', 'Cera Sanitary', 'CESC', 'CG Consumer', 'Chambal Fert', 'Chennai Petro', 'Cholamandalam (Finance Term Lending)', 'Cholamandalam (Finance-Investment)', 'Cipla', 'City Union Bank', 'Coal India', 'Cochin Shipyard', 'COFORGE LTD.', 'Colgate', 'Container Corp', 'Coromandel Int', 'CreditAccess Gr', 'CRISIL', 'Cummins', 'Cyient', 'Dabur India', 'Dalmia Bharat', 'DB Corp', 'DCB Bank', 'DCM Shriram', 'Deepak Nitrite', 'Delta Corp', 'Dhani Services', 'Dhanuka Agritec', 'Dilip Buildcon', 'Dish TV', 'Dishman Carboge', 'Divis Labs', 'Dixon Technolog', 'DLF', 'Dr Lal PathLab', 'Dr Reddys Labs', 'eClerx Services', 'Edelweiss', 'Eicher Motors', 'EID Parry', 'EIH', 'Elgi Equipments', 'Emami', 'Endurance Techn', 'EngineersInd', 'EPL', 'Equitas Holding', 'Esab India', 'Escorts', 'Exide Ind', 'FDC', 'Federal Bank', 'Fine Organics', 'Finolex Cables', 'Finolex Ind', 'Firstsource Sol', 'Fortis Health', 'Future Consumer', 'Future Retail', 'GAIL', 'Galaxy Surfacta', 'Garden Reach Sh', 'Garware Technic', 'GE Power India', 'GE Shipping', 'GE T&D India', 'General Insuran', 'Gillette India', 'GlaxoSmithKline', 'Glenmark', 'GMM Pfaudler', 'GMR Infra', 'GNFC', 'Godfrey Phillip', 'Godrej Agrovet', 'Godrej Consumer', 'Godrej Ind', 'Godrej Prop', 'Granules India', 'Graphite India', 'Grasim', 'Greaves Cotton', 'Grindwell Norto', 'GSFC', 'Guj Alkali', 'Guj Heavy Chem', 'Guj Mineral', 'Guj State Petro', 'Gujarat Fluoro', 'Gujarat Gas', 'Gujarat Pipavav', 'Gulf Oil Lubric', 'Hathway Cable', 'Hatsun Agro', 'Havells India', 'HCL Tech', 'HDFC', 'HDFC AMC', 'HDFC Bank', 'HDFC Life', 'HEG', 'Heidelberg Cem', 'Heritage Foods', 'Hero Motocorp', 'Hexaware Tech', 'HFCL', 'Himadri Special', 'Himatsingka Sei', 'Hind Copper', 'Hind Zinc', 'Hindalco', 'Hindustan Aeron', 'Honeywell Autom', 'HPCL', 'HUDCO', 'HUL', 'ICICI Bank', 'ICICI Lombard ', 'ICICI Prudentia', 'ICICI Securitie', 'ICRA', 'IDBI Bank', 'IDFC', 'IDFC First Bank', 'IEX', 'IFB Industries', 'IFCI', 'IGL', 'IIFL Finance', 'India Cements', 'India Tourism D', 'Indiabulls Hsg', 'Indiabulls Real', 'Indiamart Inter', 'Indian Bank', 'Indian Hotels', 'Indoco Remedies', 'Indostar Capita', 'INDUS TOWERS', 'IndusInd Bank', 'Infibeam Avenue', 'Info Edge', 'Infosys', 'Ingersoll Rand', 'INOX Leisure', 'Intellect Desig', 'Interglobe Avi', 'IOB', 'IOC', 'Ipca Labs', 'IRB Infra', 'Ircon Internati', 'IRCTC', 'ITC', 'ITI', 'IWML', 'J. K. Cement', 'JagranPrakashan', 'Jai Corp', 'Jamna Auto', 'JB Chemicals', 'Jindal (Hisar)', 'Jindal Saw', 'Jindal Stainles', 'Jindal Steel', 'JK Bank', 'JK Lakshmi Cem', 'JK Paper', 'JK Tyre & Ind', 'JM Financial', 'Johnson Control', 'JSW Energy', 'JSW Steel', 'Jubilant Food', 'Jubilant Pharmo', 'Just Dial', 'Jyothy Labs', 'Kajaria Ceramic', 'Kalpataru Power', 'Kansai Nerolac', 'Karnataka Bank', 'Karur Vysya', 'Kaveri Seed', 'KEC Intl', 'KEI Industries', 'KNR Construct', 'Kolte-Patil', 'Kotak Mahindra', 'KPIT Tech', 'KPR Mill', 'KRBL', 'KSB Pumps', 'L&T Finance', 'L&T Infotech', 'L&T Technology', 'La Opala RG', 'Lakshmi Machine', 'Larsen', 'Laurus Labs', 'Lemon Tree Hote', 'LIC Housing Fin', 'Linde India', 'Lupin', 'Lux Industries', 'M&M', 'Mah Scooters', 'Mah Seamless', 'Mahanagar Gas', 'Mahindra CIE', 'Mahindra Holida', 'Mahindra Logist', 'Manappuram Fin', 'Marico', 'Maruti Suzuki', 'MAS Financial S', 'Max Financial', 'MCX India', 'Metropolis', 'Minda Corp', 'Minda Ind', 'Mindtree', 'Mishra Dhatu Ni', 'MMTC Ltd', 'MOIL', 'Motherson Sumi', 'Motilal Oswal', 'MphasiS', 'MRF', 'MRPL', 'Muthoot Finance', 'NALCO', 'Narayana Hruda', 'Natco Pharma', 'Nava Bharat Ven', 'Navin Fluorine', 'NBCC (India)', 'NCC', 'NESCO', 'Nestle', 'New India Assur', 'NFL', 'NHPC', 'Nilkamal', 'Nippon', 'NLC India', 'NMDC', 'NTPC', 'Oberoi Realty', 'Oil India', 'Omaxe', 'ONGC', 'Oracle Fin Serv', 'Orient Cement', 'Orient Refract', 'P and G', 'Page Industries', 'Persistent', 'Petronet LNG', 'Pfizer', 'Phillips Carbon', 'Phoenix Mills', 'PI Industries', 'Pidilite Ind', 'Piramal Enter', 'PNB', 'PNB Housing Fin', 'PNC Infratech', 'Poly Medicure', 'Polycab', 'Power Finance', 'Power Grid Corp', 'Praj Industries', 'Prestige Estate', 'Prism Cement', 'Procter&Gamble', 'PTC India', 'PVR', 'Quess Corp', 'Radico Khaitan', 'Rail Vikas', 'Rain Industries', 'Rajesh Exports', 'Rallis India', 'Ramco Cements', 'Rashtriya Chem', 'Ratnamani Metal', 'Raymond', 'RBL Bank', 'REC', 'Redington', 'Relaxo Footwear', 'Reliance', 'Repco Home', 'RITES', 'Sadbhav Engg', 'SAIL', 'Sanofi India', 'SBI', 'SBI Life Insura', 'Schaeffler Ind', 'Schneider Infra', 'Sequent Scienti', 'Sheela Foam', 'Shipping Corp', 'Shoppers Stop', 'Shree Cements', 'Shree Renuka', 'Shriram City', 'Shriram Trans', 'Siemens', 'SIS', 'SJVN', 'SKF India', 'Sobha', 'Solar Ind', 'Sonata', 'South Ind Bk', 'SpiceJet', 'SRF', 'Star Cement', 'Sterlite Techno', 'Strides Pharma ', 'Sudarshan Chem', 'SUMITOMO', 'Sun Pharma', 'Sun Pharma Adv', 'Sun TV Network', 'Sundaram Fin', 'Sundram', 'Sunteck Realty', 'Suprajit Eng', 'Supreme Ind', 'Suzlon Energy', 'Swan Energy', 'Symphony', 'Syngene Intl', 'Tasty Bite', 'Tata Comm', 'TATA Cons. Prod', 'Tata Elxsi', 'Tata Inv Corp', 'Tata Motors', 'Tata Power', 'Tata Steel', 'Tata Steel BSL ', 'TCNS Clothing C', 'TCS', 'TeamLease Ser.', 'Tech Mahindra', 'Thermax', 'Thyrocare Techn', 'Time Techno', 'Timken', 'Titan Company', 'TML-D', 'Torrent Pharma', 'Torrent Power', 'Trent', 'Trident', 'TTK Prestige', 'TV TodayNetwork', 'TV18 Broadcast', 'TVS Motor', 'UCO Bank', 'Uflex', 'Ujjivan Financi', 'UltraTechCement', 'Union Bank', 'United Brewerie', 'United Spirits', 'UPL', 'V-Guard Ind', 'V-Mart Retail', 'Vaibhav Global', 'Vakrangee', 'Vardhman Text', 'Varroc Engineer', 'Varun Beverages', 'Vedanta', 'Venkys', 'Vesuvius India', 'Vinati Organics', 'VIP Industries', 'Vodafone Idea', 'Voltas', 'VRL Logistics', 'VST', 'WABCO India', 'Welspun Corp', 'Welspun India', 'Westlife Dev', 'Whirlpool', 'Wipro', 'Wockhardt', 'Zee Entertain', 'Zensar Tech', 'Zydus Wellness'];
+ var i;
+ xhttp.onreadystatechange=function() {
+ 	if (this.readyState == 4 && this.status == 200) {
+ 		var data = JSON.parse(this.responseText);
+for (i=200;i<250;i++){
+	var tickercmp = tickers[i].concat("cmp");
+	var tickerchng = tickers[i].concat("chng");
+	var tickerpchng = tickers[i].concat("pchng");
+	var cmp = document.getElementById(tickercmp);
+ 	var chng = document.getElementById(tickerchng);
+  	var pchng = document.getElementById(tickerpchng);
+  	var spanclose = "</font>";
+  	console.log(tickercmp);
+
+    var change =data["chng"][i-200];
+
+      var span="";
+
+        if(change > 0){
+       span = "<font color = green>";
+      }
+      else if(change < 0){
+         span = "<font color = red>";
+      }
+      else{
+       span = "<font color = grey>";
+      }
+
+      var pchng1 = span.concat(data["pchng"][i-200], spanclose);
+        pchng.innerHTML = pchng1;
+      var chng1 = span.concat(data["chng"][i-200], spanclose);
+        chng.innerHTML = chng1;
+      var cmp1 = span.concat(data["price"][i-200], spanclose);
+        cmp.innerHTML = cmp1;
+
+    }
+
+  };
+
+}
+
+  xhttp.open("GET", url, true);
+  xhttp.send();
+
+}
+
+$$(document).on('page:beforeout', function () { clearInterval(cInterval5); });
+</script>
+
+<script>
+
+    	var currentD = new Date();
+		var startHourD = new Date();
+		startHourD.setHours(9,15,0); // 9.15 am
+		var endHourD = new Date();
+		endHourD.setHours(15,30,0); // 3.30 pm
+
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		    refreshDATA6();
+		}
+		 else{
+		  loadDoc6();
+		 }
+
+		function refreshDATA6() {    cInterval6= setInterval(loadDoc6, 5000);   }
+
+		function loadDoc6() {
+  var xhttp = new XMLHttpRequest();
+  var url = "../update6shownifty500";
+
+  var tickers = ['3M India', 'Aarti Ind', 'AAVAS Financier', 'AB Capital', 'ABB India', 'Abbott India', 'ACC', 'Adani Ports', 'Adani Power', 'Adani Total Gas', 'Adani Trans', 'Aditya Birla F', 'Advanced Enzyme', 'Aegis Logistics', 'AFL', 'AIA Engineering', 'Ajanta Pharma', 'Akzo Nobel', 'Alembic Pharma', 'Alkem Lab', 'Alkyl Amines', 'Allcargo', 'Amara Raja Batt', 'Amber Enterpris', 'Ambuja Cements', 'APL Apollo', 'Apollo Hospital', 'Apollo Tyres', 'Asahi India', 'Ashok Leyland', 'Ashoka Buildcon', 'Asian Paints', 'Aster DM Health', 'Astral Poly Tec', 'AstraZeneca', 'Atul', 'AU Small Financ', 'Aurobindo Pharm', 'Avanti Feeds', 'Avenue Supermar', 'Axis Bank', 'Bajaj Auto', 'Bajaj Consumer ', 'Bajaj Electric', 'Bajaj Finance', 'Bajaj Finserv', 'Bajaj Holdings', 'Balkrishna Ind', 'Balmer Lawrie', 'Balrampur Chini', 'Bandhan Bank', 'Bank of Baroda', 'Bank of India', 'Bank of Mah', 'BASF', 'Bata India', 'Bayer CropScien', 'BEML', 'Berger Paints', 'Bharat Dynamics', 'Bharat Elec', 'Bharat Forge', 'Bharat Rasayan', 'Bharti Airtel', 'BHEL', 'Biocon', 'Birla Corp', 'Birlasoft', 'Bliss GVS', 'Blue Dart', 'Blue Star', 'Bombay Burmah', 'Bombay Dyeing', 'Bosch', 'BPCL', 'Brigade Ent', 'Britannia', 'BSE Limited', 'Cadila Health', 'Can Fin Homes', 'Canara Bank', 'Caplin Labs', 'Capri Global', 'Carborundum', 'CARE Ratings', 'Castrol', 'CCL Products', 'CDSL', 'Ceat', 'Central Bank', 'Century', 'CenturyPlyboard', 'Cera Sanitary', 'CESC', 'CG Consumer', 'Chambal Fert', 'Chennai Petro', 'Cholamandalam (Finance Term Lending)', 'Cholamandalam (Finance-Investment)', 'Cipla', 'City Union Bank', 'Coal India', 'Cochin Shipyard', 'COFORGE LTD.', 'Colgate', 'Container Corp', 'Coromandel Int', 'CreditAccess Gr', 'CRISIL', 'Cummins', 'Cyient', 'Dabur India', 'Dalmia Bharat', 'DB Corp', 'DCB Bank', 'DCM Shriram', 'Deepak Nitrite', 'Delta Corp', 'Dhani Services', 'Dhanuka Agritec', 'Dilip Buildcon', 'Dish TV', 'Dishman Carboge', 'Divis Labs', 'Dixon Technolog', 'DLF', 'Dr Lal PathLab', 'Dr Reddys Labs', 'eClerx Services', 'Edelweiss', 'Eicher Motors', 'EID Parry', 'EIH', 'Elgi Equipments', 'Emami', 'Endurance Techn', 'EngineersInd', 'EPL', 'Equitas Holding', 'Esab India', 'Escorts', 'Exide Ind', 'FDC', 'Federal Bank', 'Fine Organics', 'Finolex Cables', 'Finolex Ind', 'Firstsource Sol', 'Fortis Health', 'Future Consumer', 'Future Retail', 'GAIL', 'Galaxy Surfacta', 'Garden Reach Sh', 'Garware Technic', 'GE Power India', 'GE Shipping', 'GE T&D India', 'General Insuran', 'Gillette India', 'GlaxoSmithKline', 'Glenmark', 'GMM Pfaudler', 'GMR Infra', 'GNFC', 'Godfrey Phillip', 'Godrej Agrovet', 'Godrej Consumer', 'Godrej Ind', 'Godrej Prop', 'Granules India', 'Graphite India', 'Grasim', 'Greaves Cotton', 'Grindwell Norto', 'GSFC', 'Guj Alkali', 'Guj Heavy Chem', 'Guj Mineral', 'Guj State Petro', 'Gujarat Fluoro', 'Gujarat Gas', 'Gujarat Pipavav', 'Gulf Oil Lubric', 'Hathway Cable', 'Hatsun Agro', 'Havells India', 'HCL Tech', 'HDFC', 'HDFC AMC', 'HDFC Bank', 'HDFC Life', 'HEG', 'Heidelberg Cem', 'Heritage Foods', 'Hero Motocorp', 'Hexaware Tech', 'HFCL', 'Himadri Special', 'Himatsingka Sei', 'Hind Copper', 'Hind Zinc', 'Hindalco', 'Hindustan Aeron', 'Honeywell Autom', 'HPCL', 'HUDCO', 'HUL', 'ICICI Bank', 'ICICI Lombard ', 'ICICI Prudentia', 'ICICI Securitie', 'ICRA', 'IDBI Bank', 'IDFC', 'IDFC First Bank', 'IEX', 'IFB Industries', 'IFCI', 'IGL', 'IIFL Finance', 'India Cements', 'India Tourism D', 'Indiabulls Hsg', 'Indiabulls Real', 'Indiamart Inter', 'Indian Bank', 'Indian Hotels', 'Indoco Remedies', 'Indostar Capita', 'INDUS TOWERS', 'IndusInd Bank', 'Infibeam Avenue', 'Info Edge', 'Infosys', 'Ingersoll Rand', 'INOX Leisure', 'Intellect Desig', 'Interglobe Avi', 'IOB', 'IOC', 'Ipca Labs', 'IRB Infra', 'Ircon Internati', 'IRCTC', 'ITC', 'ITI', 'IWML', 'J. K. Cement', 'JagranPrakashan', 'Jai Corp', 'Jamna Auto', 'JB Chemicals', 'Jindal (Hisar)', 'Jindal Saw', 'Jindal Stainles', 'Jindal Steel', 'JK Bank', 'JK Lakshmi Cem', 'JK Paper', 'JK Tyre & Ind', 'JM Financial', 'Johnson Control', 'JSW Energy', 'JSW Steel', 'Jubilant Food', 'Jubilant Pharmo', 'Just Dial', 'Jyothy Labs', 'Kajaria Ceramic', 'Kalpataru Power', 'Kansai Nerolac', 'Karnataka Bank', 'Karur Vysya', 'Kaveri Seed', 'KEC Intl', 'KEI Industries', 'KNR Construct', 'Kolte-Patil', 'Kotak Mahindra', 'KPIT Tech', 'KPR Mill', 'KRBL', 'KSB Pumps', 'L&T Finance', 'L&T Infotech', 'L&T Technology', 'La Opala RG', 'Lakshmi Machine', 'Larsen', 'Laurus Labs', 'Lemon Tree Hote', 'LIC Housing Fin', 'Linde India', 'Lupin', 'Lux Industries', 'M&M', 'Mah Scooters', 'Mah Seamless', 'Mahanagar Gas', 'Mahindra CIE', 'Mahindra Holida', 'Mahindra Logist', 'Manappuram Fin', 'Marico', 'Maruti Suzuki', 'MAS Financial S', 'Max Financial', 'MCX India', 'Metropolis', 'Minda Corp', 'Minda Ind', 'Mindtree', 'Mishra Dhatu Ni', 'MMTC Ltd', 'MOIL', 'Motherson Sumi', 'Motilal Oswal', 'MphasiS', 'MRF', 'MRPL', 'Muthoot Finance', 'NALCO', 'Narayana Hruda', 'Natco Pharma', 'Nava Bharat Ven', 'Navin Fluorine', 'NBCC (India)', 'NCC', 'NESCO', 'Nestle', 'New India Assur', 'NFL', 'NHPC', 'Nilkamal', 'Nippon', 'NLC India', 'NMDC', 'NTPC', 'Oberoi Realty', 'Oil India', 'Omaxe', 'ONGC', 'Oracle Fin Serv', 'Orient Cement', 'Orient Refract', 'P and G', 'Page Industries', 'Persistent', 'Petronet LNG', 'Pfizer', 'Phillips Carbon', 'Phoenix Mills', 'PI Industries', 'Pidilite Ind', 'Piramal Enter', 'PNB', 'PNB Housing Fin', 'PNC Infratech', 'Poly Medicure', 'Polycab', 'Power Finance', 'Power Grid Corp', 'Praj Industries', 'Prestige Estate', 'Prism Cement', 'Procter&Gamble', 'PTC India', 'PVR', 'Quess Corp', 'Radico Khaitan', 'Rail Vikas', 'Rain Industries', 'Rajesh Exports', 'Rallis India', 'Ramco Cements', 'Rashtriya Chem', 'Ratnamani Metal', 'Raymond', 'RBL Bank', 'REC', 'Redington', 'Relaxo Footwear', 'Reliance', 'Repco Home', 'RITES', 'Sadbhav Engg', 'SAIL', 'Sanofi India', 'SBI', 'SBI Life Insura', 'Schaeffler Ind', 'Schneider Infra', 'Sequent Scienti', 'Sheela Foam', 'Shipping Corp', 'Shoppers Stop', 'Shree Cements', 'Shree Renuka', 'Shriram City', 'Shriram Trans', 'Siemens', 'SIS', 'SJVN', 'SKF India', 'Sobha', 'Solar Ind', 'Sonata', 'South Ind Bk', 'SpiceJet', 'SRF', 'Star Cement', 'Sterlite Techno', 'Strides Pharma ', 'Sudarshan Chem', 'SUMITOMO', 'Sun Pharma', 'Sun Pharma Adv', 'Sun TV Network', 'Sundaram Fin', 'Sundram', 'Sunteck Realty', 'Suprajit Eng', 'Supreme Ind', 'Suzlon Energy', 'Swan Energy', 'Symphony', 'Syngene Intl', 'Tasty Bite', 'Tata Comm', 'TATA Cons. Prod', 'Tata Elxsi', 'Tata Inv Corp', 'Tata Motors', 'Tata Power', 'Tata Steel', 'Tata Steel BSL ', 'TCNS Clothing C', 'TCS', 'TeamLease Ser.', 'Tech Mahindra', 'Thermax', 'Thyrocare Techn', 'Time Techno', 'Timken', 'Titan Company', 'TML-D', 'Torrent Pharma', 'Torrent Power', 'Trent', 'Trident', 'TTK Prestige', 'TV TodayNetwork', 'TV18 Broadcast', 'TVS Motor', 'UCO Bank', 'Uflex', 'Ujjivan Financi', 'UltraTechCement', 'Union Bank', 'United Brewerie', 'United Spirits', 'UPL', 'V-Guard Ind', 'V-Mart Retail', 'Vaibhav Global', 'Vakrangee', 'Vardhman Text', 'Varroc Engineer', 'Varun Beverages', 'Vedanta', 'Venkys', 'Vesuvius India', 'Vinati Organics', 'VIP Industries', 'Vodafone Idea', 'Voltas', 'VRL Logistics', 'VST', 'WABCO India', 'Welspun Corp', 'Welspun India', 'Westlife Dev', 'Whirlpool', 'Wipro', 'Wockhardt', 'Zee Entertain', 'Zensar Tech', 'Zydus Wellness'];
+ var i;
+ xhttp.onreadystatechange=function() {
+ 	if (this.readyState == 4 && this.status == 200) {
+ 		var data = JSON.parse(this.responseText);
+for (i=250;i<300;i++){
+	var tickercmp = tickers[i].concat("cmp");
+	var tickerchng = tickers[i].concat("chng");
+	var tickerpchng = tickers[i].concat("pchng");
+	var cmp = document.getElementById(tickercmp);
+ 	var chng = document.getElementById(tickerchng);
+  	var pchng = document.getElementById(tickerpchng);
+  	var spanclose = "</font>";
+  	console.log(tickercmp);
+
+    var change =data["chng"][i-250];
+
+      var span="";
+
+        if(change > 0){
+       span = "<font color = green>";
+      }
+      else if(change < 0){
+         span = "<font color = red>";
+      }
+      else{
+       span = "<font color = grey>";
+      }
+
+      var pchng1 = span.concat(data["pchng"][i-250], spanclose);
+        pchng.innerHTML = pchng1;
+      var chng1 = span.concat(data["chng"][i-250], spanclose);
+        chng.innerHTML = chng1;
+      var cmp1 = span.concat(data["price"][i-250], spanclose);
+        cmp.innerHTML = cmp1;
+
+    }
+
+  };
+
+}
+
+  xhttp.open("GET", url, true);
+  xhttp.send();
+
+}
+
+$$(document).on('page:beforeout', function () { clearInterval(cInterval6); });
+</script>
+
+<script>
+
+    	var currentD = new Date();
+		var startHourD = new Date();
+		startHourD.setHours(9,15,0); // 9.15 am
+		var endHourD = new Date();
+		endHourD.setHours(15,30,0); // 3.30 pm
+
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		    refreshDATA7();
+		}
+		 else{
+		  loadDoc7();
+		 }
+
+		function refreshDATA7() {    cInterval7= setInterval(loadDoc7, 5000);   }
+
+		function loadDoc7() {
+  var xhttp = new XMLHttpRequest();
+  var url = "../update7shownifty500";
+
+  var tickers = ['3M India', 'Aarti Ind', 'AAVAS Financier', 'AB Capital', 'ABB India', 'Abbott India', 'ACC', 'Adani Ports', 'Adani Power', 'Adani Total Gas', 'Adani Trans', 'Aditya Birla F', 'Advanced Enzyme', 'Aegis Logistics', 'AFL', 'AIA Engineering', 'Ajanta Pharma', 'Akzo Nobel', 'Alembic Pharma', 'Alkem Lab', 'Alkyl Amines', 'Allcargo', 'Amara Raja Batt', 'Amber Enterpris', 'Ambuja Cements', 'APL Apollo', 'Apollo Hospital', 'Apollo Tyres', 'Asahi India', 'Ashok Leyland', 'Ashoka Buildcon', 'Asian Paints', 'Aster DM Health', 'Astral Poly Tec', 'AstraZeneca', 'Atul', 'AU Small Financ', 'Aurobindo Pharm', 'Avanti Feeds', 'Avenue Supermar', 'Axis Bank', 'Bajaj Auto', 'Bajaj Consumer ', 'Bajaj Electric', 'Bajaj Finance', 'Bajaj Finserv', 'Bajaj Holdings', 'Balkrishna Ind', 'Balmer Lawrie', 'Balrampur Chini', 'Bandhan Bank', 'Bank of Baroda', 'Bank of India', 'Bank of Mah', 'BASF', 'Bata India', 'Bayer CropScien', 'BEML', 'Berger Paints', 'Bharat Dynamics', 'Bharat Elec', 'Bharat Forge', 'Bharat Rasayan', 'Bharti Airtel', 'BHEL', 'Biocon', 'Birla Corp', 'Birlasoft', 'Bliss GVS', 'Blue Dart', 'Blue Star', 'Bombay Burmah', 'Bombay Dyeing', 'Bosch', 'BPCL', 'Brigade Ent', 'Britannia', 'BSE Limited', 'Cadila Health', 'Can Fin Homes', 'Canara Bank', 'Caplin Labs', 'Capri Global', 'Carborundum', 'CARE Ratings', 'Castrol', 'CCL Products', 'CDSL', 'Ceat', 'Central Bank', 'Century', 'CenturyPlyboard', 'Cera Sanitary', 'CESC', 'CG Consumer', 'Chambal Fert', 'Chennai Petro', 'Cholamandalam (Finance Term Lending)', 'Cholamandalam (Finance-Investment)', 'Cipla', 'City Union Bank', 'Coal India', 'Cochin Shipyard', 'COFORGE LTD.', 'Colgate', 'Container Corp', 'Coromandel Int', 'CreditAccess Gr', 'CRISIL', 'Cummins', 'Cyient', 'Dabur India', 'Dalmia Bharat', 'DB Corp', 'DCB Bank', 'DCM Shriram', 'Deepak Nitrite', 'Delta Corp', 'Dhani Services', 'Dhanuka Agritec', 'Dilip Buildcon', 'Dish TV', 'Dishman Carboge', 'Divis Labs', 'Dixon Technolog', 'DLF', 'Dr Lal PathLab', 'Dr Reddys Labs', 'eClerx Services', 'Edelweiss', 'Eicher Motors', 'EID Parry', 'EIH', 'Elgi Equipments', 'Emami', 'Endurance Techn', 'EngineersInd', 'EPL', 'Equitas Holding', 'Esab India', 'Escorts', 'Exide Ind', 'FDC', 'Federal Bank', 'Fine Organics', 'Finolex Cables', 'Finolex Ind', 'Firstsource Sol', 'Fortis Health', 'Future Consumer', 'Future Retail', 'GAIL', 'Galaxy Surfacta', 'Garden Reach Sh', 'Garware Technic', 'GE Power India', 'GE Shipping', 'GE T&D India', 'General Insuran', 'Gillette India', 'GlaxoSmithKline', 'Glenmark', 'GMM Pfaudler', 'GMR Infra', 'GNFC', 'Godfrey Phillip', 'Godrej Agrovet', 'Godrej Consumer', 'Godrej Ind', 'Godrej Prop', 'Granules India', 'Graphite India', 'Grasim', 'Greaves Cotton', 'Grindwell Norto', 'GSFC', 'Guj Alkali', 'Guj Heavy Chem', 'Guj Mineral', 'Guj State Petro', 'Gujarat Fluoro', 'Gujarat Gas', 'Gujarat Pipavav', 'Gulf Oil Lubric', 'Hathway Cable', 'Hatsun Agro', 'Havells India', 'HCL Tech', 'HDFC', 'HDFC AMC', 'HDFC Bank', 'HDFC Life', 'HEG', 'Heidelberg Cem', 'Heritage Foods', 'Hero Motocorp', 'Hexaware Tech', 'HFCL', 'Himadri Special', 'Himatsingka Sei', 'Hind Copper', 'Hind Zinc', 'Hindalco', 'Hindustan Aeron', 'Honeywell Autom', 'HPCL', 'HUDCO', 'HUL', 'ICICI Bank', 'ICICI Lombard ', 'ICICI Prudentia', 'ICICI Securitie', 'ICRA', 'IDBI Bank', 'IDFC', 'IDFC First Bank', 'IEX', 'IFB Industries', 'IFCI', 'IGL', 'IIFL Finance', 'India Cements', 'India Tourism D', 'Indiabulls Hsg', 'Indiabulls Real', 'Indiamart Inter', 'Indian Bank', 'Indian Hotels', 'Indoco Remedies', 'Indostar Capita', 'INDUS TOWERS', 'IndusInd Bank', 'Infibeam Avenue', 'Info Edge', 'Infosys', 'Ingersoll Rand', 'INOX Leisure', 'Intellect Desig', 'Interglobe Avi', 'IOB', 'IOC', 'Ipca Labs', 'IRB Infra', 'Ircon Internati', 'IRCTC', 'ITC', 'ITI', 'IWML', 'J. K. Cement', 'JagranPrakashan', 'Jai Corp', 'Jamna Auto', 'JB Chemicals', 'Jindal (Hisar)', 'Jindal Saw', 'Jindal Stainles', 'Jindal Steel', 'JK Bank', 'JK Lakshmi Cem', 'JK Paper', 'JK Tyre & Ind', 'JM Financial', 'Johnson Control', 'JSW Energy', 'JSW Steel', 'Jubilant Food', 'Jubilant Pharmo', 'Just Dial', 'Jyothy Labs', 'Kajaria Ceramic', 'Kalpataru Power', 'Kansai Nerolac', 'Karnataka Bank', 'Karur Vysya', 'Kaveri Seed', 'KEC Intl', 'KEI Industries', 'KNR Construct', 'Kolte-Patil', 'Kotak Mahindra', 'KPIT Tech', 'KPR Mill', 'KRBL', 'KSB Pumps', 'L&T Finance', 'L&T Infotech', 'L&T Technology', 'La Opala RG', 'Lakshmi Machine', 'Larsen', 'Laurus Labs', 'Lemon Tree Hote', 'LIC Housing Fin', 'Linde India', 'Lupin', 'Lux Industries', 'M&M', 'Mah Scooters', 'Mah Seamless', 'Mahanagar Gas', 'Mahindra CIE', 'Mahindra Holida', 'Mahindra Logist', 'Manappuram Fin', 'Marico', 'Maruti Suzuki', 'MAS Financial S', 'Max Financial', 'MCX India', 'Metropolis', 'Minda Corp', 'Minda Ind', 'Mindtree', 'Mishra Dhatu Ni', 'MMTC Ltd', 'MOIL', 'Motherson Sumi', 'Motilal Oswal', 'MphasiS', 'MRF', 'MRPL', 'Muthoot Finance', 'NALCO', 'Narayana Hruda', 'Natco Pharma', 'Nava Bharat Ven', 'Navin Fluorine', 'NBCC (India)', 'NCC', 'NESCO', 'Nestle', 'New India Assur', 'NFL', 'NHPC', 'Nilkamal', 'Nippon', 'NLC India', 'NMDC', 'NTPC', 'Oberoi Realty', 'Oil India', 'Omaxe', 'ONGC', 'Oracle Fin Serv', 'Orient Cement', 'Orient Refract', 'P and G', 'Page Industries', 'Persistent', 'Petronet LNG', 'Pfizer', 'Phillips Carbon', 'Phoenix Mills', 'PI Industries', 'Pidilite Ind', 'Piramal Enter', 'PNB', 'PNB Housing Fin', 'PNC Infratech', 'Poly Medicure', 'Polycab', 'Power Finance', 'Power Grid Corp', 'Praj Industries', 'Prestige Estate', 'Prism Cement', 'Procter&Gamble', 'PTC India', 'PVR', 'Quess Corp', 'Radico Khaitan', 'Rail Vikas', 'Rain Industries', 'Rajesh Exports', 'Rallis India', 'Ramco Cements', 'Rashtriya Chem', 'Ratnamani Metal', 'Raymond', 'RBL Bank', 'REC', 'Redington', 'Relaxo Footwear', 'Reliance', 'Repco Home', 'RITES', 'Sadbhav Engg', 'SAIL', 'Sanofi India', 'SBI', 'SBI Life Insura', 'Schaeffler Ind', 'Schneider Infra', 'Sequent Scienti', 'Sheela Foam', 'Shipping Corp', 'Shoppers Stop', 'Shree Cements', 'Shree Renuka', 'Shriram City', 'Shriram Trans', 'Siemens', 'SIS', 'SJVN', 'SKF India', 'Sobha', 'Solar Ind', 'Sonata', 'South Ind Bk', 'SpiceJet', 'SRF', 'Star Cement', 'Sterlite Techno', 'Strides Pharma ', 'Sudarshan Chem', 'SUMITOMO', 'Sun Pharma', 'Sun Pharma Adv', 'Sun TV Network', 'Sundaram Fin', 'Sundram', 'Sunteck Realty', 'Suprajit Eng', 'Supreme Ind', 'Suzlon Energy', 'Swan Energy', 'Symphony', 'Syngene Intl', 'Tasty Bite', 'Tata Comm', 'TATA Cons. Prod', 'Tata Elxsi', 'Tata Inv Corp', 'Tata Motors', 'Tata Power', 'Tata Steel', 'Tata Steel BSL ', 'TCNS Clothing C', 'TCS', 'TeamLease Ser.', 'Tech Mahindra', 'Thermax', 'Thyrocare Techn', 'Time Techno', 'Timken', 'Titan Company', 'TML-D', 'Torrent Pharma', 'Torrent Power', 'Trent', 'Trident', 'TTK Prestige', 'TV TodayNetwork', 'TV18 Broadcast', 'TVS Motor', 'UCO Bank', 'Uflex', 'Ujjivan Financi', 'UltraTechCement', 'Union Bank', 'United Brewerie', 'United Spirits', 'UPL', 'V-Guard Ind', 'V-Mart Retail', 'Vaibhav Global', 'Vakrangee', 'Vardhman Text', 'Varroc Engineer', 'Varun Beverages', 'Vedanta', 'Venkys', 'Vesuvius India', 'Vinati Organics', 'VIP Industries', 'Vodafone Idea', 'Voltas', 'VRL Logistics', 'VST', 'WABCO India', 'Welspun Corp', 'Welspun India', 'Westlife Dev', 'Whirlpool', 'Wipro', 'Wockhardt', 'Zee Entertain', 'Zensar Tech', 'Zydus Wellness'];
+ var i;
+ xhttp.onreadystatechange=function() {
+ 	if (this.readyState == 4 && this.status == 200) {
+ 		var data = JSON.parse(this.responseText);
+for (i=300;i<350;i++){
+	var tickercmp = tickers[i].concat("cmp");
+	var tickerchng = tickers[i].concat("chng");
+	var tickerpchng = tickers[i].concat("pchng");
+	var cmp = document.getElementById(tickercmp);
+ 	var chng = document.getElementById(tickerchng);
+  	var pchng = document.getElementById(tickerpchng);
+  	var spanclose = "</font>";
+  	console.log(tickercmp);
+
+    var change =data["chng"][i-300];
+
+      var span="";
+
+        if(change > 0){
+       span = "<font color = green>";
+      }
+      else if(change < 0){
+         span = "<font color = red>";
+      }
+      else{
+       span = "<font color = grey>";
+      }
+
+      var pchng1 = span.concat(data["pchng"][i-300], spanclose);
+        pchng.innerHTML = pchng1;
+      var chng1 = span.concat(data["chng"][i-300], spanclose);
+        chng.innerHTML = chng1;
+      var cmp1 = span.concat(data["price"][i-300], spanclose);
+        cmp.innerHTML = cmp1;
+
+    }
+
+  };
+
+}
+
+  xhttp.open("GET", url, true);
+  xhttp.send();
+
+}
+
+$$(document).on('page:beforeout', function () { clearInterval(cInterval7); });
+</script>
+
+<script>
+
+    	var currentD = new Date();
+		var startHourD = new Date();
+		startHourD.setHours(9,15,0); // 9.15 am
+		var endHourD = new Date();
+		endHourD.setHours(15,30,0); // 3.30 pm
+
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		    refreshDATA8();
+		}
+		 else{
+		  loadDoc8();
+		 }
+
+		function refreshDATA8() {    cInterval8= setInterval(loadDoc8, 5000);   }
+
+		function loadDoc8() {
+  var xhttp = new XMLHttpRequest();
+  var url = "../update8shownifty500";
+
+  var tickers = ['3M India', 'Aarti Ind', 'AAVAS Financier', 'AB Capital', 'ABB India', 'Abbott India', 'ACC', 'Adani Ports', 'Adani Power', 'Adani Total Gas', 'Adani Trans', 'Aditya Birla F', 'Advanced Enzyme', 'Aegis Logistics', 'AFL', 'AIA Engineering', 'Ajanta Pharma', 'Akzo Nobel', 'Alembic Pharma', 'Alkem Lab', 'Alkyl Amines', 'Allcargo', 'Amara Raja Batt', 'Amber Enterpris', 'Ambuja Cements', 'APL Apollo', 'Apollo Hospital', 'Apollo Tyres', 'Asahi India', 'Ashok Leyland', 'Ashoka Buildcon', 'Asian Paints', 'Aster DM Health', 'Astral Poly Tec', 'AstraZeneca', 'Atul', 'AU Small Financ', 'Aurobindo Pharm', 'Avanti Feeds', 'Avenue Supermar', 'Axis Bank', 'Bajaj Auto', 'Bajaj Consumer ', 'Bajaj Electric', 'Bajaj Finance', 'Bajaj Finserv', 'Bajaj Holdings', 'Balkrishna Ind', 'Balmer Lawrie', 'Balrampur Chini', 'Bandhan Bank', 'Bank of Baroda', 'Bank of India', 'Bank of Mah', 'BASF', 'Bata India', 'Bayer CropScien', 'BEML', 'Berger Paints', 'Bharat Dynamics', 'Bharat Elec', 'Bharat Forge', 'Bharat Rasayan', 'Bharti Airtel', 'BHEL', 'Biocon', 'Birla Corp', 'Birlasoft', 'Bliss GVS', 'Blue Dart', 'Blue Star', 'Bombay Burmah', 'Bombay Dyeing', 'Bosch', 'BPCL', 'Brigade Ent', 'Britannia', 'BSE Limited', 'Cadila Health', 'Can Fin Homes', 'Canara Bank', 'Caplin Labs', 'Capri Global', 'Carborundum', 'CARE Ratings', 'Castrol', 'CCL Products', 'CDSL', 'Ceat', 'Central Bank', 'Century', 'CenturyPlyboard', 'Cera Sanitary', 'CESC', 'CG Consumer', 'Chambal Fert', 'Chennai Petro', 'Cholamandalam (Finance Term Lending)', 'Cholamandalam (Finance-Investment)', 'Cipla', 'City Union Bank', 'Coal India', 'Cochin Shipyard', 'COFORGE LTD.', 'Colgate', 'Container Corp', 'Coromandel Int', 'CreditAccess Gr', 'CRISIL', 'Cummins', 'Cyient', 'Dabur India', 'Dalmia Bharat', 'DB Corp', 'DCB Bank', 'DCM Shriram', 'Deepak Nitrite', 'Delta Corp', 'Dhani Services', 'Dhanuka Agritec', 'Dilip Buildcon', 'Dish TV', 'Dishman Carboge', 'Divis Labs', 'Dixon Technolog', 'DLF', 'Dr Lal PathLab', 'Dr Reddys Labs', 'eClerx Services', 'Edelweiss', 'Eicher Motors', 'EID Parry', 'EIH', 'Elgi Equipments', 'Emami', 'Endurance Techn', 'EngineersInd', 'EPL', 'Equitas Holding', 'Esab India', 'Escorts', 'Exide Ind', 'FDC', 'Federal Bank', 'Fine Organics', 'Finolex Cables', 'Finolex Ind', 'Firstsource Sol', 'Fortis Health', 'Future Consumer', 'Future Retail', 'GAIL', 'Galaxy Surfacta', 'Garden Reach Sh', 'Garware Technic', 'GE Power India', 'GE Shipping', 'GE T&D India', 'General Insuran', 'Gillette India', 'GlaxoSmithKline', 'Glenmark', 'GMM Pfaudler', 'GMR Infra', 'GNFC', 'Godfrey Phillip', 'Godrej Agrovet', 'Godrej Consumer', 'Godrej Ind', 'Godrej Prop', 'Granules India', 'Graphite India', 'Grasim', 'Greaves Cotton', 'Grindwell Norto', 'GSFC', 'Guj Alkali', 'Guj Heavy Chem', 'Guj Mineral', 'Guj State Petro', 'Gujarat Fluoro', 'Gujarat Gas', 'Gujarat Pipavav', 'Gulf Oil Lubric', 'Hathway Cable', 'Hatsun Agro', 'Havells India', 'HCL Tech', 'HDFC', 'HDFC AMC', 'HDFC Bank', 'HDFC Life', 'HEG', 'Heidelberg Cem', 'Heritage Foods', 'Hero Motocorp', 'Hexaware Tech', 'HFCL', 'Himadri Special', 'Himatsingka Sei', 'Hind Copper', 'Hind Zinc', 'Hindalco', 'Hindustan Aeron', 'Honeywell Autom', 'HPCL', 'HUDCO', 'HUL', 'ICICI Bank', 'ICICI Lombard ', 'ICICI Prudentia', 'ICICI Securitie', 'ICRA', 'IDBI Bank', 'IDFC', 'IDFC First Bank', 'IEX', 'IFB Industries', 'IFCI', 'IGL', 'IIFL Finance', 'India Cements', 'India Tourism D', 'Indiabulls Hsg', 'Indiabulls Real', 'Indiamart Inter', 'Indian Bank', 'Indian Hotels', 'Indoco Remedies', 'Indostar Capita', 'INDUS TOWERS', 'IndusInd Bank', 'Infibeam Avenue', 'Info Edge', 'Infosys', 'Ingersoll Rand', 'INOX Leisure', 'Intellect Desig', 'Interglobe Avi', 'IOB', 'IOC', 'Ipca Labs', 'IRB Infra', 'Ircon Internati', 'IRCTC', 'ITC', 'ITI', 'IWML', 'J. K. Cement', 'JagranPrakashan', 'Jai Corp', 'Jamna Auto', 'JB Chemicals', 'Jindal (Hisar)', 'Jindal Saw', 'Jindal Stainles', 'Jindal Steel', 'JK Bank', 'JK Lakshmi Cem', 'JK Paper', 'JK Tyre & Ind', 'JM Financial', 'Johnson Control', 'JSW Energy', 'JSW Steel', 'Jubilant Food', 'Jubilant Pharmo', 'Just Dial', 'Jyothy Labs', 'Kajaria Ceramic', 'Kalpataru Power', 'Kansai Nerolac', 'Karnataka Bank', 'Karur Vysya', 'Kaveri Seed', 'KEC Intl', 'KEI Industries', 'KNR Construct', 'Kolte-Patil', 'Kotak Mahindra', 'KPIT Tech', 'KPR Mill', 'KRBL', 'KSB Pumps', 'L&T Finance', 'L&T Infotech', 'L&T Technology', 'La Opala RG', 'Lakshmi Machine', 'Larsen', 'Laurus Labs', 'Lemon Tree Hote', 'LIC Housing Fin', 'Linde India', 'Lupin', 'Lux Industries', 'M&M', 'Mah Scooters', 'Mah Seamless', 'Mahanagar Gas', 'Mahindra CIE', 'Mahindra Holida', 'Mahindra Logist', 'Manappuram Fin', 'Marico', 'Maruti Suzuki', 'MAS Financial S', 'Max Financial', 'MCX India', 'Metropolis', 'Minda Corp', 'Minda Ind', 'Mindtree', 'Mishra Dhatu Ni', 'MMTC Ltd', 'MOIL', 'Motherson Sumi', 'Motilal Oswal', 'MphasiS', 'MRF', 'MRPL', 'Muthoot Finance', 'NALCO', 'Narayana Hruda', 'Natco Pharma', 'Nava Bharat Ven', 'Navin Fluorine', 'NBCC (India)', 'NCC', 'NESCO', 'Nestle', 'New India Assur', 'NFL', 'NHPC', 'Nilkamal', 'Nippon', 'NLC India', 'NMDC', 'NTPC', 'Oberoi Realty', 'Oil India', 'Omaxe', 'ONGC', 'Oracle Fin Serv', 'Orient Cement', 'Orient Refract', 'P and G', 'Page Industries', 'Persistent', 'Petronet LNG', 'Pfizer', 'Phillips Carbon', 'Phoenix Mills', 'PI Industries', 'Pidilite Ind', 'Piramal Enter', 'PNB', 'PNB Housing Fin', 'PNC Infratech', 'Poly Medicure', 'Polycab', 'Power Finance', 'Power Grid Corp', 'Praj Industries', 'Prestige Estate', 'Prism Cement', 'Procter&Gamble', 'PTC India', 'PVR', 'Quess Corp', 'Radico Khaitan', 'Rail Vikas', 'Rain Industries', 'Rajesh Exports', 'Rallis India', 'Ramco Cements', 'Rashtriya Chem', 'Ratnamani Metal', 'Raymond', 'RBL Bank', 'REC', 'Redington', 'Relaxo Footwear', 'Reliance', 'Repco Home', 'RITES', 'Sadbhav Engg', 'SAIL', 'Sanofi India', 'SBI', 'SBI Life Insura', 'Schaeffler Ind', 'Schneider Infra', 'Sequent Scienti', 'Sheela Foam', 'Shipping Corp', 'Shoppers Stop', 'Shree Cements', 'Shree Renuka', 'Shriram City', 'Shriram Trans', 'Siemens', 'SIS', 'SJVN', 'SKF India', 'Sobha', 'Solar Ind', 'Sonata', 'South Ind Bk', 'SpiceJet', 'SRF', 'Star Cement', 'Sterlite Techno', 'Strides Pharma ', 'Sudarshan Chem', 'SUMITOMO', 'Sun Pharma', 'Sun Pharma Adv', 'Sun TV Network', 'Sundaram Fin', 'Sundram', 'Sunteck Realty', 'Suprajit Eng', 'Supreme Ind', 'Suzlon Energy', 'Swan Energy', 'Symphony', 'Syngene Intl', 'Tasty Bite', 'Tata Comm', 'TATA Cons. Prod', 'Tata Elxsi', 'Tata Inv Corp', 'Tata Motors', 'Tata Power', 'Tata Steel', 'Tata Steel BSL ', 'TCNS Clothing C', 'TCS', 'TeamLease Ser.', 'Tech Mahindra', 'Thermax', 'Thyrocare Techn', 'Time Techno', 'Timken', 'Titan Company', 'TML-D', 'Torrent Pharma', 'Torrent Power', 'Trent', 'Trident', 'TTK Prestige', 'TV TodayNetwork', 'TV18 Broadcast', 'TVS Motor', 'UCO Bank', 'Uflex', 'Ujjivan Financi', 'UltraTechCement', 'Union Bank', 'United Brewerie', 'United Spirits', 'UPL', 'V-Guard Ind', 'V-Mart Retail', 'Vaibhav Global', 'Vakrangee', 'Vardhman Text', 'Varroc Engineer', 'Varun Beverages', 'Vedanta', 'Venkys', 'Vesuvius India', 'Vinati Organics', 'VIP Industries', 'Vodafone Idea', 'Voltas', 'VRL Logistics', 'VST', 'WABCO India', 'Welspun Corp', 'Welspun India', 'Westlife Dev', 'Whirlpool', 'Wipro', 'Wockhardt', 'Zee Entertain', 'Zensar Tech', 'Zydus Wellness'];
+ var i;
+ xhttp.onreadystatechange=function() {
+ 	if (this.readyState == 4 && this.status == 200) {
+ 		var data = JSON.parse(this.responseText);
+for (i=350;i<400;i++){
+	var tickercmp = tickers[i].concat("cmp");
+	var tickerchng = tickers[i].concat("chng");
+	var tickerpchng = tickers[i].concat("pchng");
+	var cmp = document.getElementById(tickercmp);
+ 	var chng = document.getElementById(tickerchng);
+  	var pchng = document.getElementById(tickerpchng);
+  	var spanclose = "</font>";
+  	console.log(tickercmp);
+
+    var change =data["chng"][i-350];
+
+      var span="";
+
+        if(change > 0){
+       span = "<font color = green>";
+      }
+      else if(change < 0){
+         span = "<font color = red>";
+      }
+      else{
+       span = "<font color = grey>";
+      }
+
+      var pchng1 = span.concat(data["pchng"][i-350], spanclose);
+        pchng.innerHTML = pchng1;
+      var chng1 = span.concat(data["chng"][i-350], spanclose);
+        chng.innerHTML = chng1;
+      var cmp1 = span.concat(data["price"][i-350], spanclose);
+        cmp.innerHTML = cmp1;
+
+    }
+
+  };
+
+}
+
+  xhttp.open("GET", url, true);
+  xhttp.send();
+
+}
+
+$$(document).on('page:beforeout', function () { clearInterval(cInterval8); });
+</script>
+
+<script>
+
+    	var currentD = new Date();
+		var startHourD = new Date();
+		startHourD.setHours(9,15,0); // 9.15 am
+		var endHourD = new Date();
+		endHourD.setHours(15,30,0); // 3.30 pm
+
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		    refreshDATA9();
+		}
+		 else{
+		  loadDoc9();
+		 }
+
+		function refreshDATA9() {    cInterval9= setInterval(loadDoc9, 5000);   }
+
+		function loadDoc9() {
+  var xhttp = new XMLHttpRequest();
+  var url = "../update9shownifty500";
+
+  var tickers = ['3M India', 'Aarti Ind', 'AAVAS Financier', 'AB Capital', 'ABB India', 'Abbott India', 'ACC', 'Adani Ports', 'Adani Power', 'Adani Total Gas', 'Adani Trans', 'Aditya Birla F', 'Advanced Enzyme', 'Aegis Logistics', 'AFL', 'AIA Engineering', 'Ajanta Pharma', 'Akzo Nobel', 'Alembic Pharma', 'Alkem Lab', 'Alkyl Amines', 'Allcargo', 'Amara Raja Batt', 'Amber Enterpris', 'Ambuja Cements', 'APL Apollo', 'Apollo Hospital', 'Apollo Tyres', 'Asahi India', 'Ashok Leyland', 'Ashoka Buildcon', 'Asian Paints', 'Aster DM Health', 'Astral Poly Tec', 'AstraZeneca', 'Atul', 'AU Small Financ', 'Aurobindo Pharm', 'Avanti Feeds', 'Avenue Supermar', 'Axis Bank', 'Bajaj Auto', 'Bajaj Consumer ', 'Bajaj Electric', 'Bajaj Finance', 'Bajaj Finserv', 'Bajaj Holdings', 'Balkrishna Ind', 'Balmer Lawrie', 'Balrampur Chini', 'Bandhan Bank', 'Bank of Baroda', 'Bank of India', 'Bank of Mah', 'BASF', 'Bata India', 'Bayer CropScien', 'BEML', 'Berger Paints', 'Bharat Dynamics', 'Bharat Elec', 'Bharat Forge', 'Bharat Rasayan', 'Bharti Airtel', 'BHEL', 'Biocon', 'Birla Corp', 'Birlasoft', 'Bliss GVS', 'Blue Dart', 'Blue Star', 'Bombay Burmah', 'Bombay Dyeing', 'Bosch', 'BPCL', 'Brigade Ent', 'Britannia', 'BSE Limited', 'Cadila Health', 'Can Fin Homes', 'Canara Bank', 'Caplin Labs', 'Capri Global', 'Carborundum', 'CARE Ratings', 'Castrol', 'CCL Products', 'CDSL', 'Ceat', 'Central Bank', 'Century', 'CenturyPlyboard', 'Cera Sanitary', 'CESC', 'CG Consumer', 'Chambal Fert', 'Chennai Petro', 'Cholamandalam (Finance Term Lending)', 'Cholamandalam (Finance-Investment)', 'Cipla', 'City Union Bank', 'Coal India', 'Cochin Shipyard', 'COFORGE LTD.', 'Colgate', 'Container Corp', 'Coromandel Int', 'CreditAccess Gr', 'CRISIL', 'Cummins', 'Cyient', 'Dabur India', 'Dalmia Bharat', 'DB Corp', 'DCB Bank', 'DCM Shriram', 'Deepak Nitrite', 'Delta Corp', 'Dhani Services', 'Dhanuka Agritec', 'Dilip Buildcon', 'Dish TV', 'Dishman Carboge', 'Divis Labs', 'Dixon Technolog', 'DLF', 'Dr Lal PathLab', 'Dr Reddys Labs', 'eClerx Services', 'Edelweiss', 'Eicher Motors', 'EID Parry', 'EIH', 'Elgi Equipments', 'Emami', 'Endurance Techn', 'EngineersInd', 'EPL', 'Equitas Holding', 'Esab India', 'Escorts', 'Exide Ind', 'FDC', 'Federal Bank', 'Fine Organics', 'Finolex Cables', 'Finolex Ind', 'Firstsource Sol', 'Fortis Health', 'Future Consumer', 'Future Retail', 'GAIL', 'Galaxy Surfacta', 'Garden Reach Sh', 'Garware Technic', 'GE Power India', 'GE Shipping', 'GE T&D India', 'General Insuran', 'Gillette India', 'GlaxoSmithKline', 'Glenmark', 'GMM Pfaudler', 'GMR Infra', 'GNFC', 'Godfrey Phillip', 'Godrej Agrovet', 'Godrej Consumer', 'Godrej Ind', 'Godrej Prop', 'Granules India', 'Graphite India', 'Grasim', 'Greaves Cotton', 'Grindwell Norto', 'GSFC', 'Guj Alkali', 'Guj Heavy Chem', 'Guj Mineral', 'Guj State Petro', 'Gujarat Fluoro', 'Gujarat Gas', 'Gujarat Pipavav', 'Gulf Oil Lubric', 'Hathway Cable', 'Hatsun Agro', 'Havells India', 'HCL Tech', 'HDFC', 'HDFC AMC', 'HDFC Bank', 'HDFC Life', 'HEG', 'Heidelberg Cem', 'Heritage Foods', 'Hero Motocorp', 'Hexaware Tech', 'HFCL', 'Himadri Special', 'Himatsingka Sei', 'Hind Copper', 'Hind Zinc', 'Hindalco', 'Hindustan Aeron', 'Honeywell Autom', 'HPCL', 'HUDCO', 'HUL', 'ICICI Bank', 'ICICI Lombard ', 'ICICI Prudentia', 'ICICI Securitie', 'ICRA', 'IDBI Bank', 'IDFC', 'IDFC First Bank', 'IEX', 'IFB Industries', 'IFCI', 'IGL', 'IIFL Finance', 'India Cements', 'India Tourism D', 'Indiabulls Hsg', 'Indiabulls Real', 'Indiamart Inter', 'Indian Bank', 'Indian Hotels', 'Indoco Remedies', 'Indostar Capita', 'INDUS TOWERS', 'IndusInd Bank', 'Infibeam Avenue', 'Info Edge', 'Infosys', 'Ingersoll Rand', 'INOX Leisure', 'Intellect Desig', 'Interglobe Avi', 'IOB', 'IOC', 'Ipca Labs', 'IRB Infra', 'Ircon Internati', 'IRCTC', 'ITC', 'ITI', 'IWML', 'J. K. Cement', 'JagranPrakashan', 'Jai Corp', 'Jamna Auto', 'JB Chemicals', 'Jindal (Hisar)', 'Jindal Saw', 'Jindal Stainles', 'Jindal Steel', 'JK Bank', 'JK Lakshmi Cem', 'JK Paper', 'JK Tyre & Ind', 'JM Financial', 'Johnson Control', 'JSW Energy', 'JSW Steel', 'Jubilant Food', 'Jubilant Pharmo', 'Just Dial', 'Jyothy Labs', 'Kajaria Ceramic', 'Kalpataru Power', 'Kansai Nerolac', 'Karnataka Bank', 'Karur Vysya', 'Kaveri Seed', 'KEC Intl', 'KEI Industries', 'KNR Construct', 'Kolte-Patil', 'Kotak Mahindra', 'KPIT Tech', 'KPR Mill', 'KRBL', 'KSB Pumps', 'L&T Finance', 'L&T Infotech', 'L&T Technology', 'La Opala RG', 'Lakshmi Machine', 'Larsen', 'Laurus Labs', 'Lemon Tree Hote', 'LIC Housing Fin', 'Linde India', 'Lupin', 'Lux Industries', 'M&M', 'Mah Scooters', 'Mah Seamless', 'Mahanagar Gas', 'Mahindra CIE', 'Mahindra Holida', 'Mahindra Logist', 'Manappuram Fin', 'Marico', 'Maruti Suzuki', 'MAS Financial S', 'Max Financial', 'MCX India', 'Metropolis', 'Minda Corp', 'Minda Ind', 'Mindtree', 'Mishra Dhatu Ni', 'MMTC Ltd', 'MOIL', 'Motherson Sumi', 'Motilal Oswal', 'MphasiS', 'MRF', 'MRPL', 'Muthoot Finance', 'NALCO', 'Narayana Hruda', 'Natco Pharma', 'Nava Bharat Ven', 'Navin Fluorine', 'NBCC (India)', 'NCC', 'NESCO', 'Nestle', 'New India Assur', 'NFL', 'NHPC', 'Nilkamal', 'Nippon', 'NLC India', 'NMDC', 'NTPC', 'Oberoi Realty', 'Oil India', 'Omaxe', 'ONGC', 'Oracle Fin Serv', 'Orient Cement', 'Orient Refract', 'P and G', 'Page Industries', 'Persistent', 'Petronet LNG', 'Pfizer', 'Phillips Carbon', 'Phoenix Mills', 'PI Industries', 'Pidilite Ind', 'Piramal Enter', 'PNB', 'PNB Housing Fin', 'PNC Infratech', 'Poly Medicure', 'Polycab', 'Power Finance', 'Power Grid Corp', 'Praj Industries', 'Prestige Estate', 'Prism Cement', 'Procter&Gamble', 'PTC India', 'PVR', 'Quess Corp', 'Radico Khaitan', 'Rail Vikas', 'Rain Industries', 'Rajesh Exports', 'Rallis India', 'Ramco Cements', 'Rashtriya Chem', 'Ratnamani Metal', 'Raymond', 'RBL Bank', 'REC', 'Redington', 'Relaxo Footwear', 'Reliance', 'Repco Home', 'RITES', 'Sadbhav Engg', 'SAIL', 'Sanofi India', 'SBI', 'SBI Life Insura', 'Schaeffler Ind', 'Schneider Infra', 'Sequent Scienti', 'Sheela Foam', 'Shipping Corp', 'Shoppers Stop', 'Shree Cements', 'Shree Renuka', 'Shriram City', 'Shriram Trans', 'Siemens', 'SIS', 'SJVN', 'SKF India', 'Sobha', 'Solar Ind', 'Sonata', 'South Ind Bk', 'SpiceJet', 'SRF', 'Star Cement', 'Sterlite Techno', 'Strides Pharma ', 'Sudarshan Chem', 'SUMITOMO', 'Sun Pharma', 'Sun Pharma Adv', 'Sun TV Network', 'Sundaram Fin', 'Sundram', 'Sunteck Realty', 'Suprajit Eng', 'Supreme Ind', 'Suzlon Energy', 'Swan Energy', 'Symphony', 'Syngene Intl', 'Tasty Bite', 'Tata Comm', 'TATA Cons. Prod', 'Tata Elxsi', 'Tata Inv Corp', 'Tata Motors', 'Tata Power', 'Tata Steel', 'Tata Steel BSL ', 'TCNS Clothing C', 'TCS', 'TeamLease Ser.', 'Tech Mahindra', 'Thermax', 'Thyrocare Techn', 'Time Techno', 'Timken', 'Titan Company', 'TML-D', 'Torrent Pharma', 'Torrent Power', 'Trent', 'Trident', 'TTK Prestige', 'TV TodayNetwork', 'TV18 Broadcast', 'TVS Motor', 'UCO Bank', 'Uflex', 'Ujjivan Financi', 'UltraTechCement', 'Union Bank', 'United Brewerie', 'United Spirits', 'UPL', 'V-Guard Ind', 'V-Mart Retail', 'Vaibhav Global', 'Vakrangee', 'Vardhman Text', 'Varroc Engineer', 'Varun Beverages', 'Vedanta', 'Venkys', 'Vesuvius India', 'Vinati Organics', 'VIP Industries', 'Vodafone Idea', 'Voltas', 'VRL Logistics', 'VST', 'WABCO India', 'Welspun Corp', 'Welspun India', 'Westlife Dev', 'Whirlpool', 'Wipro', 'Wockhardt', 'Zee Entertain', 'Zensar Tech', 'Zydus Wellness'];
+ var i;
+ xhttp.onreadystatechange=function() {
+ 	if (this.readyState == 4 && this.status == 200) {
+ 		var data = JSON.parse(this.responseText);
+for (i=400;i<450;i++){
+	var tickercmp = tickers[i].concat("cmp");
+	var tickerchng = tickers[i].concat("chng");
+	var tickerpchng = tickers[i].concat("pchng");
+	var cmp = document.getElementById(tickercmp);
+ 	var chng = document.getElementById(tickerchng);
+  	var pchng = document.getElementById(tickerpchng);
+  	var spanclose = "</font>";
+  	console.log(tickercmp);
+
+    var change =data["chng"][i-400];
+
+      var span="";
+
+        if(change > 0){
+       span = "<font color = green>";
+      }
+      else if(change < 0){
+         span = "<font color = red>";
+      }
+      else{
+       span = "<font color = grey>";
+      }
+
+      var pchng1 = span.concat(data["pchng"][i-400], spanclose);
+        pchng.innerHTML = pchng1;
+      var chng1 = span.concat(data["chng"][i-400], spanclose);
+        chng.innerHTML = chng1;
+      var cmp1 = span.concat(data["price"][i-400], spanclose);
+        cmp.innerHTML = cmp1;
+
+    }
+
+  };
+
+}
+
+  xhttp.open("GET", url, true);
+  xhttp.send();
+
+}
+
+$$(document).on('page:beforeout', function () { clearInterval(cInterval9); });
+</script>
+
+<script>
+
+    	var currentD = new Date();
+		var startHourD = new Date();
+		startHourD.setHours(9,15,0); // 9.15 am
+		var endHourD = new Date();
+		endHourD.setHours(15,30,0); // 3.30 pm
+
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		    refreshDATA10();
+		}
+		 else{
+		  loadDoc4();
+		 }
+
+		function refreshDATA10() {    cInterval10= setInterval(loadDoc10, 5000);   }
+
+		function loadDoc10() {
+  var xhttp = new XMLHttpRequest();
+  var url = "../update10shownifty500";
+
+  var tickers = ['3M India', 'Aarti Ind', 'AAVAS Financier', 'AB Capital', 'ABB India', 'Abbott India', 'ACC', 'Adani Ports', 'Adani Power', 'Adani Total Gas', 'Adani Trans', 'Aditya Birla F', 'Advanced Enzyme', 'Aegis Logistics', 'AFL', 'AIA Engineering', 'Ajanta Pharma', 'Akzo Nobel', 'Alembic Pharma', 'Alkem Lab', 'Alkyl Amines', 'Allcargo', 'Amara Raja Batt', 'Amber Enterpris', 'Ambuja Cements', 'APL Apollo', 'Apollo Hospital', 'Apollo Tyres', 'Asahi India', 'Ashok Leyland', 'Ashoka Buildcon', 'Asian Paints', 'Aster DM Health', 'Astral Poly Tec', 'AstraZeneca', 'Atul', 'AU Small Financ', 'Aurobindo Pharm', 'Avanti Feeds', 'Avenue Supermar', 'Axis Bank', 'Bajaj Auto', 'Bajaj Consumer ', 'Bajaj Electric', 'Bajaj Finance', 'Bajaj Finserv', 'Bajaj Holdings', 'Balkrishna Ind', 'Balmer Lawrie', 'Balrampur Chini', 'Bandhan Bank', 'Bank of Baroda', 'Bank of India', 'Bank of Mah', 'BASF', 'Bata India', 'Bayer CropScien', 'BEML', 'Berger Paints', 'Bharat Dynamics', 'Bharat Elec', 'Bharat Forge', 'Bharat Rasayan', 'Bharti Airtel', 'BHEL', 'Biocon', 'Birla Corp', 'Birlasoft', 'Bliss GVS', 'Blue Dart', 'Blue Star', 'Bombay Burmah', 'Bombay Dyeing', 'Bosch', 'BPCL', 'Brigade Ent', 'Britannia', 'BSE Limited', 'Cadila Health', 'Can Fin Homes', 'Canara Bank', 'Caplin Labs', 'Capri Global', 'Carborundum', 'CARE Ratings', 'Castrol', 'CCL Products', 'CDSL', 'Ceat', 'Central Bank', 'Century', 'CenturyPlyboard', 'Cera Sanitary', 'CESC', 'CG Consumer', 'Chambal Fert', 'Chennai Petro', 'Cholamandalam (Finance Term Lending)', 'Cholamandalam (Finance-Investment)', 'Cipla', 'City Union Bank', 'Coal India', 'Cochin Shipyard', 'COFORGE LTD.', 'Colgate', 'Container Corp', 'Coromandel Int', 'CreditAccess Gr', 'CRISIL', 'Cummins', 'Cyient', 'Dabur India', 'Dalmia Bharat', 'DB Corp', 'DCB Bank', 'DCM Shriram', 'Deepak Nitrite', 'Delta Corp', 'Dhani Services', 'Dhanuka Agritec', 'Dilip Buildcon', 'Dish TV', 'Dishman Carboge', 'Divis Labs', 'Dixon Technolog', 'DLF', 'Dr Lal PathLab', 'Dr Reddys Labs', 'eClerx Services', 'Edelweiss', 'Eicher Motors', 'EID Parry', 'EIH', 'Elgi Equipments', 'Emami', 'Endurance Techn', 'EngineersInd', 'EPL', 'Equitas Holding', 'Esab India', 'Escorts', 'Exide Ind', 'FDC', 'Federal Bank', 'Fine Organics', 'Finolex Cables', 'Finolex Ind', 'Firstsource Sol', 'Fortis Health', 'Future Consumer', 'Future Retail', 'GAIL', 'Galaxy Surfacta', 'Garden Reach Sh', 'Garware Technic', 'GE Power India', 'GE Shipping', 'GE T&D India', 'General Insuran', 'Gillette India', 'GlaxoSmithKline', 'Glenmark', 'GMM Pfaudler', 'GMR Infra', 'GNFC', 'Godfrey Phillip', 'Godrej Agrovet', 'Godrej Consumer', 'Godrej Ind', 'Godrej Prop', 'Granules India', 'Graphite India', 'Grasim', 'Greaves Cotton', 'Grindwell Norto', 'GSFC', 'Guj Alkali', 'Guj Heavy Chem', 'Guj Mineral', 'Guj State Petro', 'Gujarat Fluoro', 'Gujarat Gas', 'Gujarat Pipavav', 'Gulf Oil Lubric', 'Hathway Cable', 'Hatsun Agro', 'Havells India', 'HCL Tech', 'HDFC', 'HDFC AMC', 'HDFC Bank', 'HDFC Life', 'HEG', 'Heidelberg Cem', 'Heritage Foods', 'Hero Motocorp', 'Hexaware Tech', 'HFCL', 'Himadri Special', 'Himatsingka Sei', 'Hind Copper', 'Hind Zinc', 'Hindalco', 'Hindustan Aeron', 'Honeywell Autom', 'HPCL', 'HUDCO', 'HUL', 'ICICI Bank', 'ICICI Lombard ', 'ICICI Prudentia', 'ICICI Securitie', 'ICRA', 'IDBI Bank', 'IDFC', 'IDFC First Bank', 'IEX', 'IFB Industries', 'IFCI', 'IGL', 'IIFL Finance', 'India Cements', 'India Tourism D', 'Indiabulls Hsg', 'Indiabulls Real', 'Indiamart Inter', 'Indian Bank', 'Indian Hotels', 'Indoco Remedies', 'Indostar Capita', 'INDUS TOWERS', 'IndusInd Bank', 'Infibeam Avenue', 'Info Edge', 'Infosys', 'Ingersoll Rand', 'INOX Leisure', 'Intellect Desig', 'Interglobe Avi', 'IOB', 'IOC', 'Ipca Labs', 'IRB Infra', 'Ircon Internati', 'IRCTC', 'ITC', 'ITI', 'IWML', 'J. K. Cement', 'JagranPrakashan', 'Jai Corp', 'Jamna Auto', 'JB Chemicals', 'Jindal (Hisar)', 'Jindal Saw', 'Jindal Stainles', 'Jindal Steel', 'JK Bank', 'JK Lakshmi Cem', 'JK Paper', 'JK Tyre & Ind', 'JM Financial', 'Johnson Control', 'JSW Energy', 'JSW Steel', 'Jubilant Food', 'Jubilant Pharmo', 'Just Dial', 'Jyothy Labs', 'Kajaria Ceramic', 'Kalpataru Power', 'Kansai Nerolac', 'Karnataka Bank', 'Karur Vysya', 'Kaveri Seed', 'KEC Intl', 'KEI Industries', 'KNR Construct', 'Kolte-Patil', 'Kotak Mahindra', 'KPIT Tech', 'KPR Mill', 'KRBL', 'KSB Pumps', 'L&T Finance', 'L&T Infotech', 'L&T Technology', 'La Opala RG', 'Lakshmi Machine', 'Larsen', 'Laurus Labs', 'Lemon Tree Hote', 'LIC Housing Fin', 'Linde India', 'Lupin', 'Lux Industries', 'M&M', 'Mah Scooters', 'Mah Seamless', 'Mahanagar Gas', 'Mahindra CIE', 'Mahindra Holida', 'Mahindra Logist', 'Manappuram Fin', 'Marico', 'Maruti Suzuki', 'MAS Financial S', 'Max Financial', 'MCX India', 'Metropolis', 'Minda Corp', 'Minda Ind', 'Mindtree', 'Mishra Dhatu Ni', 'MMTC Ltd', 'MOIL', 'Motherson Sumi', 'Motilal Oswal', 'MphasiS', 'MRF', 'MRPL', 'Muthoot Finance', 'NALCO', 'Narayana Hruda', 'Natco Pharma', 'Nava Bharat Ven', 'Navin Fluorine', 'NBCC (India)', 'NCC', 'NESCO', 'Nestle', 'New India Assur', 'NFL', 'NHPC', 'Nilkamal', 'Nippon', 'NLC India', 'NMDC', 'NTPC', 'Oberoi Realty', 'Oil India', 'Omaxe', 'ONGC', 'Oracle Fin Serv', 'Orient Cement', 'Orient Refract', 'P and G', 'Page Industries', 'Persistent', 'Petronet LNG', 'Pfizer', 'Phillips Carbon', 'Phoenix Mills', 'PI Industries', 'Pidilite Ind', 'Piramal Enter', 'PNB', 'PNB Housing Fin', 'PNC Infratech', 'Poly Medicure', 'Polycab', 'Power Finance', 'Power Grid Corp', 'Praj Industries', 'Prestige Estate', 'Prism Cement', 'Procter&Gamble', 'PTC India', 'PVR', 'Quess Corp', 'Radico Khaitan', 'Rail Vikas', 'Rain Industries', 'Rajesh Exports', 'Rallis India', 'Ramco Cements', 'Rashtriya Chem', 'Ratnamani Metal', 'Raymond', 'RBL Bank', 'REC', 'Redington', 'Relaxo Footwear', 'Reliance', 'Repco Home', 'RITES', 'Sadbhav Engg', 'SAIL', 'Sanofi India', 'SBI', 'SBI Life Insura', 'Schaeffler Ind', 'Schneider Infra', 'Sequent Scienti', 'Sheela Foam', 'Shipping Corp', 'Shoppers Stop', 'Shree Cements', 'Shree Renuka', 'Shriram City', 'Shriram Trans', 'Siemens', 'SIS', 'SJVN', 'SKF India', 'Sobha', 'Solar Ind', 'Sonata', 'South Ind Bk', 'SpiceJet', 'SRF', 'Star Cement', 'Sterlite Techno', 'Strides Pharma ', 'Sudarshan Chem', 'SUMITOMO', 'Sun Pharma', 'Sun Pharma Adv', 'Sun TV Network', 'Sundaram Fin', 'Sundram', 'Sunteck Realty', 'Suprajit Eng', 'Supreme Ind', 'Suzlon Energy', 'Swan Energy', 'Symphony', 'Syngene Intl', 'Tasty Bite', 'Tata Comm', 'TATA Cons. Prod', 'Tata Elxsi', 'Tata Inv Corp', 'Tata Motors', 'Tata Power', 'Tata Steel', 'Tata Steel BSL ', 'TCNS Clothing C', 'TCS', 'TeamLease Ser.', 'Tech Mahindra', 'Thermax', 'Thyrocare Techn', 'Time Techno', 'Timken', 'Titan Company', 'TML-D', 'Torrent Pharma', 'Torrent Power', 'Trent', 'Trident', 'TTK Prestige', 'TV TodayNetwork', 'TV18 Broadcast', 'TVS Motor', 'UCO Bank', 'Uflex', 'Ujjivan Financi', 'UltraTechCement', 'Union Bank', 'United Brewerie', 'United Spirits', 'UPL', 'V-Guard Ind', 'V-Mart Retail', 'Vaibhav Global', 'Vakrangee', 'Vardhman Text', 'Varroc Engineer', 'Varun Beverages', 'Vedanta', 'Venkys', 'Vesuvius India', 'Vinati Organics', 'VIP Industries', 'Vodafone Idea', 'Voltas', 'VRL Logistics', 'VST', 'WABCO India', 'Welspun Corp', 'Welspun India', 'Westlife Dev', 'Whirlpool', 'Wipro', 'Wockhardt', 'Zee Entertain', 'Zensar Tech', 'Zydus Wellness'];
+ var i;
+ xhttp.onreadystatechange=function() {
+ 	if (this.readyState == 4 && this.status == 200) {
+ 		var data = JSON.parse(this.responseText);
+for (i=450;i<489;i++){
+	var tickercmp = tickers[i].concat("cmp");
+	var tickerchng = tickers[i].concat("chng");
+	var tickerpchng = tickers[i].concat("pchng");
+	var cmp = document.getElementById(tickercmp);
+ 	var chng = document.getElementById(tickerchng);
+  	var pchng = document.getElementById(tickerpchng);
+  	var spanclose = "</font>";
+  	console.log(tickercmp);
+
+    var change =data["chng"][i-450];
+
+      var span="";
+
+        if(change > 0){
+       span = "<font color = green>";
+      }
+      else if(change < 0){
+         span = "<font color = red>";
+      }
+      else{
+       span = "<font color = grey>";
+      }
+
+      var pchng1 = span.concat(data["pchng"][i-450], spanclose);
+        pchng.innerHTML = pchng1;
+      var chng1 = span.concat(data["chng"][i-450], spanclose);
+        chng.innerHTML = chng1;
+      var cmp1 = span.concat(data["price"][i-450], spanclose);
+        cmp.innerHTML = cmp1;
+
+    }
+
+  };
+
+}
+
+  xhttp.open("GET", url, true);
+  xhttp.send();
+
+}
+
+$$(document).on('page:beforeout', function () { clearInterval(cInterval10); });
+</script>
+
+    </tbody>
+  <script>
+    function myFun(){
+        var input,filter,table,tr,td,i,textvalue;
+        input=document.getElementById("myInput")
+        filter=input.value.toUpperCase();
+        table=document.getElementById("myTable");
+        tr=table.getElementsByTagName("tr");
+        for(i=0;i<tr.length;i++){
+            td=tr[i].getElementsByTagName("td")[0];
             if(td)
             {
-                let textvalue=td.textContent || td.innerHTML;
-                if(textvalue.toLowerCase().indexOf(input)>-1)
+                textvalue=td.textContent || td.innerHTML;
+                if(textvalue.toUpperCase().indexOf(filter)>-1)
                 {
                     tr[i].style.display="";
                 }
@@ -213,16 +782,7 @@ $$(document).on('page:beforeout', function () { clearInterval(cInterval2); });
             }
         }
     }
-
 </script>
-
-
-
-
-</tbody>
-  
-
-    
 </table>
 </center>
 
@@ -230,4 +790,5 @@ $$(document).on('page:beforeout', function () { clearInterval(cInterval2); });
 {% include 'layouts/home_footer.html' %}
 
 {% include 'layouts/home_additonal_body_contents.html' %}
+</html>
 </html>
