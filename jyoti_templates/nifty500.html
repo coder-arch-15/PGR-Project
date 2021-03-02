@@ -35,11 +35,11 @@
 
     	{% for ticker in stocks%}
     	<tr>
-    	<td>{{ticker.0}}</td>
+    	<td><a href="../stockpage/?ticker={{ticker}}" target="_blank"> <strong>{{ticker}}</strong></a></td>
 
-              <td class="smw-tablesort smw-Decimal"  id="{{ticker.0}}cmp"></td>
-              <td class="smw-tablesort smw-Decimal" id="{{ticker.0}}chng"></td>
-              <td class="smw-tablesort smw-Percent" id="{{ticker.0}}pchng"></td>
+              <td class="smw-tablesort smw-Decimal"  id="{{ticker}}cmp"></td>
+              <td class="smw-tablesort smw-Decimal" id="{{ticker}}chng"></td>
+              <td class="smw-tablesort smw-Percent" id="{{ticker}}pchng"></td>
 
           </tr>
 

@@ -53,8 +53,8 @@ def stockpage(request):
 				return render(request, "stockpage.html", {"info":stocks,"tradingview_ticker":tradingview_ticker[0], "cash":request.session['user'][9], "current_holdings": current_holdings[0] })
 			else:
 				stocks = []
-				stocks.append(hf.codes[ticker][1]+".NS")
-				tradingview_ticker = hf.codes[ticker][1]
+				stocks.append(hf.codes[ticker][0]+".NS")
+				tradingview_ticker = hf.codes[ticker][0]
 				return render(request, "stockpage.html", {"info":stocks,"tradingview_ticker":tradingview_ticker})
 		else:
 			return redirect("/buyplanpage")

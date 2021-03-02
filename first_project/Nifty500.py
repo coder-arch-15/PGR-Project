@@ -7,6 +7,7 @@ import bs4
 import requests
 from bs4 import BeautifulSoup
 import pymysql as mysql
+from . import hreflist as hf
 
 def update1shownifty500(request):
     url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=7')
@@ -238,12 +239,9 @@ def update10shownifty500(request):
 
 
 def shownifty500(request):
-    dbe = mysql.connect(host='localhost', port=3306, password='123', user='root', db='pgrdb')
-    cmd = dbe.cursor()
-    q = "select * from stocks500"
-    cmd.execute(q)
-    rec = cmd.fetchall()
-    dbe.close()
+    rec = []
+    for key in hf.codes.keys():
+        rec.append(key)
     return render(request,"nifty500.html",{'stocks': rec})
 
 # def temp(request):
