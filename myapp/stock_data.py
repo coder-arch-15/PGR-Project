@@ -7,10 +7,11 @@ import bs4
 import requests
 from bs4 import BeautifulSoup 
 from . import hreflist as hf
+from . import data
 
 
 
-def getcmp(request,ticker):        #this function retuurns cmp of ticker
+def getcmp(request,ticker):        #this function returns cmp of ticker
 	try:
 		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=2)
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
@@ -78,26 +79,26 @@ def updateStockInfo(request):		#this function retuurns cmp,chng,pchng... of tick
 
 
 def updateshownifty50(request):
-    url = requests.get(
-        'https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=9')
-    soup = bs4.BeautifulSoup(url.text, features="html.parser")
-    tickers = []
-    i = 0
-    pricel=[]
-    chngl=[]
-    pchngl=[]
-    y = ['ADANIPORTS.NS', 'ASIANPAINT.NS', 'AXISBANK.NS', 'BAJAJ-AUTO.NS', 'BAJAJFINSV.NS', 'BAJFINANCE.NS', 'BHARTIARTL.NS', 'BPCL.NS', 'BRITANNIA.NS', 'CIPLA.NS', 'COALINDIA.NS', 'DIVISLAB.NS', 'DRREDDY.NS', 'EICHERMOT.NS', 'GAIL.NS', 'GRASIM.NS', 'HCLTECH.NS', 'HDFC.NS', 'HDFCBANK.NS', 'HDFCLIFE.NS', 'HEROMOTOCO.NS', 'HINDALCO.NS', 'HINDUNILVR.NS', 'ICICIBANK.NS', 'INDUSINDBK.NS', 'INFY.NS', 'IOC.NS', 'ITC.NS', 'JSWSTEEL.NS', 'KOTAKBANK.NS', 'LT.NS', 'M&M.NS', 'MARUTI.NS', 'NESTLEIND.NS', 'NTPC.NS', 'ONGC.NS', 'POWERGRID.NS', 'RELIANCE.NS', 'SBILIFE.NS', 'SBIN.NS', 'SHREECEM.NS', 'SUNPHARMA.NS', 'TATAMOTORS.NS', 'TATASTEEL.NS', 'TCS.NS', 'TECHM.NS', 'TITAN.NS', 'ULTRACEMCO.NS', 'UPL.NS', 'WIPRO.NS']
-    while (i < 200):
-    	price = soup.find_all("td", {'align': 'right'})[i].text
-    	price=price.replace(',','')
-    	chng = soup.find_all("td", {'align': 'right'})[i + 1].text
-    	pchng = soup.find_all("td", {'align': 'right'})[i + 2].text
-    	pricel.append(price)
-    	chngl.append(chng)
-    	pchngl.append(pchng)
-    	i += 4
-    data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
-    return HttpResponse(json.dumps(data))
+    # url = requests.get(
+    #     'https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=9')
+    # soup = bs4.BeautifulSoup(url.text, features="html.parser")
+    # tickers = []
+    # i = 0
+    # pricel=[]
+    # chngl=[]
+    # pchngl=[]
+    # y = ['ADANIPORTS.NS', 'ASIANPAINT.NS', 'AXISBANK.NS', 'BAJAJ-AUTO.NS', 'BAJAJFINSV.NS', 'BAJFINANCE.NS', 'BHARTIARTL.NS', 'BPCL.NS', 'BRITANNIA.NS', 'CIPLA.NS', 'COALINDIA.NS', 'DIVISLAB.NS', 'DRREDDY.NS', 'EICHERMOT.NS', 'GAIL.NS', 'GRASIM.NS', 'HCLTECH.NS', 'HDFC.NS', 'HDFCBANK.NS', 'HDFCLIFE.NS', 'HEROMOTOCO.NS', 'HINDALCO.NS', 'HINDUNILVR.NS', 'ICICIBANK.NS', 'INDUSINDBK.NS', 'INFY.NS', 'IOC.NS', 'ITC.NS', 'JSWSTEEL.NS', 'KOTAKBANK.NS', 'LT.NS', 'M&M.NS', 'MARUTI.NS', 'NESTLEIND.NS', 'NTPC.NS', 'ONGC.NS', 'POWERGRID.NS', 'RELIANCE.NS', 'SBILIFE.NS', 'SBIN.NS', 'SHREECEM.NS', 'SUNPHARMA.NS', 'TATAMOTORS.NS', 'TATASTEEL.NS', 'TCS.NS', 'TECHM.NS', 'TITAN.NS', 'ULTRACEMCO.NS', 'UPL.NS', 'WIPRO.NS']
+    # while (i < 200):
+    # 	price = soup.find_all("td", {'align': 'right'})[i].text
+    # 	price=price.replace(',','')
+    # 	chng = soup.find_all("td", {'align': 'right'})[i + 1].text
+    # 	pchng = soup.find_all("td", {'align': 'right'})[i + 2].text
+    # 	pricel.append(price)
+    # 	chngl.append(chng)
+    # 	pchngl.append(pchng)
+    # 	i += 4
+    # data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
+    return HttpResponse(json.dumps(data.nifty50data))
 
 
 def updatecmp(request):			#this function updates cmps in db
@@ -155,72 +156,74 @@ def updatepriceaction(request):			#this function updates open close high low in 
 
 
 def updateIndices(request):		#returns indices data
-	try:
-		import json
-		url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
-		soup = bs4.BeautifulSoup(url.text, features="html.parser")
-		indices = {
-	        "NIFTY50":soup.find_all("td", {'align': 'right'})[6].text ,
-	        "NIFTY50CHNG":soup.find_all("td", {'align': 'right'})[7].text,
-	        "NIFTY50PCHNG":soup.find_all("td", {'align': 'right'})[8].text,
-	        "NIFTYBANK":soup.find_all("td", {'align': 'right'})[276].text,
-	        "NIFTYBANKCHNG":soup.find_all("td", {'align': 'right'})[277].text,
-	        "NIFTYBANKPCHNG":soup.find_all("td", {'align': 'right'})[278].text,
-	        "NIFTYENERGY":soup.find_all("td", {'align': 'right'})[294].text,
-	        "NIFTYENERGYCHNG":soup.find_all("td", {'align': 'right'})[295].text,
-	        "NIFTYENERGYPCHNG":soup.find_all("td", {'align': 'right'})[296].text,
-	        "NIFTYIT":soup.find_all("td", {'align': 'right'})[318].text,
-	        "NIFTYITCHNG":soup.find_all("td", {'align': 'right'})[319].text,
-	        "NIFTYITPCHNG":soup.find_all("td", {'align': 'right'})[320].text
-	        }
-		return HttpResponse(json.dumps(indices))
-	except Exception as e:
-		import json
-		url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
-		soup = bs4.BeautifulSoup(url.text, features="html.parser")
-		indices = {
-	        "NIFTY50":soup.find_all("td", {'align': 'right'})[6].text ,
-	        "NIFTY50CHNG":soup.find_all("td", {'align': 'right'})[7].text,
-	        "NIFTY50PCHNG":soup.find_all("td", {'align': 'right'})[8].text,
-	        "NIFTYBANK":soup.find_all("td", {'align': 'right'})[276].text,
-	        "NIFTYBANKCHNG":soup.find_all("td", {'align': 'right'})[277].text,
-	        "NIFTYBANKPCHNG":soup.find_all("td", {'align': 'right'})[278].text,
-	        "NIFTYENERGY":soup.find_all("td", {'align': 'right'})[294].text,
-	        "NIFTYENERGYCHNG":soup.find_all("td", {'align': 'right'})[295].text,
-	        "NIFTYENERGYPCHNG":soup.find_all("td", {'align': 'right'})[296].text,
-	        "NIFTYIT":soup.find_all("td", {'align': 'right'})[318].text,
-	        "NIFTYITCHNG":soup.find_all("td", {'align': 'right'})[319].text,
-	        "NIFTYITPCHNG":soup.find_all("td", {'align': 'right'})[320].text
-	        }
-		return HttpResponse(json.dumps(indices))
-	except:
-		return HttpResponse(json.dumps("True"))
+	return HttpResponse(json.dumps(data.indices))
+	# try:
+	# 	import json
+	# 	url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
+	# 	soup = bs4.BeautifulSoup(url.text, features="html.parser")
+	# 	indices = {
+	#         "NIFTY50":soup.find_all("td", {'align': 'right'})[6].text ,
+	#         "NIFTY50CHNG":soup.find_all("td", {'align': 'right'})[7].text,
+	#         "NIFTY50PCHNG":soup.find_all("td", {'align': 'right'})[8].text,
+	#         "NIFTYBANK":soup.find_all("td", {'align': 'right'})[276].text,
+	#         "NIFTYBANKCHNG":soup.find_all("td", {'align': 'right'})[277].text,
+	#         "NIFTYBANKPCHNG":soup.find_all("td", {'align': 'right'})[278].text,
+	#         "NIFTYENERGY":soup.find_all("td", {'align': 'right'})[294].text,
+	#         "NIFTYENERGYCHNG":soup.find_all("td", {'align': 'right'})[295].text,
+	#         "NIFTYENERGYPCHNG":soup.find_all("td", {'align': 'right'})[296].text,
+	#         "NIFTYIT":soup.find_all("td", {'align': 'right'})[318].text,
+	#         "NIFTYITCHNG":soup.find_all("td", {'align': 'right'})[319].text,
+	#         "NIFTYITPCHNG":soup.find_all("td", {'align': 'right'})[320].text
+	#         }
+	# 	return HttpResponse(json.dumps(indices))
+	# except Exception as e:
+	# 	import json
+	# 	url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
+	# 	soup = bs4.BeautifulSoup(url.text, features="html.parser")
+	# 	indices = {
+	#         "NIFTY50":soup.find_all("td", {'align': 'right'})[6].text ,
+	#         "NIFTY50CHNG":soup.find_all("td", {'align': 'right'})[7].text,
+	#         "NIFTY50PCHNG":soup.find_all("td", {'align': 'right'})[8].text,
+	#         "NIFTYBANK":soup.find_all("td", {'align': 'right'})[276].text,
+	#         "NIFTYBANKCHNG":soup.find_all("td", {'align': 'right'})[277].text,
+	#         "NIFTYBANKPCHNG":soup.find_all("td", {'align': 'right'})[278].text,
+	#         "NIFTYENERGY":soup.find_all("td", {'align': 'right'})[294].text,
+	#         "NIFTYENERGYCHNG":soup.find_all("td", {'align': 'right'})[295].text,
+	#         "NIFTYENERGYPCHNG":soup.find_all("td", {'align': 'right'})[296].text,
+	#         "NIFTYIT":soup.find_all("td", {'align': 'right'})[318].text,
+	#         "NIFTYITCHNG":soup.find_all("td", {'align': 'right'})[319].text,
+	#         "NIFTYITPCHNG":soup.find_all("td", {'align': 'right'})[320].text
+	#         }
+	# 	return HttpResponse(json.dumps(indices))
+	# except:
+	# 	return HttpResponse(json.dumps("True"))
 
 
 
 def updateAllIndices(request):		#returns indices data
-	try:
-		import json
-		url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
-		soup = bs4.BeautifulSoup(url.text, features="html.parser")
-		i = 0
-		pricel=[]
-		chngl=[]
-		pchngl=[]
-		for i in range(70):
-			if (i==1 or ((i>39) and (i<63))):
-				price = soup.find_all("td", {'align': 'right'})[6*i].text
-				price=price.replace(',','')
-				price = float(price)
-				chng = soup.find_all("td", {'align': 'right'})[6*i+1].text
-				pchng = soup.find_all("td", {'align': 'right'})[6*i+2].text
-				pricel.append(price)
-				chngl.append(chng)
-				pchngl.append(pchng)
-		data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
-		return HttpResponse(json.dumps(data))
-	except:
-		return HttpResponse(json.dumps("True"))
+	return HttpResponse(json.dumps(data.data))
+	# try:
+	# 	import json
+	# 	url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
+	# 	soup = bs4.BeautifulSoup(url.text, features="html.parser")
+	# 	i = 0
+	# 	pricel=[]
+	# 	chngl=[]
+	# 	pchngl=[]
+	# 	for i in range(70):
+	# 		if (i==1 or ((i>39) and (i<63))):
+	# 			price = soup.find_all("td", {'align': 'right'})[6*i].text
+	# 			price=price.replace(',','')
+	# 			price = float(price)
+	# 			chng = soup.find_all("td", {'align': 'right'})[6*i+1].text
+	# 			pchng = soup.find_all("td", {'align': 'right'})[6*i+2].text
+	# 			pricel.append(price)
+	# 			chngl.append(chng)
+	# 			pchngl.append(pchng)
+	# 	data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
+	# 	return HttpResponse(json.dumps(data))
+	# except:
+	# 	return HttpResponse(json.dumps("True"))
 
 
 def updateIndexConstituents(request):

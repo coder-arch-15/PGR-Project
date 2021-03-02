@@ -10,7 +10,7 @@ from django.conf import settings
 import pymysql
 
 def home(request):
-	if(request.session.has_key("username")):
+	if(request.session.has_key("user")):
 		return redirect("/userdashboard")
 	return render(request, "home.html")
 

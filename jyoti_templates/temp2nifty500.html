@@ -80,7 +80,8 @@
 		var endHourD = new Date();
 		endHourD.setHours(15,30,0); // 3.30 pm
 
-		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD ){
+		if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD )
+    {
 		    refreshDATA();
 		}
 		 else{
@@ -93,15 +94,16 @@
   var xhttp = new XMLHttpRequest();
   var url = "../tempupdateshownifty500";
  var i=0;
- var n=-1;
  xhttp.onreadystatechange=function() {
  	/*if (this.readyState == 4 && this.status == 200) {*/
-    var tempdata = this.responseText
-    if (tempdata != "True"){
- 		var data = JSON.parse(tempdata.slice(n+1));
-    n = tempdata.indexOf("}",n+1);
-    var tick = data["ticker"]
-/*for (i=0;i<489;i++){*/
+    
+    
+ 		var data = JSON.parse(this.responseText);
+    if (data != "True"){
+    console.log(data[1]["ticker"])
+    
+for (i=0;i<489;i++){
+  var tick = data[i]["ticker"]
 	var tickercmp = tick.concat("cmp");
 	var tickerchng = tick.concat("chng");
 	var tickerpchng = tick.concat("pchng");
@@ -111,7 +113,7 @@
   	var spanclose = "</font>";
   	
 
-    var change =data["chng"];
+    var change =data[i]["chng"];
 
       var span="";
 
@@ -125,14 +127,14 @@
        span = "<font color = grey>";
       }
 
-      var pchng1 = span.concat(data["pchng"], spanclose);
+      var pchng1 = span.concat(data[i]["pchng"], spanclose);
         pchng.innerHTML = pchng1;
-      var chng1 = span.concat(data["chng"], spanclose);
+      var chng1 = span.concat(data[i]["chng"], spanclose);
         chng.innerHTML = chng1;
-      var cmp1 = span.concat(data["price"], spanclose);
+      var cmp1 = span.concat(data[i]["price"], spanclose);
         cmp.innerHTML = cmp1;
 
-    /*}*/
+    }
     
 
 }
