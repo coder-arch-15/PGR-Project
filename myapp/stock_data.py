@@ -41,7 +41,7 @@ def updateStockInfo(request):		#this function retuurns cmp,chng,pchng... of tick
 		chngline = res1[0].find('span', {'data-reactid': '33'}).text
 		chng,pchng = chngline.split('(')
 		pchng = pchng.replace(")","")
-		res2 = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})
+		res = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})
 		openp = res[0].find('span').text
 		close = res[1].find('span').text
 		lowhigh = res[4].text
