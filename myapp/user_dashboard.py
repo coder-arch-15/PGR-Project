@@ -215,6 +215,8 @@ def index_page(request):
 		tick = str(request.GET.get('ticker', None))
 		if tick == "NIFTY 500":
 			return redirect("/shownifty500")
+		if tick == "NIFTY 50":
+			return redirect("/shownifty50/")
 		index_value = value[indices.index(tick)]
 		url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index={0}'.format(index_value))
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")

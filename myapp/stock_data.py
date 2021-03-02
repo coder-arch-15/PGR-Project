@@ -33,7 +33,7 @@ def updateStockInfo(request):		#this function retuurns cmp,chng,pchng... of tick
 	try:
 		prices = []
 		
-		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=2)
+		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=3)
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
 		price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
 		price=price.replace(',','')
