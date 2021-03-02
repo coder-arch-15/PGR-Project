@@ -35,18 +35,19 @@ def updateStockInfo(request):		#this function retuurns cmp,chng,pchng... of tick
 		
 		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=3)
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
-		price = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span').text
+		res1 = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})
+		price = res1[0].find('span').text
 		price=price.replace(',','')
-		chngline = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})[0].find('span', {'data-reactid': '33'}).text
+		chngline = res1[0].find('span', {'data-reactid': '33'}).text
 		chng,pchng = chngline.split('(')
 		pchng = pchng.replace(")","")
-
-		openp = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[0].find('span').text
-		close = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[1].find('span').text
-		lowhigh = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[4].text
-		lowhigh52 = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[5].text
-		volume = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[6].find('span').text
-		mcap = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})[8].find('span').text
+		res2 = soup.find_all("td", {'class': 'Ta(end) Fw(600) Lh(14px)'})
+		openp = res[0].find('span').text
+		close = res[1].find('span').text
+		lowhigh = res[4].text
+		lowhigh52 = res[5].text
+		volume = res[6].find('span').text
+		mcap = res[8].find('span').text
 		prices = [price, chng, pchng, openp, close, lowhigh, lowhigh52, volume, mcap]
 		return HttpResponse(json.dumps(prices))
 
@@ -155,8 +156,9 @@ def updatepriceaction(request):			#this function updates open close high low in 
 	return HttpResponse("Price Action updated successfully!")
 
 
-def updateIndices(request):		#returns indices data
+def updateIndices(request):		#returns header indices data
 	return HttpResponse(json.dumps(data.indices))
+
 	# try:
 	# 	import json
 	# 	url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
@@ -231,19 +233,16 @@ def updateIndexConstituents(request):
 		import json
 		url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		res=soup.find_all("td", {'align': 'right'})
 		i = 0
 		pricel=[]
 		chngl=[]
 		pchngl=[]
 		for i in range(70):
 			if (i==1 or ((i>39) and (i<63))):
-				price = soup.find_all("td", {'align': 'right'})[6*i].text
-				price=price.replace(',','')
-				chng = soup.find_all("td", {'align': 'right'})[6*i+1].text
-				pchng = soup.find_all("td", {'align': 'right'})[6*i+2].text
-				pricel.append(price)
-				chngl.append(chng)
-				pchngl.append(pchng)
+				pricel.append(res[6*i].text.replace(',',''))
+				chngl.append(res[6*i+1].text)
+				pchngl.append(res[6*i+2].text)
 		data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
 		return HttpResponse(json.dumps(data))
 	except:
@@ -261,23 +260,16 @@ def update_index_page(request):
 		i = 0
 		tickerl = []
 		pricel=[]
-		industryl  =[]
 		chngl=[]
 		pchngl=[]
+		res = soup.find_all("td", {"class":"brdrgtgry"})
 		try:
 		    while(True):
-		        ticker = soup.find_all("td", {"class":"brdrgtgry"})[i].text.split("\n")[0]
-		        industry = soup.find_all("td", {"class":"brdrgtgry"})[i+1].text
-		        price = soup.find_all("td", {"class":"brdrgtgry"})[i+2].text
-		        price = price.replace(',','')
-		        chng = soup.find_all("td", {"class":"brdrgtgry"})[i+3].text
-		        pchng = soup.find_all("td", {"class":"brdrgtgry"})[i+4].text
+		        tickerl.append(res[i].text.split("\n")[0])
+		        pricel.append(res[i+2].text.replace(',',''))
+		        chngl.append(res[i+3].text)
+		        pchngl.append(res[i+4].text)
 		        i+=6
-		        industryl.append(industry)
-		        tickerl.append(ticker)
-		        pricel.append(price)
-		        chngl.append(chng)
-		        pchngl.append(pchng)
 		except:
 		    True
 		data = {"ticker":tickerl, "industry":industryl, "price":pricel, "chng": chngl, "pchng":pchngl} 
