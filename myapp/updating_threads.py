@@ -13,7 +13,7 @@ end_time = now.replace(hour=15, minute=30, second=0, microsecond=0)
 
 def updateIndicesThread():
 	while(True):
-		time.sleep(2)
+		time.sleep(3)
 		try:
 			url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
 			soup = bs4.BeautifulSoup(url.text, features="html.parser")
@@ -40,7 +40,7 @@ def updateIndicesThread():
 
 def updateAllIndicesThread():	#returns indices data
 	while(True):
-		time.sleep(3)
+		time.sleep(2)
 		try:
 			url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
 			soup = bs4.BeautifulSoup(url.text, features="html.parser")
@@ -63,7 +63,7 @@ def updateAllIndicesThread():	#returns indices data
 
 def updateshownifty50Thread():
 	while(True):
-		time.sleep(3)
+		time.sleep(2)
 		try:
 		    url = requests.get(
 		        'https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=9')
@@ -87,11 +87,11 @@ def updateshownifty50Thread():
 
 
 def updateshownifty500Thread():
-	url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=7')
-	soup = bs4.BeautifulSoup(url.text, features="html.parser")
-	res = soup.find_all("td", {"class":"brdrgtgry"})
 	while(True):
-		time.sleep(1)
+		url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=7')
+		soup = bs4.BeautifulSoup(url.text, features="html.parser")
+		res = soup.find_all("td", {"class":"brdrgtgry"})
+		time.sleep(30)
 		try:
 			tempdata = []
 			i = 0
