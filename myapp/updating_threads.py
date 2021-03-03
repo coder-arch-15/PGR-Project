@@ -91,7 +91,7 @@ def updateshownifty500Thread():
 		url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=7')
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
 		res = soup.find_all("td", {"class":"brdrgtgry"})
-		time.sleep(30)
+		time.sleep(20)
 		try:
 			tempdata = []
 			i = 0
