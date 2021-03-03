@@ -228,29 +228,9 @@ def updateAllIndices(request):		#returns indices data
 	# 	return HttpResponse(json.dumps("True"))
 
 
-def updateIndexConstituents(request):
-	try:
-		import json
-		url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
-		soup = bs4.BeautifulSoup(url.text, features="html.parser")
-		res=soup.find_all("td", {'align': 'right'})
-		i = 0
-		pricel=[]
-		chngl=[]
-		pchngl=[]
-		for i in range(70):
-			if (i==1 or ((i>39) and (i<63))):
-				pricel.append(res[6*i].text.replace(',',''))
-				chngl.append(res[6*i+1].text)
-				pchngl.append(res[6*i+2].text)
-		data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
-		return HttpResponse(json.dumps(data))
-	except:
-		return HttpResponse(json.dumps("True"))
-
 
 def update_index_page(request):
-	try:
+	# try:
 		value = [9,27,31,53,28,7,52,23,48,56,38,47,39,35,19,50,51,40,41,42,43,79,34,44]
 		indices = ['NIFTY 50', 'NIFTY Midcap 100', 'NIFTY MIDCAP 50', 'NIFTY Smallcap 100', 'NIFTY 100', 'NIFTY 500', 'NIFTY AUTO', 'NIFTY BANK', 'NIFTY COMMODITIES', 'NIFTY CONSUMPTION', 'NIFTY ENERGY', 'NIFTY FIN SERVICE', 'NIFTY FMCG', 'NIFTY INFRA', 'NIFTY IT', 'NIFTY MEDIA', 'NIFTY METAL', 'NIFTY MNC', 'NIFTY PHARMA', 'NIFTY PSE', 'NIFTY PSU BANK', 'NIFTY PVT BANK', 'NIFTY REALTY', 'NIFTY SERV SECTOR']
 		ticker = str(request.GET.get('ticker', None))
@@ -272,8 +252,8 @@ def update_index_page(request):
 		        i+=6
 		except:
 		    True
-		data = {"ticker":tickerl, "industry":industryl, "price":pricel, "chng": chngl, "pchng":pchngl} 
+		data = {"ticker":tickerl, "price":pricel, "chng": chngl, "pchng":pchngl} 
 		return HttpResponse(json.dumps(data))
 
-	except:
-		return HttpResponse(json.dumps("True"))
+	# except:
+	# 	return HttpResponse(json.dumps("True"))
