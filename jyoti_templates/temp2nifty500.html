@@ -10,9 +10,8 @@
 
 				{% include 'dashboard-layouts/header.html' %}
 
+<h6 style="text-align: : right;">Last Updated : <span id = "last_update"><span></h6>
 <center>
-
-  <br><br>
     <input type="text" placeholder="Search Stocks Here!.." onkeyup="searchFunction(this)" id="myInput" style="width: 50%;">
 
     <script>
@@ -88,7 +87,7 @@
 		  loadDoc();
 		 }
 
-		function refreshDATA() {    cInterval= setInterval(loadDoc, 10000);   }
+		function refreshDATA() {    cInterval= setInterval(loadDoc, 20000);   }
 
 		function loadDoc() {
   var xhttp = new XMLHttpRequest();
@@ -135,7 +134,8 @@ for (i=0;i<489;i++){
         cmp.innerHTML = cmp1;
 
     }
-    
+var currentD = new Date();
+    document.getElementById("last_update").innerHTML =currentD.getFullYear()+'/'+(currentD.getMonth()+1)+'/'+currentD.getDate()+" - " +currentD.getHours() + ":" + currentD.getMinutes() + ":" + currentD.getSeconds();    
 
 }
 };

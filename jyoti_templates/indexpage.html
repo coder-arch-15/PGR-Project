@@ -10,10 +10,37 @@
 
         {% include 'dashboard-layouts/header.html' %}
 
+        <h6 style="text-align: : right;"><b>Last Updated : <span id = "last_update"><span> </b></h6>
 <center>
-  <br><br>
-  <strong><h1>{{index}} Constituents</h1></strong>
-<table style="width: 60%; margin-top: 30px;">
+    <input type="text" placeholder="Search Stocks Here!.." onkeyup="searchFunction(this)" id="myInput" style="width: 50%;">
+
+    <script>
+    function searchFunction(e){
+        var filter,table,tr,td,i,textvalue;
+        filter=e.value.toUpperCase();
+        
+        
+        table=document.getElementById("myTable123");
+        tr=table.getElementsByTagName("tr");
+        console.log(tr.length);
+        for(i=0;i<tr.length;i++){
+            td=tr[i].getElementsByTagName("td")[0];
+            if(td)
+            {
+                textvalue=td.textContent || td.innerHTML;
+                if(textvalue.toUpperCase().indexOf(filter)>-1)
+                {
+                    tr[i].style.display="";
+                }
+                else{
+                    tr[i].style.display="none";
+                }
+
+            }
+        }
+    }
+</script>
+<table style="width: 50%; margin-top: 30px;" id="myTable123">
     <thead>
       <tr>
               <th>Company Name</th>
@@ -51,7 +78,7 @@
       loadDoc();
      }
 
-    function refreshDATA() {    cInterval= setInterval(loadDoc, 6000);   }
+    function refreshDATA() {    cInterval= setInterval(loadDoc, 5000);   }
 
     function loadDoc() {
   var xhttp = new XMLHttpRequest();
@@ -93,7 +120,10 @@ for (i=0;i<data["ticker"].length;i++){
       var cmp1 = span.concat(data["price"][i], spanclose); 
         cmp.innerHTML = cmp1;
       
-    }}
+    }
+var currentD = new Date();
+    document.getElementById("last_update").innerHTML =currentD.getFullYear()+'/'+(currentD.getMonth()+1)+'/'+currentD.getDate()+" - " +currentD.getHours() + ":" + currentD.getMinutes() + ":" + currentD.getSeconds();
+  }
     
   };
 
