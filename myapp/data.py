@@ -1,4 +1,4 @@
 indices = {}
-data = {}
+allIndices = {}
 nifty50data = {}
 nifty500data = []

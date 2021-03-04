@@ -11,33 +11,6 @@ start_time = now.replace(hour=9, minute=15, second=0, microsecond=0)
 end_time = now.replace(hour=15, minute=30, second=0, microsecond=0)
 
 
-def updateIndicesThread():
-	while(True):
-		time.sleep(3)
-		try:
-			url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
-			soup = bs4.BeautifulSoup(url.text, features="html.parser")
-			res = soup.find_all("td", {'align': 'right'})
-			data.indices = {
-	        "NIFTY50":res[6].text ,
-	        "NIFTY50CHNG":res[7].text,
-	        "NIFTY50PCHNG":res[8].text,
-	        "NIFTYBANK":res[276].text,
-	        "NIFTYBANKCHNG":res[277].text,
-	        "NIFTYBANKPCHNG":res[278].text,
-	        "NIFTYENERGY":res[294].text,
-	        "NIFTYENERGYCHNG":res[295].text,
-	        "NIFTYENERGYPCHNG":res[296].text,
-	        "NIFTYIT":res[318].text,
-	        "NIFTYITCHNG":res[319].text,
-	        "NIFTYITPCHNG":res[320].text
-	        }
-		except Exception as e:
-			pass
-		if (datetime.datetime.now()>end_time) or (datetime.datetime.now()<start_time):
-			break
-
-
 def updateAllIndicesThread():	#returns indices data
 	while(True):
 		time.sleep(3)
@@ -54,7 +27,7 @@ def updateAllIndicesThread():	#returns indices data
 					pricel.append(res[6*i].text.replace(',',''))
 					chngl.append(res[6*i+1].text)
 					pchngl.append(res[6*i+2].text)
-			data.data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
+			data.allIndices = {"price":pricel, "chng": chngl, "pchng":pchngl} 
 		except:
 			pass
 		if (datetime.datetime.now()>end_time) or (datetime.datetime.now()<start_time):
@@ -110,7 +83,6 @@ def updateshownifty500Thread():
       
 
 def update_data(): 
-	t1 = threading.Thread(target=updateIndicesThread,daemon=True) 
 	t2 = threading.Thread(target=updateAllIndicesThread,daemon=True) 
 	t3 = threading.Thread(target=updateshownifty500Thread,daemon=True) 
 	t5 = threading.Thread(target=updateshownifty50Thread,daemon=True) 
@@ -118,6 +90,31 @@ def update_data():
 	t5.start()
 	t3.start()
 	t2.start()
-	t1.start() 
 	return
   
+
+# def updateIndicesThread():
+# 	while(True):
+# 		time.sleep(3)
+# 		try:
+# 			url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
+# 			soup = bs4.BeautifulSoup(url.text, features="html.parser")
+# 			res = soup.find_all("td", {'align': 'right'})
+# 			data.indices = {
+# 	        "NIFTY50":res[6].text ,
+# 	        "NIFTY50CHNG":res[7].text,
+# 	        "NIFTY50PCHNG":res[8].text,
+# 	        "NIFTYBANK":res[276].text,
+# 	        "NIFTYBANKCHNG":res[277].text,
+# 	        "NIFTYBANKPCHNG":res[278].text,
+# 	        "NIFTYENERGY":res[294].text,
+# 	        "NIFTYENERGYCHNG":res[295].text,
+# 	        "NIFTYENERGYPCHNG":res[296].text,
+# 	        "NIFTYIT":res[318].text,
+# 	        "NIFTYITCHNG":res[319].text,
+# 	        "NIFTYITPCHNG":res[320].text
+# 	        }
+# 		except Exception as e:
+# 			pass
+# 		if (datetime.datetime.now()>end_time) or (datetime.datetime.now()<start_time):
+# 			break

@@ -56,7 +56,7 @@ if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD )
   document.getElementById("marketclose").style.display = "block";*/
  }
 
-function refreshDATA() {    cInterval= setInterval(loadDoc, 10000);   }
+function refreshDATA() {    cInterval= setInterval(loadDoc, 4000);   }
 
 
 function loadDoc() {
@@ -85,7 +85,7 @@ function loadDoc() {
         var data = JSON.parse(this.response);
         var span="";
         
-      var change =data["NIFTY50CHNG"];   
+      var change =data["chng"][0];   
         if(change > 0){
        span = "<font color = green><strong>";
       }
@@ -96,34 +96,34 @@ function loadDoc() {
        span = "<font color = grey><strong>";
       }
 
-      var pchng = span.concat("+",data["NIFTY50PCHNG"], spanclose); 
+      var pchng = span.concat(data["pchng"][0], spanclose); 
         nifty50pchng.innerHTML = pchng;
-      var ltp = span.concat(data["NIFTY50"], spanclose); 
+      var ltp = span.concat(data["price"][0], spanclose); 
         nifty50ltp.innerHTML = ltp;
-      var chng = span.concat(data["NIFTY50CHNG"], spanclose); 
+      var chng = span.concat(data["chng"][0], spanclose); 
         nifty50chng.innerHTML = chng;
 
 
-       change =data["NIFTYBANKCHNG"];   
-        if(change > 0){
-       span = "<font color = green><strong>";
+       change =data["chng"][7];   
+        if(change[0]=="-"){
+       span = "<font color = red><strong>";
       }
-      else if(change < 0){
-         span = "<font color = red><strong>";
+      else if(change ==0){
+         span = "<font color = grey><strong>";
       }
       else{
-       span = "<font color = grey><strong>";
+       span = "<font color = green><strong>";
       }
 
-       pchng = span.concat("+",data["NIFTYBANKPCHNG"], spanclose); 
+       pchng = span.concat(data["pchng"][7], spanclose); 
         niftyBANKpchng.innerHTML = pchng;
-       ltp = span.concat(data["NIFTYBANK"], spanclose); 
+       ltp = span.concat(data["price"][7], spanclose); 
         niftyBANKltp.innerHTML = ltp;
-       chng = span.concat(data["NIFTYBANKCHNG"], spanclose); 
+       chng = span.concat(data["chng"][7], spanclose); 
         niftyBANKchng.innerHTML = chng;
 
 
-       change =data["NIFTYENERGYCHNG"];   
+       change =data["chng"][10];   
         if(change > 0){
        span = "<font color = green><strong>";
       }
@@ -134,15 +134,15 @@ function loadDoc() {
        span = "<font color = grey><strong>";
       }
 
-       pchng = span.concat("+",data["NIFTYENERGYPCHNG"], spanclose); 
+       pchng = span.concat(data["pchng"][10], spanclose); 
         niftyENERGYpchng.innerHTML = pchng;
-       ltp = span.concat(data["NIFTYENERGY"], spanclose); 
+       ltp = span.concat(data["price"][10], spanclose); 
         niftyENERGYltp.innerHTML = ltp;
-       chng = span.concat(data["NIFTYENERGYCHNG"], spanclose); 
+       chng = span.concat(data["chng"][10], spanclose); 
         niftyENERGYchng.innerHTML = chng;
 
 
-       change =data["NIFTYITCHNG"];   
+       change =data["chng"][14];   
         if(change > 0){
        span = "<font color = green><strong>";
       }
@@ -153,11 +153,11 @@ function loadDoc() {
        span = "<font color = grey><strong>";
       }
 
-       pchng = span.concat("+",data["NIFTYITPCHNG"], spanclose); 
+       pchng = span.concat(data["pchng"][14], spanclose); 
         niftyITpchng.innerHTML = pchng;
-       ltp = span.concat(data["NIFTYIT"], spanclose); 
+       ltp = span.concat(data["price"][14], spanclose); 
         niftyITltp.innerHTML = ltp;
-       chng = span.concat(data["NIFTYITCHNG"], spanclose); 
+       chng = span.concat(data["chng"][14], spanclose); 
         niftyITchng.innerHTML = chng;
       
     }

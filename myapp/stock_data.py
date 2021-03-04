@@ -157,7 +157,7 @@ def updatepriceaction(request):			#this function updates open close high low in 
 
 
 def updateIndices(request):		#returns header indices data
-	return HttpResponse(json.dumps(data.indices))
+	return HttpResponse(json.dumps(data.allIndices))
 
 	# try:
 	# 	import json
@@ -203,7 +203,7 @@ def updateIndices(request):		#returns header indices data
 
 
 def updateAllIndices(request):		#returns indices data
-	return HttpResponse(json.dumps(data.data))
+	return HttpResponse(json.dumps(data.allIndices))
 	# try:
 	# 	import json
 	# 	url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
