@@ -7,6 +7,7 @@ import bs4
 import requests
 from bs4 import BeautifulSoup  
 from . import hreflist as hf
+from . import data as data
 
 def user_dashboard(request):
 	if(request.session.has_key("user")):
@@ -38,19 +39,19 @@ def stockpage(request):
 			if ".NS" in ticker:
 				tradingview_ticker=ticker.split(".NS")
 
-				conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
-				cur = conn.cursor()
+				# conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
+				# cur = conn.cursor()
 				
-				cur.execute("SELECT * FROM STOCKS WHERE company = '{0}'".format(ticker))
-				stocks = cur.fetchone()
-				cur.execute("SELECT quantity FROM HOLDINGS WHERE company = '{0}' and username = '{0}'".format(ticker, request.session['user'][0]))
-				if cur.rowcount==0:
-					current_holdings =[0]
-				else:
-					current_holdings = cur.fetchone()
-				conn.commit()
-				conn.close()
-				return render(request, "stockpage.html", {"info":stocks,"tradingview_ticker":tradingview_ticker[0], "cash":request.session['user'][9], "current_holdings": current_holdings[0] })
+				# cur.execute("SELECT * FROM STOCKS WHERE company = '{0}'".format(ticker))
+				# stocks = cur.fetchone()
+				# cur.execute("SELECT quantity FROM HOLDINGS WHERE company = '{0}' and username = '{0}'".format(ticker, request.session['user'][0]))
+				# if cur.rowcount==0:
+				# 	current_holdings =[0]
+				# else:
+				# 	current_holdings = cur.fetchone()
+				# conn.commit()
+				# conn.close()
+				return render(request, "stockpage.html", {"info":[ticker,data.companies[ticker]],"tradingview_ticker":tradingview_ticker[0], "cash":request.session['user'][9], "current_holdings": 0 })
 			else:
 				stocks = []
 				stocks.append(hf.codes[ticker][0]+".NS")
@@ -215,7 +216,7 @@ def index_page(request):
 		tick = str(request.GET.get('ticker', None))
 
 		if tick == "NIFTY 500":
-			return redirect("/shownifty500")
+			return redirect("/shownifty500temp")
 		if tick == "NIFTY 50":
 			return redirect("/shownifty50/")
 

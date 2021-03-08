@@ -8,6 +8,7 @@ import requests
 from bs4 import BeautifulSoup 
 from . import hreflist as hf
 from . import data
+from bsedata.bse import BSE
 
 
 
@@ -32,7 +33,6 @@ def updateStockInfo(request):		#this function retuurns cmp,chng,pchng... of tick
 		ticker = hf.codes[ticker][0] + ".NS"
 	try:
 		prices = []
-		
 		url = requests.get("https://finance.yahoo.com/quote/{0}?p={0}".format(ticker), timeout=3)
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
 		res1 = soup.find_all("div", {'class': 'My(6px) Pos(r) smartphone_Mt(6px)'})
@@ -49,18 +49,13 @@ def updateStockInfo(request):		#this function retuurns cmp,chng,pchng... of tick
 		volume = res[6].find('span').text
 		mcap = res[8].find('span').text
 		prices = [price, chng, pchng, openp, close, lowhigh, lowhigh52, volume, mcap]
+		print("NSE")
 		return HttpResponse(json.dumps(prices))
 
 	except Exception as e:
-		conn = pymysql.connect( host='localhost',	port =3306 , user='root',  password = "123",   db='pgrdb' ) 
-		cur = conn.cursor()
-		cur.execute("SELECT bsecode from STOCKS where company = '{0}'".format(ticker))
-		code = cur.fetchone()
-		conn.commit()
-		conn.close()
-		from bsedata.bse import BSE
 		b = BSE()
-		q = b.getQuote(str(code[0]))
+		code = hf.bsecode[ticker]
+		q = b.getQuote(str(code))
 		price = q['currentValue']
 		price=price.replace(',','')
 		chng = q['change']
@@ -73,7 +68,9 @@ def updateStockInfo(request):		#this function retuurns cmp,chng,pchng... of tick
 		mcap = q['marketCapFull']
 		prices=[]
 		prices = [price, chng, pchng, openp, close, lowhigh, lowhigh52, volume, mcap]
-		return HttpResponse(json.dumps(prices))
+		print("BSE")
+		return HttpResponse(json.dumps(prices))	
+
 	except:
 		return HttpResponse(json.dumps("True"))
 	

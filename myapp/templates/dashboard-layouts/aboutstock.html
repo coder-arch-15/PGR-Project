@@ -4,9 +4,9 @@
 						<div class="hmc-container">
         <div id="breadcrumbs" class="centurylib-breadcrumbs-wrapper">
             <div class="breadcrumbs-wrap layout1 no-image" style="background-image:url();" >
-                <div class="centurylib-bdcb-container">
-                    <div role="navigation" class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb"><ul class="trail-items" itemscope itemtype="http://schema.org/BreadcrumbList"><meta name="numberOfItems" content="2" /><meta name="itemListOrder" content="Ascending" /><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item trail-begin"><a href="https://priyankgupta.co.in" rel="home"><span itemprop="name">Home</span></a><meta content="1" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item trail-end"><span itemprop="name">Market Live</span><meta content="2" /></li></ul></div>                </div><!-- .container -->
-            </div>
+                
+<h6>Last Updated : <span id = "last_update"><span></h6>
+
         </div><!-- #breadcrumb -->
         	<div id="primary" class="content-area main-content-area">
 
@@ -24,12 +24,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <html lang="en">
 <style type="text/css">
     .root{
@@ -239,85 +233,17 @@ div.buysellbox{
 
 	<!-- Live Chart -->
 	
-<script>
-window.onload = function() {
 
-  var dataPoints1 = [];
-  var dataPoints2 = [];
-var chart = new CanvasJS.Chart("chartContainer", {
-  zoomEnabled: true,
-  animationEnabled: true,
-  exportEnabled: true,
-
-	theme: "light2",
-	title: {
-		text: "{{tradingview_ticker}}"
-	},
-  axisY: {
-  includeZero:false,
-  prefix: "₹",
-  title: "Price"
-},
-toolTip: {
-		shared: true
-	},
-
-	data: [{
-		type: "line",
-    showInLegend: true,
-		name: "Live Price",
-    xValueType: "dateTime",
-	xValueFormatString: "hh:mm:ss TT",
-		dataPoints: dataPoints1
-	},
-]
-});
-updateData();
-
-// Initial Values
-//var xValue = 0;
-//var yValue = 10;
-var newDataCount1 = 6;
-
-function addData1(data) {
-	if(newDataCount1 != 1) {
-		$.each(data, function(key, value) {
-			dataPoints1.push({x: value[0], y: parseFloat(value[1])});
-			//xValue++;
-			//yValue = parseFloat(value[1]);
-		});
-	} else {
-		//dataPoints1.shift();
-		dataPoints1.push({x: data[0][0], y: parseFloat(data[0][1])});
-		//xValue++;
-		//yValue = parseFloat(data[0][1]);
-	}
-
-	newDataCount1 = 1;
-	chart.render();
-	setTimeout(updateLastData, 3000);
-}
-
-
-function updateData() {
-	$.getJSON("https://priyankgupta.co.in/ticker.php?flag=1&symbol=TATAMOTORS", addData1);
-}
-	function updateLastData() {
-	$.getJSON("https://priyankgupta.co.in/ticker.php?flag=1&last=1&symbol=TATAMOTORS", addData1);
-}
-
-}
-</script>
 
 <div class="stockinfo">
-<h2 style="display: inline;"><strong>{{info.6}}</strong></h4>
+<h2 style="display: inline;"><strong>{{info.1}}</strong></h4>
 <h5 style="display: inline; margin-left: 7px;"><strong>{{info.0}}</strong></h5><br>
-<h1 style="display: inline;"  id = "cmp">{{info.1}}</h1>
+<h1 style="display: inline;"  id = "cmp"></h1>
 <h3 style="display: inline; margin-left: 7px;" id = "chng"></h3>
 <h3 style="display: inline; margin-left: 7px;" id = "pchng"></h3><br><br>
-<h6 id="open">Open : {{info.2}}</h6>
-<h6 id="close">Close : {{info.3}}</h6>
-<h6 id="range">Day Range : {{info.4}} - {{info.5}}</h6>
+<h6 id="open">Open : </h6>
+<h6 id="close">Close : </h6>
+<h6 id="range">Day Range : }</h6>
 <h6 id="range52">52 Week Range : </h6>
 <h6 id="volume">Volume : </h6>
 <h6 id="mcap">Market Cap : </h6><br><br>
@@ -338,7 +264,7 @@ if(currentD.getTime() >= startHourD.getTime() && currentD.getTime() < endHourD )
   loadDoc();
  }
 
-function refreshDATA() {    cInterval= setInterval(loadDoc, 5000);   }
+function refreshDATA() {    cInterval= setInterval(loadDoc, 10000);   }
 
 function loadDoc() {
 
@@ -389,6 +315,8 @@ function loadDoc() {
       volume.innerHTML = "<strong>Volume :</strong> "+data[7];
       mcap.innerHTML ="<strong>Market Cap :</strong> "+ data[8];
     
+    var currentD = new Date();
+    document.getElementById("last_update").innerHTML =currentD.getFullYear()+'/'+(currentD.getMonth()+1)+'/'+currentD.getDate()+" - " +currentD.getHours() + ":" + currentD.getMinutes() + ":" + currentD.getSeconds();
   }
 }
 };

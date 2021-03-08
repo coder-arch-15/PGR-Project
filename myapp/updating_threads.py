@@ -13,7 +13,6 @@ end_time = now.replace(hour=15, minute=30, second=0, microsecond=0)
 
 def updateAllIndicesThread():	#returns indices data
 	while(True):
-		time.sleep(3)
 		try:
 			url = requests.get('https://www.moneycontrol.com/markets/irol.com/markets/indian-indices/?classic=true', timeout=5)
 			soup = bs4.BeautifulSoup(url.text, features="html.parser")
@@ -28,15 +27,17 @@ def updateAllIndicesThread():	#returns indices data
 					chngl.append(res[6*i+1].text)
 					pchngl.append(res[6*i+2].text)
 			data.allIndices = {"price":pricel, "chng": chngl, "pchng":pchngl} 
+		
+			if (datetime.datetime.now()>end_time) or (datetime.datetime.now()<start_time) or (datetime.datetime.now().strftime("%A")=="Saturday") or (datetime.datetime.now().strftime("%A")=="Sunday"):
+				break
+			time.sleep(5)
 		except:
 			pass
-		if (datetime.datetime.now()>end_time) or (datetime.datetime.now()<start_time):
-			break
 
 
 def updateshownifty50Thread():
 	while(True):
-		time.sleep(3)
+		
 		try:
 		    url = requests.get(
 		        'https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=9')
@@ -55,8 +56,9 @@ def updateshownifty50Thread():
 		    data.nifty50data = {"price":pricel, "chng": chngl, "pchng":pchngl} 
 		except:
 			pass
-		if (datetime.datetime.now()>end_time) or (datetime.datetime.now()<start_time):
-			break		    
+		if (datetime.datetime.now()>end_time) or (datetime.datetime.now()<start_time) or (datetime.datetime.now().strftime("%A")=="Saturday") or (datetime.datetime.now().strftime("%A")=="Sunday"):
+			break
+		time.sleep(40)	    
 
 
 def updateshownifty500Thread():
@@ -64,7 +66,6 @@ def updateshownifty500Thread():
 		url = requests.get('https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=7')
 		soup = bs4.BeautifulSoup(url.text, features="html.parser")
 		res = soup.find_all("td", {"class":"brdrgtgry"})
-		time.sleep(30)
 		try:
 			tempdata = []
 			i = 0
@@ -76,10 +77,11 @@ def updateshownifty500Thread():
 				i += 6
 			
 			data.nifty500data=tempdata
-			if (datetime.datetime.now()>end_time) or (datetime.datetime.now()<start_time):
+			if (datetime.datetime.now()>end_time) or (datetime.datetime.now()<start_time) or (datetime.datetime.now().strftime("%A")=="Saturday") or (datetime.datetime.now().strftime("%A")=="Sunday"):
 				break
 		except:
 			pass
+		time.sleep(40)
       
 
 def update_data(): 
