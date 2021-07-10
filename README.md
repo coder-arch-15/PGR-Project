@@ -2,4 +2,4 @@
 PGR Stock Market Simulator
 
 This project is developed on Django framework.
-![Alt text](relative/path/to/img.jpg?raw=true "Title")
+![Alt text](asset/img/undraw_posting_photo.svg?raw=true "Title")
