@@ -11,7 +11,7 @@ The main functionalities of the project include -
   <li><b>Rendering real-time prices for different stocks and indices</b></li>
     We are web-scrapping the stock prices from other websites. For this, we are using the Beautiful Soup Python library. Different threads will be running in the background that will fetch the latest stock prices and update the dictionaries. Websites used for web-scrapping include Moneycontrol.com, in.finance.yahoo.com, etc ( the web app was developed only for educational purposes and not for any business activity). The real-time prices are rendered on the HTML using AJAX calls. AJAX calls are made to the server requesting new data about the price of the stock.<br>
   <p align="center">
-  <img src="asset/img/stock.png" width="1500" title="hover text">
+  <img src="asset/img/stock.png" width="700" title="hover text">
 </p>
   <br><br>
   <li><b>Access to virtual cash to buy and sell stocks</b></li>
