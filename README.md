@@ -10,8 +10,13 @@ The main functionalities of the project include -
   <li><b>Access to virtual cash to buy and sell stocks</b></li>
   Each user is provided with virtual cash, which can be used to trade stocks. This way, users can simulate the trading environment without actually putting their money in the play.
   
-  <li><b>User's transaction page to list all the transactions carried out.</b></li>
+  <li><b>Admin Panel</b></li>
+    The Admin-Panel is used to verify the users registering on the portal. It can be further developed to give more features to control/monitor the activities carried out on the application.
+ 
+  <li><b>Trading View Charts for Stock Analysis</b></li>
+    We have embedded the Trading View Charts to help traders review the technical and fundamental analysis of the stocks.
 </ul>
+<br><br>
 <p align="center">
   <img src="asset/img/undraw_posting_photo.svg" width="350" title="hover text">
 </p>
