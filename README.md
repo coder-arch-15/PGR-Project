@@ -22,7 +22,7 @@ The main functionalities of the project include -
   <br><br>
   <li><b>Trading View Charts for Stock Analysis</b></li>
     We have embedded the Trading View Charts to help traders review the technical and fundamental analysis of the stocks.<br>
-   <p align="center"  style="margin-top:5px;">
+   <p align="center" style="margin-top:5px;">
   <img src="asset/img/tradingview.png" width="1500" title="hover text">
 </p>
   <br><br>
