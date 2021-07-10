@@ -27,8 +27,10 @@ The main functionalities of the project include -
 </p>
   <br><br>
   <li><b>Admin Panel</b></li>
-    The Admin-Panel is used to verify the users registering on the portal. It can be further developed to give more features to control/monitor the activities carried out on the application.
- 
+    The Admin-Panel is used to verify the users registering on the portal. It can be further developed to give more features to control/monitor the activities carried out on the application.<br>
+ <p align="center">
+  <img src="asset/img/admin.png" width="1200" title="hover text">
+</p>
 </ul>
 <br><br>
 <p align="center">
