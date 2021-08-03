@@ -1,7 +1,7 @@
 # PGR-Project
 <h3><b>Stock Market Simulator</b></h3>
 <h5><b>The project was developed for educational purposes.</b></h5>
-This is basically a stock market simulator web application based is based on the Django framework. You can find a list of stocks under NIFTY-50, NIFTY-500, BANKNIFTY.... and many other indices as well. This allows you to trade shares of companies using virtual money, thus helping you to gain trading experience without risking your money! The project is still open to a lot of changes and upgrades. The project uses MySQL database to store information.<br><br><br>
+This is basically a stock market simulator web application based on the Django framework. You can find a list of stocks under NIFTY-50, NIFTY-500, BANKNIFTY.... and many other indices as well. This allows you to trade shares of companies using virtual money, thus helping you to gain trading experience without risking your money! The project is still open to a lot of changes and upgrades. The project uses MySQL database to store information.<br><br><br>
 <p align="center">
   <img src="asset/img/indices.jpg.png" width="1500" title="Major Indices Page">
 </p>
